@@ -11,7 +11,7 @@ Galán Castillo, Raúl - r.galan.2017@alumnos.urjc.es
 
 Olaya Maciá, Pedro - p.olaya.2018@alumnos.urjc.es
 
-Ortuño Guisado, Lucía - 
+Ortuño Guisado, Lucía - l.ortuno.2017@alumnos.urjc.es 
 
 Cuenta en GitHub: GRINGO616 - Repositorio: GRINGO616/Trabajo-JeR-Grupo3
 
