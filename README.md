@@ -1,6 +1,25 @@
 # Trabajo-JeR-Grupo3
 Repositorio de GitHub perteneciente al trabajo de Juegos en Red de la URJC del grupo de trabajo Nº3
 
+Nombre del juego: EXPOTION
+
+# Grupo 03
+
+Benítez Vicente, Sergio
+
+Galán Castillo, Raúl
+
+Olaya Maciá, Pedro
+
+Ortuño Guisado, Lucía
+
+Cuenta en GitHub: GRINGO616 - Repositorio: GRINGO616/Trabajo-JeR-Grupo3
+
+Enlace a Trello: https://trello.com/b/DfmTVe1f/juegos-en-red-grupo-3
+
+
+
+
 # HISTORIA DE VERSIONES
 
 Con el propósito de analizar los diferentes cambios que va sufriendo el proyecto que supone Expotion, a lo largo de su desarrollo, es conveniente establecer cada uno de los cambios que se van generando en las diferentes versiones. De esta forma, esta parte del documento mantendrá una continua actualización.
