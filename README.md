@@ -5,13 +5,13 @@ Nombre del juego: EXPOTION
 
 # Grupo 03
 
-Benítez Vicente, Sergio
+Benítez Vicente, Sergio - s.benitez.2017@alumnos.urjc.es
 
-Galán Castillo, Raúl
+Galán Castillo, Raúl - r.galan.2017@alumnos.urjc.es
 
-Olaya Maciá, Pedro
+Olaya Maciá, Pedro - p.olaya.2018@alumnos.urjc.es
 
-Ortuño Guisado, Lucía
+Ortuño Guisado, Lucía - 
 
 Cuenta en GitHub: GRINGO616 - Repositorio: GRINGO616/Trabajo-JeR-Grupo3
 
