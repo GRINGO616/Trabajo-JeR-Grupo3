@@ -1,17 +1,60 @@
 class Loading extends Phaser.Scene {
     constructor(){
-        super("Carga")
+        super("Loading")
         
     }
     preload(){
-        this.load.image('background','Assets/background.png');
-        this.load.image('logo','Assets/logo_pixelart.PNG');
-        this.load.image('white','Assets/white.jpg');
-        this.load.image('arcade_button','Assets/arcade_button.png');
-        this.load.image('storyMode_button','Assets/storyMode_button.png');
-        this.load.image('settings_button','Assets/settings_button.png');
-        this.load.image('controls_button','Assets/controls_button.png');
-        this.load.image('exit_button','Assets/exit_button.png');
+
+        // Elementos de sonido
+        this.load.audio('menuMusic',['Assets/music/menuMusic.ogg','Assets/music/menuMusic.mp3']);
+        this.load.audio('stageMusic',['Assets/music/stageMusic.ogg','Assets/music/stageMusic.mp3']);
+        
+        // Elementos de texto
+        var url;
+
+        url =
+        "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js";
+        this.load.plugin("rexbbcodetextplugin", url, true);
+        
+        url =
+        "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexteditplugin.min.js";
+        this.load.plugin("rextexteditplugin", url, true);
+
+        // Elementos de pantalla de carga
+        this.load.image('loadingBackground','Assets/loadingScene/loadingBackground.jpg');
+        this.load.image('logo','Assets/loadingScene/logo_pixelart.PNG');
+
+        // Elementos de pantalla de logging
+        this.load.image('loginBackground','Assets/loggingScene/loginBackground.jpg');
+        this.load.image('loginBox','Assets/loggingScene/loginBox.png');
+        this.load.image('loginNextButton','Assets/loggingScene/loginNextButton.png');
+        
+        // Elementos de pantalla de menú
+        this.load.image('menuBackground','Assets/menuScene/menuBackground.png');
+        this.load.image('arcade_button','Assets/menuScene/arcade_button.png');
+        this.load.image('storyMode_button','Assets/menuScene/storyMode_button.png');
+        this.load.image('settings_button','Assets/menuScene/settings_button.png');
+        this.load.image('controls_button','Assets/menuScene/controls_button.png');
+        this.load.image('credits_button','Assets/menuScene/credits_button.png');
+
+        // Elementos de pantalla de configuración
+        this.load.image('configurationBackground','Assets/configurationScene/configurationBackground.jpg');
+        this.load.image('returnConfiguration','Assets/configurationScene/returnConfiguration.png');
+
+        // Elementos de pantalla de ajustes
+        this.load.image('settingsBackground','Assets/settingsScene/settingsBackground.jpg');
+        this.load.image('musicON','Assets/settingsScene/musicON.png');
+        this.load.image('musicOFF','Assets/settingsScene/musicOFF.png');
+        this.load.image('english','Assets/settingsScene/english.png');
+        this.load.image('spanish','Assets/settingsScene/spanish.png');
+        this.load.image('returnSettings','Assets/settingsScene/returnSettings.png');
+
+        // Elementos de pantalla de créditos
+        this.load.image('creditsBackground','Assets/creditsScene/creditsBackground.jpg');
+        this.load.image('creditsText','Assets/creditsScene/creditsText.jpg');
+        this.load.image('returnCredits','Assets/creditsScene/returnCredits.png');
+
+        // Elementos de pantallas de juego.
         this.load.image('Lysha','Assets/Lysha.png');
         this.load.image('bat','Assets/bat.png');
         this.load.image('bat_potion','Assets/bat_potion.png');
@@ -30,23 +73,29 @@ class Loading extends Phaser.Scene {
         this.load.image('wall3','Assets/wall3.png');
         this.load.image('wall4','Assets/wall4.png');
         this.load.image('table','Assets/table.png');
-    }
-    create(){
-        /*
-        var scene=this;
-        var white = this.add.image(config.width/2,config.height/2,'white');
-        var logo = this.add.image(config.width/2,config.height/2,'logo').setScale(0.3);
 
         
-        this.cameras.main.once('camerafadeoutcomplete', function (camera) {
+    }
+    create(){
+        
+        // Se establece la escena inicial del propio videojuego.
+        var scene=this;
+
+        // Se establecen los elementos principales de la pantalla de carga.
+        var white = this.add.image(config.width/2,config.height/2,'loadingBackground');
+        var logo = this.add.image(config.width/2,config.height/2,'logo');
+                this.cameras.main.once('camerafadeoutcomplete', function (camera) {
             logo.destroy();
             white.destroy();
-            scene.scene.start("Menu");
+            scene.scene.start("Login");
         });
+        
+        menuMusic = this.sound.add('menuMusic',{loop:true});
+        stageMusic = this.sound.add('stageMusic',{loop:true});
 
         setTimeout(function(){
             scene.cameras.main.fadeOut(2000);
-             }, 2000);*/
-             this.scene.start("GameScene");
+             }, 2000);
+             //this.scene.start("GameScene");
     }
 }

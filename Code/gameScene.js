@@ -4,7 +4,7 @@ class GameScene extends Phaser.Scene{
     }
     create(){
         this.add.image(config.width/2,config.height/2,'ground');
-        
+
         this.cursors = this.input.keyboard.createCursorKeys();
 
         var colisionableObjects = this.physics.add.staticGroup();

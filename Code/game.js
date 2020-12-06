@@ -5,7 +5,7 @@ var config = {
     backgroundColor: 0x000000,
     pixelArt: true, //Prevent pixel art from becoming blurred when scaled.
     //antialias: true,
-    scene: [Loading,GameScene,Start,Menu],
+    scene: [Loading,Login,Menu,Settings,Configuration,Credits,GameScene],
     physics: {
         default: 'arcade',
         arcade: {
@@ -20,6 +20,9 @@ var config = {
     height: 600
     }
 }
+
+var menuMusic;
+var stageMusic;
 
 window.onload = function(){
     var game = new Phaser.Game(config);
