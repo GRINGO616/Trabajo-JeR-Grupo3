@@ -5,12 +5,12 @@ var config = {
     backgroundColor: 0x000000,
     pixelArt: true, //Prevent pixel art from becoming blurred when scaled.
     //antialias: true,
-    scene: [Start,Menu],
+    scene: [Loading,GameScene,Start,Menu],
     physics: {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            debug: false
+            debug: true
         }
     },
     scale: { 
