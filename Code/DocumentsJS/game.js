@@ -17,7 +17,10 @@ var config = {
     mode: Phaser.Scale.FIT,// para que al rescalar la pantalla se siga manteninedo igual
     autoCenter: Phaser.Scale.CENTER_BOTH, // centrar
     width: 800,
-    height: 600
+    height: 600,
+    dom: {
+        createContainer: true
+    }
     }
 }
 
