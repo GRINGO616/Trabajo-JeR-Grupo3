@@ -8,17 +8,6 @@ class Loading extends Phaser.Scene {
         // Elementos de sonido
         this.load.audio('menuMusic',['Assets/music/menuMusic.ogg','Assets/music/menuMusic.mp3']);
         this.load.audio('stageMusic',['Assets/music/stageMusic.ogg','Assets/music/stageMusic.mp3']);
-        
-        // Elementos de texto
-        var url;
-
-        url =
-        "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js";
-        this.load.plugin("rexbbcodetextplugin", url, true);
-        
-        url =
-        "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexteditplugin.min.js";
-        this.load.plugin("rextexteditplugin", url, true);
 
         // Elementos de pantalla de carga
         this.load.image('loadingBackground','Assets/loadingScene/loadingBackground.jpg');
@@ -30,6 +19,7 @@ class Loading extends Phaser.Scene {
         this.load.image('loginNextButton','Assets/loggingScene/loginNextButton.png');
         
         // Elementos de pantalla de menú
+        this.load.image('logoGame', 'Assets/menuScene/logoGame.PNG');
         this.load.image('menuBackground','Assets/menuScene/menuBackground.png');
         this.load.image('arcade_button','Assets/menuScene/arcade_button.png');
         this.load.image('storyMode_button','Assets/menuScene/storyMode_button.png');
@@ -90,12 +80,12 @@ class Loading extends Phaser.Scene {
             scene.scene.start("Login");
         });
         
-        menuMusic = this.sound.add('menuMusic',{loop:true});
-        stageMusic = this.sound.add('stageMusic',{loop:true});
+        // Se establecen los parámetros para poder declarar la música del videojuego.
+        menuMusic = this.sound.add('menuMusic',{loop:true, volume: 0.4});
+        stageMusic = this.sound.add('stageMusic',{loop:true, volume: 0.4});
 
         setTimeout(function(){
             scene.cameras.main.fadeOut(2000);
              }, 2000);
-             //this.scene.start("GameScene");
     }
 }

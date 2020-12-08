@@ -11,7 +11,7 @@ class Login extends Phaser.Scene{
 
         // Declaración de los botones del menú de logging.
         this.log_box=this.add.image(config.width/2.7,config.height/4,'loginBox')
-        this.login_next_button=this.add.image(config.width/3,config.height/1.7,'loginNextButton')
+        this.login_next_button=this.add.image(config.width/3,config.height/1.7,'loginNextButton').setScale(1.2)
 
         // Declaración de funcionalidades
         /*var editor = "";

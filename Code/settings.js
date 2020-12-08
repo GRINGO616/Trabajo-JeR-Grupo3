@@ -17,11 +17,11 @@ class Settings extends Phaser.Scene{
 
             // Declaración de funcionalidades
             this.musicON_button.setInteractive().on('pointerdown', () => {
-                menuMusic.play();
+                menuMusic.volume = 0.4;
             })
 
             this.musicOFF_button.setInteractive().on('pointerdown', () => {
-                menuMusic.stop();
+                menuMusic.volume = 0.0;
             })
 
             this.settings_return_button.setInteractive().on('pointerdown', () => {
