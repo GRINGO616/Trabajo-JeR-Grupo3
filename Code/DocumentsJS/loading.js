@@ -50,7 +50,11 @@ class Loading extends Phaser.Scene {
         this.load.image('returnCredits','Assets/creditsScene/returnCredits.png');
 
         // Elementos de pantallas de juego.
-        this.load.image('Lysha','Assets/Lysha.png');
+        this.load.spritesheet('Lysha','Assets/Lysha.png',{frameWidth: 75, frameHeight: 140});
+        this.load.spritesheet('Lysha_walkcycle','Assets/Lysha_walk_cycle_1.png', {frameWidth: 75 , frameHeight: 154} );
+        this.load.spritesheet('Lysha_walkcycle_2','Assets/Lysha_walk_cycle_2.png', {frameWidth: 77 , frameHeight: 154});
+        this.load.spritesheet('Lysha_walkcycle_3','Assets/Lysha_walk_cycle_3.png', {frameWidth: 75 , frameHeight: 150});
+        this.load.spritesheet('Lysha_walkcycle_4','Assets/Lysha_walk_cycle_4.png', {frameWidth: 75 , frameHeight: 150});
         this.load.image('bat','Assets/bat.png');
         this.load.image('bat_potion','Assets/bat_potion.png');
         this.load.image('cut_bat','Assets/cut_bat.png');
@@ -58,7 +62,7 @@ class Loading extends Phaser.Scene {
         this.load.image('herb','Assets/herb.png');
         this.load.image('cut_herb','Assets/cut_herb.png');
         this.load.image('herbal_potion','Assets/herbal_potion.png');
-        this.load.image('herbal?potion?order','Assets/herb.png')
+        this.load.image('herbal_potion_order','Assets/herb.png')
         this.load.image('cauldron','Assets/cauldron.png');
         this.load.image('coins','Assets/coins.png');
         this.load.image('time','Assets/time.png');
@@ -68,6 +72,11 @@ class Loading extends Phaser.Scene {
         this.load.image('wall3','Assets/wall3.png');
         this.load.image('wall4','Assets/wall4.png');
         this.load.image('table','Assets/table.png');
+        this.load.image('boxes','Assets/boxes.png');
+        this.load.image('box','Assets/box.png');
+        this.load.image('progress','Assets/progress.png');
+        this.load.image('empty_bar','Assets/empty_bar.png');
+        this.load.image('goal_box','Assets/goal_box.png');
 
         
     }
@@ -75,7 +84,8 @@ class Loading extends Phaser.Scene {
         
         // Se establece la escena inicial del propio videojuego.
         var scene=this;
-
+        scene.scene.start("GameScene");
+        /*
         // Se establecen los elementos principales de la pantalla de carga.
         var white = this.add.image(config.width/2,config.height/2,'loadingBackground');
         var logo = this.add.image(config.width/2,config.height/2,'logo');
@@ -92,5 +102,6 @@ class Loading extends Phaser.Scene {
         setTimeout(function(){
             scene.cameras.main.fadeOut(2000);
              }, 2000);
+         */
     }
 }
