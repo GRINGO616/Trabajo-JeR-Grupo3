@@ -51,6 +51,9 @@ class Loading extends Phaser.Scene {
 
         // Elementos de pantallas de juego.
         this.load.spritesheet('Lysha','Assets/Lysha.png',{frameWidth: 75, frameHeight: 140});
+        this.load.spritesheet('left','Assets/left.png',{frameWidth: 75, frameHeight: 150});
+        this.load.spritesheet('right','Assets/right.png',{frameWidth: 75, frameHeight: 140});
+        this.load.spritesheet('backwards','Assets/backwards.png',{frameWidth: 75, frameHeight: 140});
         this.load.spritesheet('Lysha_walkcycle','Assets/Lysha_walk_cycle_1.png', {frameWidth: 75 , frameHeight: 154} );
         this.load.spritesheet('Lysha_walkcycle_2','Assets/Lysha_walk_cycle_2.png', {frameWidth: 77 , frameHeight: 154});
         this.load.spritesheet('Lysha_walkcycle_3','Assets/Lysha_walk_cycle_3.png', {frameWidth: 75 , frameHeight: 150});
@@ -77,6 +80,7 @@ class Loading extends Phaser.Scene {
         this.load.image('progress','Assets/progress.png');
         this.load.image('empty_bar','Assets/empty_bar.png');
         this.load.image('goal_box','Assets/goal_box.png');
+        this.load.image('bookshelf','Assets/bookshelf.png');
 
         
     }
