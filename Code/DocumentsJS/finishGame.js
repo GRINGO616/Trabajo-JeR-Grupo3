@@ -14,6 +14,7 @@ class FinishGameScene extends Phaser.Scene{
         this.firstStar=this.add.image(config.width*0.4,config.height*0.4,'star').setScale(0);
         this.secondStar=this.add.image(config.width*0.5,config.height*0.4,'star').setScale(0);
         this.thirdStar=this.add.image(config.width*0.6,config.height*0.4,'star').setScale(0);
+        this.levelFinishedGameText=this.add.text(config.width*0.5,config.height*0.55,GameManager.levelCoins, { font: "38px PixelFont", fill: "#ffffff", align: "center" }).setOrigin(0.5).setResolution(10);
         //Falta texto con los puntos, boton de replay si saca una o ninguna estrella y boton de nextLevel si ha sacado dos o mas
         if(GameManager.levelCoins>100){
             this.tweens.add({
