@@ -49,15 +49,32 @@ class Loading extends Phaser.Scene {
         this.load.image('creditsText','Assets/creditsScene/creditsText.jpg');
         this.load.image('returnCredits','Assets/creditsScene/returnCredits.png');
 
+        //Elementos pantalla de victoria
+        this.load.image('cross','Assets/cross.png');
+        this.load.image('blackStar','Assets/blackStar.png');
+        this.load.image('star','Assets/star.png');
+
         // Elementos de pantallas de juego.
-        this.load.spritesheet('Lysha','Assets/Lysha.png',{frameWidth: 75, frameHeight: 140});
-        this.load.spritesheet('left','Assets/left.png',{frameWidth: 75, frameHeight: 150});
-        this.load.spritesheet('right','Assets/right.png',{frameWidth: 75, frameHeight: 140});
-        this.load.spritesheet('backwards','Assets/backwards.png',{frameWidth: 75, frameHeight: 140});
+        this.load.spritesheet('Lysha_forward','Assets/Lysha_forward.png',{frameWidth: 75, frameHeight: 140});
+        this.load.spritesheet('Lysha_left','Assets/Lysha_left.png',{frameWidth: 75, frameHeight: 150});
+        this.load.spritesheet('Lysha_right','Assets/Lysha_right.png',{frameWidth: 75, frameHeight: 140});
+        this.load.spritesheet('Lysha_backwards','Assets/Lysha_backwards.png',{frameWidth: 75, frameHeight: 140});
+
+        this.load.spritesheet('Freddie_forward','Assets/Freddie_forward.png',{frameWidth: 75, frameHeight: 140});
+        this.load.spritesheet('Freddie_left','Assets/Freddie_left.png',{frameWidth: 75, frameHeight: 145});
+        this.load.spritesheet('Freddie_right','Assets/Freddie_right.png',{frameWidth: 75, frameHeight: 145});
+        this.load.spritesheet('Freddie_backwards','Assets/Freddie_backwards.png',{frameWidth: 75, frameHeight: 140});
+
         this.load.spritesheet('Lysha_walkcycle','Assets/Lysha_walk_cycle_1.png', {frameWidth: 75 , frameHeight: 154} );
         this.load.spritesheet('Lysha_walkcycle_2','Assets/Lysha_walk_cycle_2.png', {frameWidth: 77 , frameHeight: 154});
         this.load.spritesheet('Lysha_walkcycle_3','Assets/Lysha_walk_cycle_3.png', {frameWidth: 75 , frameHeight: 150});
         this.load.spritesheet('Lysha_walkcycle_4','Assets/Lysha_walk_cycle_4.png', {frameWidth: 75 , frameHeight: 150});
+        
+        this.load.spritesheet('Freddie_walkcycle','Assets/Freddie_walk_cycle_1.png', {frameWidth: 75 , frameHeight: 154} );
+        this.load.spritesheet('Freddie_walkcycle_2','Assets/Freddie_walk_cycle_2.png', {frameWidth: 75 , frameHeight: 154});
+        this.load.spritesheet('Freddie_walkcycle_3','Assets/Freddie_walk_cycle_3.png', {frameWidth: 75 , frameHeight: 150});
+        this.load.spritesheet('Freddie_walkcycle_4','Assets/Freddie_walk_cycle_4.png', {frameWidth: 75 , frameHeight: 150});
+
         this.load.image('bat','Assets/bat.png');
         this.load.image('bat_potion','Assets/bat_potion.png');
         this.load.image('cut_bat','Assets/cut_bat.png');
@@ -65,8 +82,9 @@ class Loading extends Phaser.Scene {
         this.load.image('herb','Assets/herb.png');
         this.load.image('cut_herb','Assets/cut_herb.png');
         this.load.image('herbal_potion','Assets/herbal_potion.png');
-        this.load.image('herbal_potion_order','Assets/herb.png')
+        this.load.image('herbal_potion_order','Assets/herb.png');
         this.load.image('cauldron','Assets/cauldron.png');
+        this.load.image('empty_cauldron','Assets/empty_cauldron.png');
         this.load.image('coins','Assets/coins.png');
         this.load.image('time','Assets/time.png');
         this.load.image('ground','Assets/ground.png');
@@ -81,6 +99,7 @@ class Loading extends Phaser.Scene {
         this.load.image('empty_bar','Assets/empty_bar.png');
         this.load.image('goal_box','Assets/goal_box.png');
         this.load.image('bookshelf','Assets/bookshelf.png');
+
 
         
     }
