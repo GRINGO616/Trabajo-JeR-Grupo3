@@ -8,7 +8,10 @@ class GameScene extends Phaser.Scene {
         GameManager.levelCoins = 600;
         this.gameTimer = this.time.addEvent({ delay: (GameManager.gameTime * 1000), callback: this.finishGame, callbackScope: this });
         this.textTime = this.time.addEvent({ delay: 1000, loop: true, callback: subtractTime, callbackScope: this })
-
+        
+        this.rithim = 0.9;
+        this.comandCount = 1;
+        this.lastComand = 0;
         this.levelSettings();
         this.interfaceSettings();
         this.firstCharacterSettings();
@@ -266,74 +269,39 @@ class GameScene extends Phaser.Scene {
     
    updateComands(){
     
+    
     var numComand = Math.random() * 10;
-    if(GameManager.comands < 0.6)
+    if(GameManager.comands < 0.8)
     {
-        if(GameManager.timeLeft == GameManager.gameTime * 0.9 && GameManager.comandCount == 0)
-        {
+       
             if(numComand <= 5)
             {
-                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandBat').setScale(1);
-                GameManager.comands += 0.15;
-                GameManager.comandCount++;
+                 if(GameManager.timeLeft <= GameManager.gameTime * this.rithim && this.comandCount > this.lastComand)
+                    {
+                        this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandBat').setScale(1);
+                        GameManager.comands += 0.15;
+                        this.lastComand = this.comandCount;
+                        this.rithim -= 0.3;
+                        this.comandCount++;
+                    }             
             }
             else
             {
-                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandHerb').setScale(1);
-                GameManager.comands += 0.15;
-                GameManager.comandCount++;
-            }
-        }
-        if(GameManager.timeLeft == GameManager.gameTime * 0.6 && GameManager.comandCount == 1)
-        {
-            if(numComand <= 5)
-            {
-                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandBat').setScale(1);
-                GameManager.comands += 0.15;
-                GameManager.comandCount++;
-            }
-            else
-            {
-                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandHerb').setScale(1);
-                GameManager.comands += 0.15;
-                GameManager.comandCount++;
-            }
-        }
-        if(GameManager.timeLeft == GameManager.gameTime * 0.4 && GameManager.comandCount == 2)
-        {
-            if(numComand <= 5)
-            {
-                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandBat').setScale(1);
-                GameManager.comands += 0.15;
-                GameManager.comandCount++;
-            }
-            else
-            {
-                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandHerb').setScale(1);
-                GameManager.comands += 0.15;
-                GameManager.comandCount++;
-            }
-        }
-        if(GameManager.timeLeft == GameManager.gameTime * 0.2 && GameManager.comandCount == 3)
-        {
-            if(numComand <= 5)
-            {
-                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandBat').setScale(1);
-                GameManager.comands += 0.15;
-                GameManager.comandCount++;
-            }
-            else
-            {
-                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandHerb').setScale(1);
-                GameManager.comands += 0.15;
-                GameManager.comandCount++;
+                if(GameManager.timeLeft <= GameManager.gameTime * this.rithim && this.comandCount > this.lastComand)
+                    {
+                        this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandHerb').setScale(1);
+                        GameManager.comands += 0.15;
+                        this.lastComand = this.comandCount;
+                        this.rithim -= 0.3;
+                        this.comandCount++;
+                    }
             }
         }
     }
     
     
     
-}
+
 
     updateFirstPlayer() {
         this.playerOne.body.setVelocityX(0);
@@ -477,7 +445,6 @@ class GameManager {
     static objectPlayerOne;
     static objectPlayerTwo;
     static comands = 0.1;
-    static comandCount = 0;
     constructor(scene) {
         GameManager.scene = scene;
     }
