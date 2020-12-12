@@ -99,6 +99,8 @@ class Loading extends Phaser.Scene {
         this.load.image('empty_bar','Assets/empty_bar.png');
         this.load.image('goal_box','Assets/goal_box.png');
         this.load.image('bookshelf','Assets/bookshelf.png');
+        this.load.image('comandBat','Assets/comandBat.png');
+        this.load.image('comandHerb','Assets/comandHerb.png');
 
 
         

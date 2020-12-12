@@ -48,6 +48,8 @@ class GameScene extends Phaser.Scene {
         this.add.sprite(config.width * 0.9, config.height * 0.1, 'coins').setScale(1.5);
         this.add.sprite(config.width * 0.7, config.height * 0.1, 'coins').setScale(1.5);
         this.add.sprite(config.width * 0.74, config.height * 0.1, 'time').setScale(0.8);
+        
+        
         //Bag
         //player one
         this.add.sprite(config.width*0.1,config.height*0.9,'loadingBackground').setScale(0.15);
@@ -258,8 +260,80 @@ class GameScene extends Phaser.Scene {
     update() {
         this.updateFirstPlayer();
         this.updateSecondPlayer();
+        this.updateComands();
         
     }
+    
+   updateComands(){
+    
+    var numComand = Math.random() * 10;
+    if(GameManager.comands < 0.6)
+    {
+        if(GameManager.timeLeft == GameManager.gameTime * 0.9 && GameManager.comandCount == 0)
+        {
+            if(numComand <= 5)
+            {
+                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandBat').setScale(1);
+                GameManager.comands += 0.15;
+                GameManager.comandCount++;
+            }
+            else
+            {
+                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandHerb').setScale(1);
+                GameManager.comands += 0.15;
+                GameManager.comandCount++;
+            }
+        }
+        if(GameManager.timeLeft == GameManager.gameTime * 0.6 && GameManager.comandCount == 1)
+        {
+            if(numComand <= 5)
+            {
+                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandBat').setScale(1);
+                GameManager.comands += 0.15;
+                GameManager.comandCount++;
+            }
+            else
+            {
+                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandHerb').setScale(1);
+                GameManager.comands += 0.15;
+                GameManager.comandCount++;
+            }
+        }
+        if(GameManager.timeLeft == GameManager.gameTime * 0.4 && GameManager.comandCount == 2)
+        {
+            if(numComand <= 5)
+            {
+                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandBat').setScale(1);
+                GameManager.comands += 0.15;
+                GameManager.comandCount++;
+            }
+            else
+            {
+                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandHerb').setScale(1);
+                GameManager.comands += 0.15;
+                GameManager.comandCount++;
+            }
+        }
+        if(GameManager.timeLeft == GameManager.gameTime * 0.2 && GameManager.comandCount == 3)
+        {
+            if(numComand <= 5)
+            {
+                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandBat').setScale(1);
+                GameManager.comands += 0.15;
+                GameManager.comandCount++;
+            }
+            else
+            {
+                this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandHerb').setScale(1);
+                GameManager.comands += 0.15;
+                GameManager.comandCount++;
+            }
+        }
+    }
+    
+    
+    
+}
 
     updateFirstPlayer() {
         this.playerOne.body.setVelocityX(0);
@@ -402,6 +476,8 @@ class GameManager {
     static levelCoins;
     static objectPlayerOne;
     static objectPlayerTwo;
+    static comands = 0.1;
+    static comandCount = 0;
     constructor(scene) {
         GameManager.scene = scene;
     }
@@ -423,3 +499,5 @@ function subtractTime() {
         GameManager.scene.textTime.paused = true;
     }
 }
+
+
