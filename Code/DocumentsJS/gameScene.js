@@ -79,6 +79,15 @@ class GameScene extends Phaser.Scene {
         this.cuttingAreaThree[0] = this.physics.add.sprite(config.width * 0.89, config.height * 0.63, 'box').setScale(0.6, 0.3).setVisible(false);
         this.cuttingAreaThree[1] = this.physics.add.sprite(config.width * 0.85, config.height * 0.71, 'box').setScale(0.5, 0.4).setVisible(false);
         this.cuttingAreaThree[2] = this.physics.add.sprite(config.width * 0.89, config.height * 0.77, 'box').setScale(0.6, 0.3).setVisible(false);
+
+        //Cooking area
+        this.cauldronAreaZero=[];
+        this.cauldronAreaZero[0] = this.physics.add.sprite(config.width * 0.15, config.height * 0.305, 'box').setScale(0.6, 0.3).setVisible(false);
+        this.cauldronAreaZero[1] = this.physics.add.sprite(config.width * 0.19, config.height * 0.27, 'box').setScale(0.3, 0.4).setVisible(false);
+
+        this.cauldronAreaOne=[];
+        this.cauldronAreaOne[0] = this.physics.add.sprite(config.width * 0.84, config.height * 0.27, 'box').setScale(0.3, 0.4).setVisible(false);
+        this.cauldronAreaOne[1] = this.physics.add.sprite(config.width * 0.88, config.height * 0.305, 'box').setScale(0.6, 0.3).setVisible(false);
     }
 
     interfaceSettings() {
@@ -685,7 +694,7 @@ class GameScene extends Phaser.Scene {
     {
         if(numComand <= 5)
             {
-                 if(GameManager.timeLeft <= GameManager.gameTime * this.rithim && this.comandCount > this.lastComand)
+                if(GameManager.timeLeft <= GameManager.gameTime * this.rithim && this.comandCount > this.lastComand)
                     {
                         this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandBat').setScale(1);
                         GameManager.comands += 0.15;
@@ -938,7 +947,7 @@ class GameScene extends Phaser.Scene {
 class GameManager {
     static scene;
     static level = 1;
-    static gameTime = 3000;
+    static gameTime = 40;
     static timeLeft;
     static levelCoins;
     static objectPlayerOne;
