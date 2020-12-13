@@ -2,16 +2,20 @@ class GameScene extends Phaser.Scene {
     constructor() {
         super("GameScene")
     }
+    
     create() {
         var gm = new GameManager(this);
         GameManager.timeLeft = GameManager.gameTime;
-        GameManager.levelCoins = 600;
+        GameManager.levelCoins = 0;
         this.gameTimer = this.time.addEvent({ delay: (GameManager.gameTime * 1000), callback: this.finishGame, callbackScope: this });
         this.textTime = this.time.addEvent({ delay: 1000, loop: true, callback: subtractTime, callbackScope: this })
 
         this.rithim = 0.9;
         this.comandCount = 1;
         this.lastComand = 0;
+        this.comandsType = [];
+        this.comandDone = false;
+        this.comandToErase = -1;
         this.levelSettings();
         this.interfaceSettings();
         this.firstCharacterSettings();
@@ -229,6 +233,19 @@ class GameScene extends Phaser.Scene {
         this.physics.add.overlap(this.playerOne, this.batAreaTwo, function () {
             if (GameManager.scene.playerOne.lastMov == 0 && GameManager.scene.cursorsFirstPlayer.take.isDown) {
                 GameManager.scene.takeObject(1, 8)
+            }
+        })
+        
+        //GOAL AREA
+        this.physics.add.overlap(this.playerOne, this.goalArea, function () {
+            if (GameManager.scene.playerOne.lastMov == 2 && GameManager.scene.cursorsFirstPlayer.take.isDown) {
+                GameManager.scene.leavePotion(1);
+                GameManager.objectPlayerOne.destroy();
+                GameManager.scene.playerOne.haveObject = false;
+                GameManager.scene.comandDone = false;
+                if(GameManager.scene.comandToErase >= 0){
+                   GameManager.scene.comandsType[GameManager.scene.comandToErase].destroy(); 
+                }
             }
         })
 
@@ -798,7 +815,6 @@ class GameScene extends Phaser.Scene {
         })
     }
 
-
     update() {
 
         if (this.playerOne.canMove) {
@@ -808,7 +824,7 @@ class GameScene extends Phaser.Scene {
             this.updateSecondPlayer();
         }
         this.updateCauldron();
-        //this.updateComands();
+        this.updateComands();
 
     }
 
@@ -838,7 +854,7 @@ class GameScene extends Phaser.Scene {
         if (GameManager.comands < 0.8) {
             if (numComand <= 5) {
                 if (GameManager.timeLeft <= GameManager.gameTime * this.rithim && this.comandCount > this.lastComand) {
-                    this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandBat').setScale(1);
+                    this.comandsType[this.comandCount - 1] = this.add.sprite(config.width * 0.1, config.height * GameManager.comands, 'comandBat').setScale(1);
                     GameManager.comands += 0.15;
                     this.lastComand = this.comandCount;
                     this.rithim -= 0.3;
@@ -847,7 +863,7 @@ class GameScene extends Phaser.Scene {
             }
             else {
                 if (GameManager.timeLeft <= GameManager.gameTime * this.rithim && this.comandCount > this.lastComand) {
-                    this.add.sprite(config.width * 0.15, config.height * GameManager.comands, 'comandHerb').setScale(1);
+                    this.comandsType[this.comandCount - 1] = this.add.sprite(config.width * 0.1, config.height * GameManager.comands, 'comandHerb').setScale(1);
                     GameManager.comands += 0.15;
                     this.lastComand = this.comandCount;
                     this.rithim -= 0.3;
@@ -856,10 +872,6 @@ class GameScene extends Phaser.Scene {
             }
         }
     }
-
-
-
-
 
     updateFirstPlayer() {
         this.playerOne.body.setVelocityX(0);
@@ -910,6 +922,7 @@ class GameScene extends Phaser.Scene {
 
         }
     }
+    
     updateSecondPlayer() {
         this.playerTwo.body.setVelocityX(0);
         this.playerTwo.body.setVelocityY(0);
@@ -1139,8 +1152,85 @@ class GameScene extends Phaser.Scene {
 
         }
     }
-
     
+    leavePotion(player){
+        
+        if(player == 1){
+            
+            this.comandsType.forEach(function(element, index, array){
+                var type = element.texture.key;
+                if(GameManager.objectPlayerOne.texture.key == 'herbal_potion' && type == 'comandHerb' && GameManager.scene.comandDone == false){
+                    
+                    if(GameManager.timeLeft > (GameManager.gameTime / 2)){
+                        GameManager.levelCoins += 100;
+                        GameManager.scene.comandDone = true;
+                        GameManager.scene.comandToErase += 1;
+                    }
+                    if(GameManager.timeLeft < (GameManager.gameTime / 2) && GameManager.timeLeft > (GameManager.gameTime / 3)){
+                        GameManager.levelCoins += 200;
+                        GameManager.scene.comandDone = true;
+                        GameManager.scene.comandToErase += 1;
+                    }
+                    if(GameManager.timeLeft < (GameManager.gameTime / 3)){
+                        GameManager.levelCoins += 300;
+                        GameManager.scene.comandDone = true;
+                        GameManager.scene.comandToErase += 1;
+                    }
+                    
+                }
+                if(GameManager.objectPlayerOne.texture.key == 'bat_potion' && type == 'comandBat' && GameManager.scene.comandDone == false){
+                    
+                    if(GameManager.timeLeft > (GameManager.gameTime / 2)){
+                        GameManager.levelCoins += 100;
+                        GameManager.scene.comandDone = true;
+                        GameManager.scene.comandToErase += 1;
+                    }
+                    if(GameManager.timeLeft < (GameManager.gameTime / 2) && GameManager.timeLeft > (GameManager.gameTime / 3)){
+                        GameManager.levelCoins += 200;
+                        GameManager.scene.comandDone = true;
+                        GameManager.scene.comandToErase += 1;
+                    }
+                    if(GameManager.timeLeft < (GameManager.gameTime / 3)){
+                        GameManager.levelCoins += 300;
+                        GameManager.scene.comandDone = true;
+                        GameManager.scene.comandToErase += 1;
+                    }
+                }
+                
+            })
+              
+        }
+        if(player == 2){
+            
+             this.comandsType.forEach(function(element, index, array){
+                var type = element.texture.key;
+                if(GameManager.objectPlayerTwo.texture.key == 'herbal_potion' && type == 'comandHerb' && GameManager.scene.comandDone == false){
+                    if(GameManager.timeLeft > (GameManager.gameTime / 2)){
+                        GameManager.levelCoins += 100;
+                    }
+                    if(GameManager.timeLeft < (GameManager.gameTime / 2) && GameManager.timeLeft > (GameManager.gameTime / 3)){
+                        GameManager.levelCoins += 200;
+                    }
+                    if(GameManager.timeLeft < (GameManager.gameTime / 3)){
+                        GameManager.levelCoins += 300;
+                    }
+                    
+                }
+                if(GameManager.objectPlayerTwo.texture.key == 'bat_potion' && type == 'comandBat' && GameManager.scene.comandDone == false){
+                    if(GameManager.timeLeft > (GameManager.gameTime / 2)){
+                        GameManager.levelCoins += 100;
+                    }
+                    if(GameManager.timeLeft < (GameManager.gameTime / 2) && GameManager.timeLeft > (GameManager.gameTime / 3)){
+                        GameManager.levelCoins += 200;
+                    }
+                    if(GameManager.timeLeft < (GameManager.gameTime / 3)){
+                        GameManager.levelCoins += 300;
+                    }
+                }
+            })
+        }
+        this.coinsText = this.add.text(config.width * 0.87, config.height * 0.08, GameManager.levelCoins, { font: "34px PixelFont", fill: "#ffffff", align: "center" }).setOrigin(0.5).setResolution(10);
+    }
 
     finishGame() {
         this.scene.pause("GameScene");
@@ -1151,7 +1241,7 @@ class GameScene extends Phaser.Scene {
 class GameManager {
     static scene;
     static level = 1;
-    static gameTime = 300;
+    static gameTime = 60;
     static timeLeft;
     static levelCoins;
     static objectPlayerOne;
@@ -1177,7 +1267,6 @@ class Slot {
         this.ready = false;
     }
 }
-
 
 function subtractTime() {
     if (GameManager.timeLeft) {
