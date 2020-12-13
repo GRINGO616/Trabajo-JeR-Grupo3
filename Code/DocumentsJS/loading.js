@@ -88,6 +88,7 @@ class Loading extends Phaser.Scene {
         this.load.image('cross','Assets/cross.png');
         this.load.image('blackStar','Assets/blackStar.png');
         this.load.image('star','Assets/star.png');
+        this.load.image('points_background','Assets/points_background.png');
 
         // Elementos de pantallas de juego.
         this.load.spritesheet('Lysha_forward','Assets/Lysha_forward.png',{frameWidth: 75, frameHeight: 140});
@@ -110,6 +111,10 @@ class Loading extends Phaser.Scene {
         this.load.spritesheet('Freddie_walkcycle_3','Assets/Freddie_walk_cycle_3.png', {frameWidth: 75 , frameHeight: 150});
         this.load.spritesheet('Freddie_walkcycle_4','Assets/Freddie_walk_cycle_4.png', {frameWidth: 75 , frameHeight: 150});
 
+        this.load.spritesheet('cauldronAnimation','Assets/cauldronAnimation.png', {frameWidth: 53 , frameHeight: 60});
+        this.load.spritesheet('cauldron','Assets/cauldron.png', {frameWidth: 53 , frameHeight: 47});
+        this.load.spritesheet('empty_cauldron','Assets/empty_cauldron.png', {frameWidth: 53 , frameHeight: 47});
+
         this.load.image('bat','Assets/bat.png');
         this.load.image('bat_potion','Assets/bat_potion.png');
         this.load.image('cut_bat','Assets/cut_bat.png');
@@ -118,8 +123,6 @@ class Loading extends Phaser.Scene {
         this.load.image('cut_herb','Assets/cut_herb.png');
         this.load.image('herbal_potion','Assets/herbal_potion.png');
         this.load.image('herbal_potion_order','Assets/herb.png');
-        this.load.image('cauldron','Assets/cauldron.png');
-        this.load.image('empty_cauldron','Assets/empty_cauldron.png');
         this.load.image('coins','Assets/coins.png');
         this.load.image('time','Assets/time.png');
         this.load.image('ground','Assets/ground.png');
@@ -136,6 +139,10 @@ class Loading extends Phaser.Scene {
         this.load.image('bookshelf','Assets/bookshelf.png');
         this.load.image('comandBat','Assets/comandBat.png');
         this.load.image('comandHerb','Assets/comandHerb.png');
+        this.load.image('bag','Assets/bag.png');
+
+
+        
     }
 
     create(){
