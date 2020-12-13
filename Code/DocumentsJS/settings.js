@@ -40,11 +40,41 @@ class Settings extends Phaser.Scene{
                 musicON = true;
             })
 
+            this.musicON_button.setInteractive().on('pointerover', () => {
+                if (musicON ===false){
+                    if(musicON === true){
+                    overEffect.play();
+                    }
+                    this.musicON_button.setTint(0xE197FE)
+            }
+            })
+
+            this.musicON_button.setInteractive().on('pointerout',()=>{
+                if (musicON === false){
+                    this.musicON_button.setTint()
+                }
+            })
+
             this.musicOFF_button.setInteractive().on('pointerdown', () => {
                 menuMusic.volume = 0.0;
                 this.musicON_button=this.add.image(config.width/1.55,config.height/2.5,'musicONNoActive');
                 this.musicOFF_button=this.add.image(config.width/2.6,config.height/2.5,'musicOFFActive');
                 musicON = false;
+            })
+
+            this.musicOFF_button.setInteractive().on('pointerover', () => {
+                if (musicON ===true){
+                    if(musicON === true){
+                        overEffect.play();
+                    }
+                    this.musicOFF_button.setTint(0xE197FE)
+            }
+            })
+
+            this.musicOFF_button.setInteractive().on('pointerout',()=>{
+                if (musicON === true){
+                    this.musicOFF_button.setTint()
+                }
             })
 
             this.english_button.setInteractive().on('pointerdown', () => {
@@ -55,6 +85,21 @@ class Settings extends Phaser.Scene{
                 english = true;
             })
 
+            this.english_button.setInteractive().on('pointerover', () => {
+                if (spanish===true){
+                    if(musicON === true){
+                        overEffect.play();
+                    }
+                    this.english_button.setTint(0xE197FE)
+            }
+            })
+
+            this.english_button.setInteractive().on('pointerout',()=>{
+                if (spanish === true){
+                    this.english_button.setTint()
+                }
+            })
+
             this.spanish_button.setInteractive().on('pointerdown', () => {
                 this.english_button=this.add.image(config.width/1.55,config.height/1.6,'englishNoActive');
                 this.spanish_button=this.add.image(config.width/2.6,config.height/1.6,'spanishActive');
@@ -63,8 +108,42 @@ class Settings extends Phaser.Scene{
                 english = false;
             })
 
+            this.spanish_button.setInteractive().on('pointerover', () => {
+                if (english ===true){
+                    if(musicON === true){
+                        overEffect.play();
+                        }
+                    this.spanish_button.setTint(0xE197FE)
+            }
+            })
+
+            this.spanish_button.setInteractive().on('pointerout',()=>{
+                if (english === true){
+                    this.spanish_button.setTint()
+                }
+            })
+
             this.settings_return_button.setInteractive().on('pointerdown', () => {
-            this.scene.start("Menu");
+                if(musicON===true){
+                    pulseEffect.play();
+                    }
+                this.scene.start("Menu");
+            })
+
+            this.settings_return_button.setInteractive().on('pointerover', () => {
+                this.tweens.add({
+                    targets:this.settings_return_button,
+                    duration:200,
+                    scale: 1.15,
+                });
+            })
+    
+            this.settings_return_button.setInteractive().on('pointerout',()=>{
+                this.tweens.add({
+                    targets:this.settings_return_button,
+                    duration:200,
+                    scale: 1,
+                });
             })
 
         }
