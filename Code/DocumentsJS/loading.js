@@ -14,6 +14,8 @@ class Loading extends Phaser.Scene {
         this.load.audio('menuMusic',['Assets/music/menuMusic.ogg','Assets/music/menuMusic.mp3']);
         this.load.audio('stageMusic',['Assets/music/stageMusic.ogg','Assets/music/stageMusic.mp3']);
         this.load.audio('levelSelectionMusic',['Assets/music/levelSelectionMusic.ogg','Assets/music/levelSelectionMusic.mp3']);
+        this.load.audio('pulseMusic',['Assets/music/pulseMagicEffect.ogg','Assets/music/pulseMagicEffect.mp3']);
+        this.load.audio('overMusic',['Assets/music/overEffect.ogg','Assets/music/overEffect.mp3']);
 
         // Elementos de pantalla de carga
         this.load.image('loadingBackground','Assets/loadingScene/loadingBackground.jpg');
@@ -41,6 +43,12 @@ class Loading extends Phaser.Scene {
 
         // Elementos de pantalla de configuración
         this.load.image('configurationBackground','Assets/configurationScene/configurationBackground.jpg');
+        this.load.image('controlsZoneSpanish','Assets/configurationScene/controlsZoneSpanish.png');
+        this.load.image('controlsZoneEnglish','Assets/configurationScene/controlsZoneEnglish.png');
+        this.load.image('onePlayerButtonSpanish','Assets/configurationScene/onePlayerButtonSpanish.png');
+        this.load.image('onePlayerButtonEnglish','Assets/configurationScene/onePlayerButtonEnglish.png');
+        this.load.image('twoPlayersButtonSpanish','Assets/configurationScene/twoPlayersButtonSpanish.png');
+        this.load.image('twoPlayersButtonEnglish','Assets/configurationScene/twoPlayersButtonEnglish.png');
         this.load.image('returnConfigurationSpanish','Assets/configurationScene/returnConfigurationSpanish.png');
         this.load.image('returnConfigurationEnglish','Assets/configurationScene/returnConfigurationEnglish.png');
 
@@ -67,6 +75,12 @@ class Loading extends Phaser.Scene {
 
         // Elementos de pantalla de selección de nivel
         this.load.image('selectionLevelBackground','Assets/selectionLevelScene/selectionLevelBackground.jpg');
+        this.load.image('level1Spanish','Assets/selectionLevelScene/level1Spanish.png');
+        this.load.image('level1English','Assets/selectionLevelScene/level1English.png');
+        this.load.image('level2Spanish','Assets/selectionLevelScene/level2Spanish.png');
+        this.load.image('level2English','Assets/selectionLevelScene/level2English.png');
+        this.load.image('nextSelectionLevelSpanish','Assets/selectionLevelScene/nextSelectionLevelSpanish.png');
+        this.load.image('nextSelectionLevelEnglish','Assets/selectionLevelScene/nextSelectionLevelEnglish.png');
         this.load.image('returnSelectionLevelSpanish','Assets/selectionLevelScene/returnSelectionLevelSpanish.png');
         this.load.image('returnSelectionLevelEnglish','Assets/selectionLevelScene/returnSelectionLevelEnglish.png');
 
@@ -142,6 +156,8 @@ class Loading extends Phaser.Scene {
         menuMusic = this.sound.add('menuMusic',{loop:true, volume: 0.0});
         stageMusic = this.sound.add('stageMusic',{loop:true, volume: 0.0});
         levelSelectionMusic = this.sound.add('levelSelectionMusic',{loop:true, volume: 0.0});
+        pulseEffect = this.sound.add('pulseMusic',{loop:false, volume: 0.6});
+        overEffect = this.sound.add('overMusic',{loop:false, volume: 0.6});
         menuMusic.play()
 
         musicON = true;

@@ -21,7 +21,26 @@ class Credits extends Phaser.Scene{
         
         // Declaración de funcionalidades
         this.credits_return_button.setInteractive().on('pointerdown', () => {
+            if(musicON===true){
+                pulseEffect.play();
+            }
             this.scene.start("Menu");
+        })
+
+        this.credits_return_button.setInteractive().on('pointerover', () => {
+            this.tweens.add({
+                targets:this.credits_return_button,
+                duration:200,
+                scale: 1.15,
+            });
+        })
+
+        this.credits_return_button.setInteractive().on('pointerout',()=>{
+            this.tweens.add({
+                targets:this.credits_return_button,
+                duration:200,
+                scale: 1,
+            });
         })
         }
 

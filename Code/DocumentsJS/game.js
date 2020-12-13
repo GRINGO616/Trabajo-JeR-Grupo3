@@ -5,7 +5,7 @@ var config = {
     backgroundColor: 0x000000,
     pixelArt: true, //Prevent pixel art from becoming blurred when scaled.
     //antialias: true,
-    scene: [Loading,Login,Menu,Settings,Configuration,Credits,SelectionLevel,GameScene,FinishGameScene],
+    scene: [Loading,Login,Menu,Settings,Configuration,Credits,SelectionLevel,PreloadLevel,GameScene,FinishGameScene],
     physics: {
         default: 'arcade',
         arcade: {
@@ -28,6 +28,8 @@ var config = {
 var menuMusic;
 var levelSelectionMusic;
 var stageMusic;
+var pulseEffect;
+var overEffect;
 var musicON;
 
 // Para controlar el idioma se usarán las siguientes variables
