@@ -418,13 +418,19 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 3) {
                     GameManager.scene.putIngredient(1, 0);
                 }
-            }
+                if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                    GameManager.scene.takePotion(1,0);
+                }
 
+            }
         })
         this.physics.add.overlap(this.playerOne, this.cookingAreaZero[1], function () {
             if (GameManager.scene.playerOne.lastMov == 0) {
                 if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 3) {
                     GameManager.scene.putIngredient(1, 0);
+                }
+                if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                    GameManager.scene.takePotion(1,0);
                 }
 
             }
@@ -437,6 +443,9 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 3) {
                     GameManager.scene.putIngredient(1, 1);
                 }
+                if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                    GameManager.scene.takePotion(1,1);
+                }
             }
 
         })
@@ -444,6 +453,9 @@ class GameScene extends Phaser.Scene {
             if (GameManager.scene.playerOne.lastMov == 3) {
                 if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 3) {
                     GameManager.scene.putIngredient(1, 1);
+                }
+                if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                    GameManager.scene.takePotion(1,1);
                 }
 
             }
@@ -741,6 +753,9 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 3) {
                     GameManager.scene.putIngredient(2, 0);
                 }
+                if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                    GameManager.scene.takePotion(2,0);
+                }
             }
 
         })
@@ -748,6 +763,9 @@ class GameScene extends Phaser.Scene {
             if (GameManager.scene.playerTwo.lastMov == 0) {
                 if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 3) {
                     GameManager.scene.putIngredient(2, 0);
+                }
+                if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                    GameManager.scene.takePotion(2,0);
                 }
 
             }
@@ -760,6 +778,9 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 3) {
                     GameManager.scene.putIngredient(2, 1);
                 }
+                if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                    GameManager.scene.takePotion(2,1);
+                }
             }
 
         })
@@ -767,6 +788,9 @@ class GameScene extends Phaser.Scene {
             if (GameManager.scene.playerTwo.lastMov == 3) {
                 if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 3) {
                     GameManager.scene.putIngredient(2, 1);
+                }
+                if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                    GameManager.scene.takePotion(2,1);
                 }
 
             }
@@ -1070,8 +1094,50 @@ class GameScene extends Phaser.Scene {
     }
 
     takePotion(player,slot){
+         if (player == 1) {
+            this.playerOne.canMove = false;
+            this.time.addEvent({
+                delay: 2000, callback: function () {
+                    GameManager.scene.playerOne.canMove = true;
+                    var type = Slot.cookingSlotsList.getAt(slot).ingredients[slot].texture.key;
+                    switch (type) {
+                        case 'cut_herb':
+                            GameManager.objectPlayerOne = this.add.sprite(GameManager.scene.playerOne.bagCoord[0], GameManager.scene.playerOne.bagCoord[1], 'herbal_potion').setScale(1.5);
+                            this.playerOne.haveObject = true;
+                            break;
+                        case 'cut_bat':
+                            GameManager.objectPlayerOne = this.add.sprite(GameManager.scene.playerOne.bagCoord[0], GameManager.scene.playerOne.bagCoord[1], 'bat_potion').setScale(1.5);
+                            this.playerOne.haveObject = true;
+                            break;
+                    }
+                
+                }, callbackScope: this
+            });
 
+        }
+        else if (player == 2) {
+            this.playerTwo.canMove = false;
+            this.time.addEvent({
+                delay: 2000, callback: function () {
+                    GameManager.scene.playerTwo.canMove = true;
+                    var type = Slot.cookingSlotsList.getAt(slot).ingredients;
+                    switch (type) {
+                        case 'cut_herb':
+                            GameManager.objectPlayerTwo = this.add.sprite(GameManager.scene.playerOne.bagCoord[0], GameManager.scene.playerTwo.bagCoord[1], 'herbal_potion').setScale(1.5);
+                            this.playerTwo.haveObject = true;
+                            break;
+                        case 'cut_bat':
+                            GameManager.objectPlayerTwo = this.add.sprite(GameManager.scene.playerOne.bagCoord[0], GameManager.scene.playerTwo.bagCoord[1], 'bat_potion').setScale(1.5);
+                            this.playerTwo.haveObject = true;
+                            break;
+                    }
+                }, callbackScope: this
+            });
+
+        }
     }
+
+    
 
     finishGame() {
         this.scene.pause("GameScene");
