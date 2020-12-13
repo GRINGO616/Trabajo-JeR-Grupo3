@@ -134,8 +134,7 @@ class Loading extends Phaser.Scene {
     create(){
         
         // Se establece la escena inicial del propio videojuego.
-        var scene=this;
-
+        var scene=this; 
         // Se establecen los elementos principales de la pantalla de carga.
         var white = this.add.image(config.width/2,config.height/2,'loadingBackground');
         var logo = this.add.image(config.width/2,config.height/2,'logo');
