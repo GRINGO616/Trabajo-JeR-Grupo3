@@ -1094,6 +1094,9 @@ class GameScene extends Phaser.Scene {
     }
 
     takePotion(player,slot){
+        Slot.cookingSlotsList.getAt(slot).ingredients[0].destroy();
+        Slot.cookingSlotsList.getAt(slot).ingredients[1].destroy();
+        Slot.cookingSlotsList.getAt(slot).ingredients[2].destroy();
          if (player == 1) {
             this.playerOne.canMove = false;
             this.time.addEvent({
