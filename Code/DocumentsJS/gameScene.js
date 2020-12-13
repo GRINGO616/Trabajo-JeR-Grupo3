@@ -243,7 +243,7 @@ class GameScene extends Phaser.Scene {
                 GameManager.objectPlayerOne.destroy();
                 GameManager.scene.playerOne.haveObject = false;
                 GameManager.scene.comandDone = false;
-                if(GameManager.scene.comandToErase >= 0){
+                if(GameManager.scene.comandToErase >= 0 && GameManager.scene.comandsType[GameManager.scene.comandToErase] != undefined){
                    GameManager.scene.comandsType[GameManager.scene.comandToErase].destroy(); 
                 }
             }
