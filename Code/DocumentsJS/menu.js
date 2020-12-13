@@ -21,7 +21,6 @@ class Menu extends Phaser.Scene{
         if (musicON === false){
 
             menuMusic.volume = 0.0;
-            menuMusic.volume = 0.0;
         }
 
         // Declaración de los botones del menú principal.

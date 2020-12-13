@@ -5,8 +5,8 @@ class GameScene extends Phaser.Scene {
     create() {
         var gm = new GameManager(this);
         GameManager.timeLeft = GameManager.gameTime;
-        GameManager.levelCoins = 600;
-        this.gameTimer = this.time.addEvent({ delay: (GameManager.gameTime * 1000), callback: this.finishGame, callbackScope: this });
+        GameManager.levelCoins = 350;
+        this.gameTimer = this.time.addEvent({ delay: (GameManager.gameTime * 10), callback: this.finishGame, callbackScope: this });
         this.textTime = this.time.addEvent({ delay: 1000, loop: true, callback: subtractTime, callbackScope: this })
 
         this.rithim = 0.9;
@@ -1144,7 +1144,7 @@ class GameScene extends Phaser.Scene {
 
     finishGame() {
         this.scene.pause("GameScene");
-        this.scene.launch("FinishGameScene");
+        this.scene.start("FinishGameScene");
     }
 }
 
