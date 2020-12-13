@@ -5,7 +5,7 @@ var config = {
     backgroundColor: 0x000000,
     pixelArt: true, //Prevent pixel art from becoming blurred when scaled.
     //antialias: true,
-    scene: [Loading,Login,Menu,Settings,Configuration,Credits,GameScene,FinishGameScene],
+    scene: [Loading,Login,Menu,Settings,Configuration,Credits,SelectionLevel,GameScene,FinishGameScene],
     physics: {
         default: 'arcade',
         arcade: {
@@ -24,8 +24,15 @@ var config = {
     }
 }
 
+// Para controlar la música se utilizarán las siguientes variables
 var menuMusic;
+var levelSelectionMusic;
 var stageMusic;
+var musicON;
+
+// Para controlar el idioma se usarán las siguientes variables
+var spanish;
+var english;
 
 window.onload = function(){
     var game = new Phaser.Game(config);

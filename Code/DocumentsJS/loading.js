@@ -13,12 +13,13 @@ class Loading extends Phaser.Scene {
         // Elementos de sonido
         this.load.audio('menuMusic',['Assets/music/menuMusic.ogg','Assets/music/menuMusic.mp3']);
         this.load.audio('stageMusic',['Assets/music/stageMusic.ogg','Assets/music/stageMusic.mp3']);
+        this.load.audio('levelSelectionMusic',['Assets/music/levelSelectionMusic.ogg','Assets/music/levelSelectionMusic.mp3']);
 
         // Elementos de pantalla de carga
         this.load.image('loadingBackground','Assets/loadingScene/loadingBackground.jpg');
         this.load.image('logo','Assets/loadingScene/logo_pixelart.PNG');
 
-        // Elementos de pantalla de logging
+        // Elementos de pantalla de login
         this.load.image('loginBackground','Assets/loggingScene/loginBackground.jpg');
         this.load.image('loginBox','Assets/loggingScene/loginBox.png');
         this.load.image('loginNextButton','Assets/loggingScene/loginNextButton.png');
@@ -27,27 +28,47 @@ class Loading extends Phaser.Scene {
         this.load.image('logoGame', 'Assets/menuScene/logoGame.PNG');
         this.load.image('menuBackground','Assets/menuScene/menuBackground.png');
         this.load.image('arcade_button','Assets/menuScene/arcade_button.png');
-        this.load.image('storyMode_button','Assets/menuScene/storyMode_button.png');
-        this.load.image('settings_button','Assets/menuScene/settings_button.png');
-        this.load.image('controls_button','Assets/menuScene/controls_button.png');
-        this.load.image('credits_button','Assets/menuScene/credits_button.png');
+
+        this.load.image('storyMode_button_spanish','Assets/menuScene/storyMode_button_spanish.png');
+        this.load.image('settings_button_spanish','Assets/menuScene/settings_button_spanish.png');
+        this.load.image('controls_button_spanish','Assets/menuScene/controls_button_spanish.png');
+        this.load.image('credits_button_spanish','Assets/menuScene/credits_button_spanish.png');
+
+        this.load.image('storyMode_button_english','Assets/menuScene/storyMode_button_english.png');
+        this.load.image('settings_button_english','Assets/menuScene/settings_button_english.png');
+        this.load.image('controls_button_english','Assets/menuScene/controls_button_english.png');
+        this.load.image('credits_button_english','Assets/menuScene/credits_button_english.png');
 
         // Elementos de pantalla de configuración
         this.load.image('configurationBackground','Assets/configurationScene/configurationBackground.jpg');
-        this.load.image('returnConfiguration','Assets/configurationScene/returnConfiguration.png');
+        this.load.image('returnConfigurationSpanish','Assets/configurationScene/returnConfigurationSpanish.png');
+        this.load.image('returnConfigurationEnglish','Assets/configurationScene/returnConfigurationEnglish.png');
 
         // Elementos de pantalla de ajustes
         this.load.image('settingsBackground','Assets/settingsScene/settingsBackground.jpg');
-        this.load.image('musicON','Assets/settingsScene/musicON.png');
-        this.load.image('musicOFF','Assets/settingsScene/musicOFF.png');
-        this.load.image('english','Assets/settingsScene/english.png');
-        this.load.image('spanish','Assets/settingsScene/spanish.png');
-        this.load.image('returnSettings','Assets/settingsScene/returnSettings.png');
+        this.load.image('settingsZone','Assets/settingsScene/settingsZone.png');
+        this.load.image('musicONActive','Assets/settingsScene/musicONActive.png');
+        this.load.image('musicONNoActive','Assets/settingsScene/musicONNoActive.png');
+        this.load.image('musicOFFActive','Assets/settingsScene/musicOFFActive.png');
+        this.load.image('musicOFFNoActive','Assets/settingsScene/musicOFFNoActive.png');
+        this.load.image('englishActive','Assets/settingsScene/englishActive.png');
+        this.load.image('englishNoActive','Assets/settingsScene/englishNoActive.png');
+        this.load.image('spanishActive','Assets/settingsScene/spanishActive.png');
+        this.load.image('spanishNoActive','Assets/settingsScene/spanishNoActive.png');
+        this.load.image('returnSettingsSpanish','Assets/settingsScene/returnSettingsSpanish.png');
+        this.load.image('returnSettingsEnglish','Assets/settingsScene/returnSettingsEnglish.png');
 
         // Elementos de pantalla de créditos
         this.load.image('creditsBackground','Assets/creditsScene/creditsBackground.jpg');
-        this.load.image('creditsText','Assets/creditsScene/creditsText.jpg');
-        this.load.image('returnCredits','Assets/creditsScene/returnCredits.png');
+        this.load.image('creditsTextSpanish','Assets/creditsScene/creditsTextSpanish.png');
+        this.load.image('returnCreditsSpanish','Assets/creditsScene/returnCreditsSpanish.png');
+        this.load.image('creditsTextEnglish','Assets/creditsScene/creditsTextEnglish.png');
+        this.load.image('returnCreditsEnglish','Assets/creditsScene/returnCreditsEnglish.png');
+
+        // Elementos de pantalla de selección de nivel
+        this.load.image('selectionLevelBackground','Assets/selectionLevelScene/selectionLevelBackground.jpg');
+        this.load.image('returnSelectionLevelSpanish','Assets/selectionLevelScene/returnSelectionLevelSpanish.png');
+        this.load.image('returnSelectionLevelEnglish','Assets/selectionLevelScene/returnSelectionLevelEnglish.png');
 
         //Elementos pantalla de victoria
         this.load.image('cross','Assets/cross.png');
@@ -101,32 +122,36 @@ class Loading extends Phaser.Scene {
         this.load.image('bookshelf','Assets/bookshelf.png');
         this.load.image('comandBat','Assets/comandBat.png');
         this.load.image('comandHerb','Assets/comandHerb.png');
-
-
-        
     }
+
     create(){
         
         // Se establece la escena inicial del propio videojuego.
         var scene=this;
-        scene.scene.start("GameScene");
-        /*
+
         // Se establecen los elementos principales de la pantalla de carga.
         var white = this.add.image(config.width/2,config.height/2,'loadingBackground');
         var logo = this.add.image(config.width/2,config.height/2,'logo');
                 this.cameras.main.once('camerafadeoutcomplete', function (camera) {
             logo.destroy();
             white.destroy();
-            scene.scene.start("Login");
+            scene.scene.start("Menu");
         });
         
         // Se establecen los parámetros para poder declarar la música del videojuego.
-        menuMusic = this.sound.add('menuMusic',{loop:true, volume: 0.4});
-        stageMusic = this.sound.add('stageMusic',{loop:true, volume: 0.4});
+        menuMusic = this.sound.add('menuMusic',{loop:true, volume: 0.0});
+        stageMusic = this.sound.add('stageMusic',{loop:true, volume: 0.0});
+        levelSelectionMusic = this.sound.add('levelSelectionMusic',{loop:true, volume: 0.0});
+        menuMusic.play()
+
+        musicON = true;
+
+        // Se establecen los parámetros para poder establecer el idioma.
+        spanish = true;
+        english = false;
 
         setTimeout(function(){
             scene.cameras.main.fadeOut(2000);
              }, 2000);
-         */
     }
 }
