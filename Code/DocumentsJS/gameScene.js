@@ -853,8 +853,8 @@ class GameScene extends Phaser.Scene {
         if (GameManager.comands < 0.8) {
             if (numComand <= 5) {
                 if (GameManager.timeLeft <= GameManager.gameTime * this.rithim && this.comandCount > this.lastComand) {
-                    this.comandsType[this.comandCount - 1] = this.add.sprite(config.width * 0.1, config.height * GameManager.comands, 'comandBat').setScale(1);
-                    GameManager.comands += 0.15;
+                    this.comandsType[this.comandCount - 1] = this.add.sprite(config.width * 0.05, config.height * GameManager.comands, 'comandBat').setScale(0.65);
+                    GameManager.comands += 0.09;
                     this.lastComand = this.comandCount;
                     this.rithim -= 0.3;
                     this.comandCount++;
@@ -862,8 +862,8 @@ class GameScene extends Phaser.Scene {
             }
             else {
                 if (GameManager.timeLeft <= GameManager.gameTime * this.rithim && this.comandCount > this.lastComand) {
-                    this.comandsType[this.comandCount - 1] = this.add.sprite(config.width * 0.1, config.height * GameManager.comands, 'comandHerb').setScale(1);
-                    GameManager.comands += 0.15;
+                    this.comandsType[this.comandCount - 1] = this.add.sprite(config.width * 0.05, config.height * GameManager.comands, 'comandHerb').setScale(0.65);
+                    GameManager.comands += 0.09;
                     this.lastComand = this.comandCount;
                     this.rithim -= 0.3;
                     this.comandCount++;
