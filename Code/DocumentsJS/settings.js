@@ -90,7 +90,7 @@ class Settings extends Phaser.Scene{
                     if(musicON === true){
                         overEffect.play();
                     }
-                    this.english_button.setTint(0xE197FE)
+                    this.english_button.setTint(0xE197FE);
             }
             })
 

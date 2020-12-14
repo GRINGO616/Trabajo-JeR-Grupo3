@@ -43,12 +43,15 @@ class Loading extends Phaser.Scene {
 
         // Elementos de pantalla de configuración
         this.load.image('configurationBackground','Assets/configurationScene/configurationBackground.jpg');
-        this.load.image('controlsZoneSpanish','Assets/configurationScene/controlsZoneSpanish.png');
-        this.load.image('controlsZoneEnglish','Assets/configurationScene/controlsZoneEnglish.png');
-        this.load.image('onePlayerButtonSpanish','Assets/configurationScene/onePlayerButtonSpanish.png');
-        this.load.image('onePlayerButtonEnglish','Assets/configurationScene/onePlayerButtonEnglish.png');
-        this.load.image('twoPlayersButtonSpanish','Assets/configurationScene/twoPlayersButtonSpanish.png');
-        this.load.image('twoPlayersButtonEnglish','Assets/configurationScene/twoPlayersButtonEnglish.png');
+        this.load.image('controlsArea','Assets/configurationScene/controlsArea.png');
+        this.load.image('controlsZone1PSpanish','Assets/configurationScene/controlsZone1PSpanish.png');
+        this.load.image('controlsZone1PEnglish','Assets/configurationScene/controlsZone1PEnglish.png');
+        this.load.image('controlsZone2PSpanish','Assets/configurationScene/controlsZone2PSpanish.png');
+        this.load.image('controlsZone2PEnglish','Assets/configurationScene/controlsZone2PEnglish.png');
+        this.load.image('onePlayerButtonHold','Assets/configurationScene/onePlayerButtonHold.png');
+        this.load.image('onePlayerButtonUnhold','Assets/configurationScene/onePlayerButtonUnhold.png');
+        this.load.image('twoPlayersButtonHold','Assets/configurationScene/twoPlayerButtonHold.png');
+        this.load.image('twoPlayersButtonUnhold','Assets/configurationScene/twoPlayerButtonUnhold.png');
         this.load.image('returnConfigurationSpanish','Assets/configurationScene/returnConfigurationSpanish.png');
         this.load.image('returnConfigurationEnglish','Assets/configurationScene/returnConfigurationEnglish.png');
 
@@ -85,10 +88,14 @@ class Loading extends Phaser.Scene {
         this.load.image('returnSelectionLevelEnglish','Assets/selectionLevelScene/returnSelectionLevelEnglish.png');
 
         //Elementos pantalla de victoria
-        this.load.image('cross','Assets/cross.png');
-        this.load.image('blackStar','Assets/blackStar.png');
-        this.load.image('star','Assets/star.png');
-        this.load.image('points_background','Assets/points_background.png');
+        this.load.image('finishGameBackground','Assets/finishGameScene/finishGameBackground.jpg');
+        this.load.image('blackStar','Assets/finishGameScene/blackStar.png');
+        this.load.image('star','Assets/finishGameScene/star.png');
+        this.load.image('points_background','Assets/finishGameScene/points_background.png');
+        this.load.image('retryButtonSpanish','Assets/finishGameScene/retryButtonSpanish.png');
+        this.load.image('retryButtonEnglish','Assets/finishGameScene/retryButtonEnglish.png');
+        this.load.image('returnFinishGameSpanish','Assets/finishGameScene/returnFinishGameSpanish.png');
+        this.load.image('returnFinishGameEnglish','Assets/finishGameScene/returnFinishGameEnglish.png');
 
         // Elementos de pantallas de juego.
         this.load.spritesheet('Lysha_forward','Assets/Lysha_forward.png',{frameWidth: 75, frameHeight: 140});

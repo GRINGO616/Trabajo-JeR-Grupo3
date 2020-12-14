@@ -1235,7 +1235,7 @@ class GameScene extends Phaser.Scene {
 
     finishGame() {
         this.scene.pause("GameScene");
-        this.scene.launch("FinishGameScene");
+        this.scene.start("FinishGameScene");
     }
 }
 
