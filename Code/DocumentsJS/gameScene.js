@@ -1192,10 +1192,12 @@ class GameScene extends Phaser.Scene {
                         
                     }
                 }
-
-            })
+                    
+            }
 
         }
+            })
+                    }
         if (player == 2) {
 
             this.comandsType.forEach(function (element, index, array) {
@@ -1235,10 +1237,14 @@ class GameScene extends Phaser.Scene {
                     else if (GameManager.timeLeft < (GameManager.gameTime / 3)) {
                         GameManager.levelCoins += 300;
                         GameManager.scene.comandDone = true;
-                    }
+                         }
                 }
-            })
+                    
+            }
+
         }
+            })
+                    }
         GameManager.scene.coinsText.setText(GameManager.levelCoins);
     }
 
