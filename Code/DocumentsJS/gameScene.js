@@ -434,7 +434,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 3) {
                     GameManager.scene.putIngredient(1, 0);
                 }
-                if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
                     GameManager.scene.takePotion(1,0);
                 }
 
@@ -445,7 +445,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 3) {
                     GameManager.scene.putIngredient(1, 0);
                 }
-                if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
                     GameManager.scene.takePotion(1,0);
                 }
 
@@ -459,7 +459,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 3) {
                     GameManager.scene.putIngredient(1, 1);
                 }
-                if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
                     GameManager.scene.takePotion(1,1);
                 }
             }
@@ -470,7 +470,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 3) {
                     GameManager.scene.putIngredient(1, 1);
                 }
-                if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
                     GameManager.scene.takePotion(1,1);
                 }
 
@@ -769,7 +769,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 3) {
                     GameManager.scene.putIngredient(2, 0);
                 }
-                if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
                     GameManager.scene.takePotion(2,0);
                 }
             }
@@ -780,7 +780,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 3) {
                     GameManager.scene.putIngredient(2, 0);
                 }
-                if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
                     GameManager.scene.takePotion(2,0);
                 }
 
@@ -794,7 +794,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 3) {
                     GameManager.scene.putIngredient(2, 1);
                 }
-                if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
                     GameManager.scene.takePotion(2,1);
                 }
             }
@@ -805,7 +805,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 3) {
                     GameManager.scene.putIngredient(2, 1);
                 }
-                if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
+                if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 3) {
                     GameManager.scene.takePotion(2,1);
                 }
 
