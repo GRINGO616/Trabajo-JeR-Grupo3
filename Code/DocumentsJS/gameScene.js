@@ -1168,10 +1168,6 @@ class GameScene extends Phaser.Scene {
                 if(GameManager.scene.comandDone == false){
                     GameManager.scene.comandToErase += 1;
                 }
-                
-                if(GameManager.objectPlayerOne.texture.key == 'herbal_potion' && type == 'comandHerb' && GameManager.scene.comandDone == false){
-                    
-                    if(GameManager.timeLeft > (GameManager.gameTime / 2)){
 
                 if (GameManager.objectPlayerOne.texture.key == 'herbal_potion' && type == 'comandHerb' && GameManager.scene.comandDone == false) {
 
@@ -1210,13 +1206,14 @@ class GameScene extends Phaser.Scene {
                         GameManager.scene.comandDone = true;
                         
                     }
-                }
+                    }
                     
+                })
             }
 
-        }
-            })
-                    }
+        
+            
+                    
         if (player == 2) {
 
             this.comandsType.forEach(function (element, index, array) {
@@ -1225,8 +1222,6 @@ class GameScene extends Phaser.Scene {
                  if(GameManager.scene.comandDone == false){
                     GameManager.scene.comandToErase += 1;
                 }
-                if(GameManager.objectPlayerTwo.texture.key == 'herbal_potion' && type == 'comandHerb' && GameManager.scene.comandDone == false){
-                    if(GameManager.timeLeft > (GameManager.gameTime / 2)){
 
                 if (GameManager.objectPlayerTwo.texture.key == 'herbal_potion' && type == 'comandHerb' && GameManager.scene.comandDone == false) {
                     if (GameManager.timeLeft > (GameManager.gameTime / 2)) {
@@ -1256,14 +1251,11 @@ class GameScene extends Phaser.Scene {
                     else if (GameManager.timeLeft < (GameManager.gameTime / 3)) {
                         GameManager.levelCoins += 300;
                         GameManager.scene.comandDone = true;
-                         }
-                }
-                    
-            }
-
-        }
-            })
+                        }
                     }
+                    
+                })
+            }
         GameManager.scene.coinsText.setText(GameManager.levelCoins);
     }
 
