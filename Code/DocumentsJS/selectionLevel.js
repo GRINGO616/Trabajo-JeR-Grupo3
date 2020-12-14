@@ -10,18 +10,18 @@ class SelectionLevel extends Phaser.Scene{
         var elected = false;
 
         // Declaración de los botones del menú de configuration.
+
+        this.level1_button =this.add.image(config.width/3.25,config.height/1.6,'level1Hold');
+        this.level2_button =this.add.image(config.width/1.5,config.height/1.6,'level2Hold');
+
         if(spanish === true){
-            this.level1_button =this.add.image(config.width/1.5,config.height/2,'level1Spanish');
-            this.level2_button =this.add.image(config.width/3.25,config.height/2,'level2Spanish');
-            this.next_button =this.add.image(config.width/1.4,config.height/1.2,'nextSelectionLevelSpanish');
-            this.selection_level_return_button=this.add.image(config.width/3.25,config.height/1.2,'returnSelectionLevelSpanish')
+            this.next_button =this.add.image(config.width/1.4,config.height/9,'nextSelectionLevelSpanish');
+            this.selection_level_return_button=this.add.image(config.width/3,config.height/9,'returnSelectionLevelSpanish')
         }
 
         if(english === true){
-            this.level1_button =this.add.image(config.width/1.5,config.height/2,'level1English');
-            this.level2_button =this.add.image(config.width/3.25,config.height/2,'level2English');
-            this.next_button =this.add.image(config.width/1.4,config.height/1.2,'nextSelectionLevelEnglish');
-            this.selection_level_return_button=this.add.image(config.width/3.25,config.height/1.2,'returnSelectionLevelEnglish')
+            this.next_button =this.add.image(config.width/1.4,config.height/9,'nextSelectionLevelEnglish');
+            this.selection_level_return_button=this.add.image(config.width/3,config.height/9,'returnSelectionLevelEnglish')
         }
 
         if (elected === false){

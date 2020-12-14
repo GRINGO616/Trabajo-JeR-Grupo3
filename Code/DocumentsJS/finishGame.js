@@ -25,13 +25,13 @@ class FinishGameScene extends Phaser.Scene{
         this.thirdStar=this.add.image(config.width*0.6,config.height*0.45,'star').setScale(0);
 
         if(spanish === true){
-        this.retryButton=this.add.image(config.width*0.4,config.height*0.25,'retryButtonSpanish').setScale(0);
-        this.returnFinishGame=this.add.image(config.width*0.6,config.height*0.25,'returnFinishGameSpanish').setScale(0);
+        this.retryButton=this.add.image(config.width*0.35,config.height*0.7,'retryButtonSpanish').setScale(0);
+        this.returnFinishGame=this.add.image(config.width*0.65,config.height*0.7,'returnFinishGameSpanish').setScale(0);
         }
 
         if(english=== true){
-            this.retryButton=this.add.image(config.width*0.4,config.height*0.25,'retryButtonEnglish').setScale(0);
-            this.returnFinishGame=this.add.image(config.width*0.6,config.height*0.25,'returnFinishGameEnglish').setScale(0);
+            this.retryButton=this.add.image(config.width*0.35,config.height*0.7,'retryButtonEnglish').setScale(0);
+            this.returnFinishGame=this.add.image(config.width*0.65,config.height*0.7,'returnFinishGameEnglish').setScale(0);
         }
 
         this.levelFinishedGameText=this.add.text(config.width*0.5,config.height*0.6,GameManager.levelCoins, { font: "38px PixelFont", fill: "#ffffff", align: "center" }).setOrigin(0.5).setResolution(10);

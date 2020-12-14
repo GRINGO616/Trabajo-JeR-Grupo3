@@ -78,10 +78,8 @@ class Loading extends Phaser.Scene {
 
         // Elementos de pantalla de selección de nivel
         this.load.image('selectionLevelBackground','Assets/selectionLevelScene/selectionLevelBackground.jpg');
-        this.load.image('level1Spanish','Assets/selectionLevelScene/level1Spanish.png');
-        this.load.image('level1English','Assets/selectionLevelScene/level1English.png');
-        this.load.image('level2Spanish','Assets/selectionLevelScene/level2Spanish.png');
-        this.load.image('level2English','Assets/selectionLevelScene/level2English.png');
+        this.load.image('level1Hold','Assets/selectionLevelScene/level1Hold.png');
+        this.load.image('level2Hold','Assets/selectionLevelScene/level2Hold.png');
         this.load.image('nextSelectionLevelSpanish','Assets/selectionLevelScene/nextSelectionLevelSpanish.png');
         this.load.image('nextSelectionLevelEnglish','Assets/selectionLevelScene/nextSelectionLevelEnglish.png');
         this.load.image('returnSelectionLevelSpanish','Assets/selectionLevelScene/returnSelectionLevelSpanish.png');
@@ -147,8 +145,6 @@ class Loading extends Phaser.Scene {
         this.load.image('comandBat','Assets/comandBat.png');
         this.load.image('comandHerb','Assets/comandHerb.png');
         this.load.image('bag','Assets/bag.png');
-
-
         
     }
 
