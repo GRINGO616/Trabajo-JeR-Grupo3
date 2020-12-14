@@ -240,7 +240,7 @@ class GameScene extends Phaser.Scene {
         this.physics.add.overlap(this.playerOne, this.goalArea, function () {
             if (GameManager.scene.playerOne.lastMov == 2 && GameManager.scene.cursorsFirstPlayer.take.isDown) {
                 GameManager.scene.leavePotion(1);
-                //GameManager.objectPlayerOne.destroy();
+                GameManager.objectPlayerOne.destroy();
                 GameManager.scene.playerOne.haveObject = false;
                 if(GameManager.scene.comandToErase >= 0 && GameManager.scene.comandsType[GameManager.scene.comandToErase] != undefined){
                    GameManager.scene.comandsType[GameManager.scene.comandToErase].destroy(); 
@@ -1160,22 +1160,26 @@ class GameScene extends Phaser.Scene {
             
             this.comandsType.forEach(function(element, index, array){
                 var type = element.texture.key;
+                if(GameManager.scene.comandDone == false){
+                    GameManager.scene.comandToErase += 1;
+                }
+                
                 if(GameManager.objectPlayerOne.texture.key == 'herbal_potion' && type == 'comandHerb' && GameManager.scene.comandDone == false){
                     
                     if(GameManager.timeLeft > (GameManager.gameTime / 2)){
                         GameManager.levelCoins += 100;
                         GameManager.scene.comandDone = true;
-                        GameManager.scene.comandToErase += 1;
+                       
                     }
                     if(GameManager.timeLeft < (GameManager.gameTime / 2) && GameManager.timeLeft > (GameManager.gameTime / 3)){
                         GameManager.levelCoins += 200;
                         GameManager.scene.comandDone = true;
-                        GameManager.scene.comandToErase += 1;
+                        
                     }
                     if(GameManager.timeLeft < (GameManager.gameTime / 3)){
                         GameManager.levelCoins += 300;
                         GameManager.scene.comandDone = true;
-                        GameManager.scene.comandToErase += 1;
+                       
                     }
                     
                 }
@@ -1184,17 +1188,17 @@ class GameScene extends Phaser.Scene {
                     if(GameManager.timeLeft > (GameManager.gameTime / 2)){
                         GameManager.levelCoins += 100;
                         GameManager.scene.comandDone = true;
-                        GameManager.scene.comandToErase += 1;
+                        
                     }
                     if(GameManager.timeLeft < (GameManager.gameTime / 2) && GameManager.timeLeft > (GameManager.gameTime / 3)){
                         GameManager.levelCoins += 200;
                         GameManager.scene.comandDone = true;
-                        GameManager.scene.comandToErase += 1;
+                        
                     }
                     if(GameManager.timeLeft < (GameManager.gameTime / 3)){
                         GameManager.levelCoins += 300;
                         GameManager.scene.comandDone = true;
-                        GameManager.scene.comandToErase += 1;
+                        
                     }
                 }
                 
@@ -1205,27 +1209,36 @@ class GameScene extends Phaser.Scene {
             
              this.comandsType.forEach(function(element, index, array){
                 var type = element.texture.key;
+                 if(GameManager.scene.comandDone == false){
+                    GameManager.scene.comandToErase += 1;
+                }
                 if(GameManager.objectPlayerTwo.texture.key == 'herbal_potion' && type == 'comandHerb' && GameManager.scene.comandDone == false){
                     if(GameManager.timeLeft > (GameManager.gameTime / 2)){
                         GameManager.levelCoins += 100;
+                        GameManager.scene.comandDone = true;
                     }
                     if(GameManager.timeLeft < (GameManager.gameTime / 2) && GameManager.timeLeft > (GameManager.gameTime / 3)){
                         GameManager.levelCoins += 200;
+                        GameManager.scene.comandDone = true;
                     }
                     if(GameManager.timeLeft < (GameManager.gameTime / 3)){
                         GameManager.levelCoins += 300;
+                        GameManager.scene.comandDone = true;
                     }
                     
                 }
                 if(GameManager.objectPlayerTwo.texture.key == 'bat_potion' && type == 'comandBat' && GameManager.scene.comandDone == false){
                     if(GameManager.timeLeft > (GameManager.gameTime / 2)){
                         GameManager.levelCoins += 100;
+                        GameManager.scene.comandDone = true;
                     }
                     if(GameManager.timeLeft < (GameManager.gameTime / 2) && GameManager.timeLeft > (GameManager.gameTime / 3)){
                         GameManager.levelCoins += 200;
+                        GameManager.scene.comandDone = true;
                     }
                     if(GameManager.timeLeft < (GameManager.gameTime / 3)){
                         GameManager.levelCoins += 300;
+                        GameManager.scene.comandDone = true;
                     }
                 }
             })
@@ -1242,7 +1255,7 @@ class GameScene extends Phaser.Scene {
 class GameManager {
     static scene;
     static level = 1;
-    static gameTime = 60;
+    static gameTime = 120;
     static timeLeft;
     static levelCoins;
     static objectPlayerOne;
