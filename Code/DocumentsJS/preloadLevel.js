@@ -29,7 +29,7 @@ class PreloadLevel extends Phaser.Scene{
     });
         setTimeout(function(){
             scene.cameras.main.fadeOut(3000);
-             }, 3000);
+             }, 7000);
         }
 
 }
