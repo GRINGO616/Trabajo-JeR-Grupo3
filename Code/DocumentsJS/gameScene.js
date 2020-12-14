@@ -240,9 +240,8 @@ class GameScene extends Phaser.Scene {
         this.physics.add.overlap(this.playerOne, this.goalArea, function () {
             if (GameManager.scene.playerOne.lastMov == 2 && GameManager.scene.cursorsFirstPlayer.take.isDown) {
                 GameManager.scene.leavePotion(1);
-                GameManager.objectPlayerOne.destroy();
+                //GameManager.objectPlayerOne.destroy();
                 GameManager.scene.playerOne.haveObject = false;
-                GameManager.scene.comandDone = false;
                 if(GameManager.scene.comandToErase >= 0 && GameManager.scene.comandsType[GameManager.scene.comandToErase] != undefined){
                    GameManager.scene.comandsType[GameManager.scene.comandToErase].destroy(); 
                 }
@@ -974,6 +973,7 @@ class GameScene extends Phaser.Scene {
     }
 
     takeObject(player, slot) {
+        
         if (slot < 4) {
             if (player == 1 && !this.playerOne.haveObject) {
                 Slot.cuttingSlotsList.getAt(slot).ocuppied = false;
@@ -1107,6 +1107,7 @@ class GameScene extends Phaser.Scene {
     }
 
     takePotion(player,slot){
+        GameManager.scene.comandDone = false;
         Slot.cookingSlotsList.getAt(slot).ingredients[0].destroy();
         Slot.cookingSlotsList.getAt(slot).ingredients[1].destroy();
         Slot.cookingSlotsList.getAt(slot).ingredients[2].destroy();
