@@ -9,8 +9,6 @@ class FinishGameScene extends Phaser.Scene{
         this.firstblackStarFinishedGame=this.add.sprite(config.width*0.4,config.height*0.45,'blackStar');
         this.secondblackStarFinishedGame=this.add.sprite(config.width*0.5,config.height*0.45,'blackStar');
         this.thirdblackStarFinishedGame=this.add.sprite(config.width*0.6,config.height*0.45,'blackStar');
-        
-        GameManager.comands = 0.1;
 
         if(spanish === true){
         this.levelFinishedGameText=this.add.text(config.width*0.52,config.height*0.35,"Nivel "+GameManager.level, { font: "38px PixelFont", fill: "#ffffff", align: "center" }).setOrigin(0.5).setResolution(10);
