@@ -31,6 +31,7 @@ class SelectionLevel extends Phaser.Scene{
         // Declaración de funcionalidades
         this.level1_button.setInteractive().on('pointerdown', () => {
             elected = true;
+            level = 1;
             this.tweens.add({
                 targets:this.level1_button,
                 scale: 1.15,
@@ -70,6 +71,7 @@ class SelectionLevel extends Phaser.Scene{
 
         this.level2_button.setInteractive().on('pointerdown', () => {
             elected = true;
+            level = 2;
             this.tweens.add({
                 targets:this.level2_button,
                 scale: 1.15,

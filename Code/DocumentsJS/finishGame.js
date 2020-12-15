@@ -5,7 +5,6 @@ class FinishGameScene extends Phaser.Scene{
     create(){
         
         //Finished game interface
-        //this.background = this.add.image(config.width/2,config.height/2,'finishGameBackground');
         this.backgroundFinishedGame=this.add.image(config.width*0.5,config.height*0.5,'points_background');
         this.firstblackStarFinishedGame=this.add.sprite(config.width*0.4,config.height*0.45,'blackStar');
         this.secondblackStarFinishedGame=this.add.sprite(config.width*0.5,config.height*0.45,'blackStar');
