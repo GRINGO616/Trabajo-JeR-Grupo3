@@ -162,8 +162,43 @@ class GameScene extends Phaser.Scene {
         //Taking objects area
         this.herbArea = this.physics.add.sprite(config.width * 0.17, config.height * 0.75, 'box').setScale(0.5, 1.3).setVisible(false);
         this.herbAreaTwo = this.physics.add.sprite(config.width * 0.13, config.height * 0.65, 'box').setScale(0.7, 0.3).setVisible(false);
-        this.batArea = this.physics.add.sprite(config.width * 0.38, config.height * 0.46, 'box').setScale(0.5, 1).setVisible(false);
+        this.batArea = this.physics.add.sprite(config.width * 0.86, config.height * 0.4, 'box').setScale(0.5, 1.3).setVisible(false);
         this.batAreaTwo = this.physics.add.sprite(config.width * 0.9, config.height * 0.5, 'box').setScale(0.7, 0.3).setVisible(false);
+        this.batAreaThree = this.physics.add.sprite(config.width * 0.9, config.height * 0.305, 'box').setScale(0.7, 0.3).setVisible(false);
+        this.midZoneLeft = this.physics.add.sprite(config.width * 0.47, config.height * 0.57, 'box').setScale(0.5, 2.0).setVisible(false);
+        this.midZoneRight = this.physics.add.sprite(config.width * 0.57, config.height * 0.57, 'box').setScale(0.5, 2.0).setVisible(false);
+        
+        //Cutting area
+        Slot.cuttingSlotsList.add(new Slot(config.width * 0.32, config.height * 0.22, 0));
+        Slot.cuttingSlotsList.add(new Slot(config.width * 0.71, config.height * 0.22, 1));
+        Slot.cuttingSlotsList.add(new Slot(config.width * 0.135, config.height * 0.58, 2));
+        Slot.cuttingSlotsList.add(new Slot(config.width * 0.892, config.height * 0.68, 3));
+
+        this.cuttingAreaZero = [];
+        this.cuttingAreaZero[0] = this.physics.add.sprite(config.width * 0.14, config.height * 0.52, 'box').setScale(0.7, 0.3).setVisible(false);
+        this.cuttingAreaZero[1] = this.physics.add.sprite(config.width * 0.19, config.height * 0.45, 'box').setScale(0.5, 0.6).setVisible(false);
+        
+
+        this.cuttingAreaOne = [];
+        this.cuttingAreaOne[0] = this.physics.add.sprite(config.width * 0.85, config.height * 0.75, 'box').setScale(0.5, 0.7).setVisible(false);
+        
+
+        //Cooking area
+        this.cookingAreaZero = [];
+        this.cookingAreaZero[0] = this.physics.add.sprite(config.width * 0.14, config.height * 0.29, 'box').setScale(0.7, 0.3).setVisible(false);
+        this.cookingAreaZero[1] = this.physics.add.sprite(config.width * 0.19, config.height * 0.35, 'box').setScale(0.4, 0.7).setVisible(false);
+
+        this.cookingAreaOne = [];
+        this.cookingAreaOne[0] = this.physics.add.sprite(config.width * 0.845, config.height * 0.65, 'box').setScale(0.4, 0.7).setVisible(false);
+        this.cookingAreaOne[1] = this.physics.add.sprite(config.width * 0.89, config.height * 0.6, 'box').setScale(0.9, 0.3).setVisible(false);
+
+        Slot.cookingSlotsList.add(new Slot(config.width * 0.12, config.height * 0.18, 0));
+        Slot.cookingSlotsList.add(new Slot(config.width * 0.85, config.height * 0.18, 1));
+
+        //Goal areas
+        this.goalArea = this.physics.add.sprite(config.width * 0.3, config.height * 0.87, 'box').setScale(2.6, 0.4).setVisible(false);
+        this.goalArea = this.physics.add.sprite(config.width * 0.72, config.height * 0.87, 'box').setScale(2.6, 0.4).setVisible(false);
+
 
     }
 
@@ -890,7 +925,7 @@ class GameScene extends Phaser.Scene {
             this.updateSecondPlayer();
         }
         this.updateCauldron();
-        this.updateComands();
+        //this.updateComands();
 
     }
 
