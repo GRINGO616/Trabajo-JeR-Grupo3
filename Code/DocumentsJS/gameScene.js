@@ -12,8 +12,6 @@ class GameScene extends Phaser.Scene {
         this.textTime = this.time.addEvent({ delay: 1000, loop: true, callback: subtractTime, callbackScope: this })
 
         this.rithim = 0.9;
-        this.comandCount = 1;
-        this.lastComand = 0;
         this.comandsType = [];
         this.comandDone = false;
         this.comandToErase = -1;
@@ -74,6 +72,14 @@ class GameScene extends Phaser.Scene {
         //Leaving objects area
         //this.leavingTopArea=this.physics.add.sprite(config.width * 0.51, config.height * 0.32, 'box').setScale(3, 0.4).setVisible(false);
         //this.leavingDownArea=this.physics.add.sprite(config.width * 0.51, config.height * 0.82, 'box').setScale(3, 0.4).setVisible(false);
+
+        //Comands
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 0.1, 0));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 1, 1));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 1.9, 2));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 2.8, 3));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 3.7, 4));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 4.6, 5));
 
         //Goal area
         this.goalArea = this.physics.add.sprite(config.width * 0.5, config.height * 0.87, 'box').setScale(5.2, 0.4).setVisible(false);
@@ -867,26 +873,45 @@ class GameScene extends Phaser.Scene {
 
     updateComands() {
         var numComand = Math.random() * 10;
-        if (GameManager.comands < 0.8) {
+        var freeSlot = this.findFreeSlot();
+        
             if (numComand <= 5) {
-                if (GameManager.timeLeft <= GameManager.gameTime * this.rithim && this.comandCount > this.lastComand) {
-                    this.comandsType[this.comandCount - 1] = this.add.sprite(config.width * 0.05, config.height * GameManager.comands, 'comandBat').setScale(0.65);
-                    GameManager.comands += 0.09;
-                    this.lastComand = this.comandCount;
-                    this.rithim -= 0.3;
-                    this.comandCount++;
+                if (GameManager.timeLeft <= GameManager.gameTime * this.rithim && freeSlot > -1) {
+                    Slot.comandSlots.getAt(freeSlot) = this.add.sprite(config.width * 0.05, config.height * Slot.comandSlots.getAt(freeSlot).y, 'comandBat').setScale(0.65);
+                    this.rithim -= 0.1;
+                    
                 }
             }
             else {
-                if (GameManager.timeLeft <= GameManager.gameTime * this.rithim && this.comandCount > this.lastComand) {
-                    this.comandsType[this.comandCount - 1] = this.add.sprite(config.width * 0.05, config.height * GameManager.comands, 'comandHerb').setScale(0.65);
-                    GameManager.comands += 0.09;
-                    this.lastComand = this.comandCount;
-                    this.rithim -= 0.3;
-                    this.comandCount++;
+                if (GameManager.timeLeft <= GameManager.gameTime * this.rithim && freeSlot > -1) {
+                    Slot.comandSlots.getAt(freeSlot) = this.add.sprite(config.width * 0.05, config.height * Slot.comandSlots.getAt(freeSlot).y, 'comandHerb').setScale(0.65);
+                    this.rithim -= 0.1;
                 }
             }
-        }
+        
+    }
+    
+    findFreeSlot(){
+       
+        var i=0;
+        var slot;
+        var slotId = -1;
+        var found = false;
+        var maxSlots=6;
+       
+          while(i<maxSlots && !found)
+          {
+            slot = Slot.comandSlots.getAt(i);
+            if(!slot.occupied)
+            {
+              Slot.comandOccupiedSlots++;
+              slot.occupied = true;
+              slotId = i;
+              found = true;
+            }
+            i++;
+          } 
+          return slotId;
     }
 
     updateFirstPlayer() {
@@ -1289,7 +1314,6 @@ class GameManager {
     static levelCoins;
     static objectPlayerOne;
     static objectPlayerTwo;
-    static comands = 0.1;
     constructor(scene) {
         GameManager.scene = scene;
     }
@@ -1298,6 +1322,7 @@ class GameManager {
 class Slot {
     static cuttingSlotsList = new Phaser.Structs.List();
     static cookingSlotsList = new Phaser.Structs.List();
+    static comandSlots = new Phaser.Structs.List();
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
@@ -1309,6 +1334,9 @@ class Slot {
         this.ingredients = [];
         this.ready = false;
         this.cooking=false;
+        //Comands
+        this.comandOccupiedSlots = 0;
+        this.occupied = false;
     }
 }
 
