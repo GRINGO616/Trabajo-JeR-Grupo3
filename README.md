@@ -18,8 +18,6 @@ Cuenta en GitHub: GRINGO616 - Repositorio: GRINGO616/Trabajo-JeR-Grupo3
 Enlace a Trello: https://trello.com/b/DfmTVe1f/juegos-en-red-grupo-3
 
 
-
-
 # HISTORIA DE VERSIONES
 
 Con el propósito de analizar los diferentes cambios que va sufriendo el proyecto que supone Expotion, a lo largo de su desarrollo, es conveniente establecer cada uno de los cambios que se van generando en las diferentes versiones. De esta forma, esta parte del documento mantendrá una continua actualización.
@@ -28,7 +26,14 @@ Versión 0.0: idea del propio videojuego, puesta en común por todo el equipo de
 
 Versión 0.5: diferentes logos del propio videojuego y fuentes de inspiración para el estilo y diseño del mismo.
 
+Versión 0.9: implementación local del videojuego con un solo nivel.
 
+Versión 1.0: implementación local del videojuego con los dos niveles propuestos.
+
+
+#PRE-REQUISITOS
+
+Al tratarse de un videojuego que se realiza dentro de los navegadores y ser un juego local, actualmente solo se precisaría de un navegador y los archivos HTML, CSS y JavaScript del videojuego. Una vez que se tengan todos se debe de ejecutar el proyecto a través de algún compilador como puede ser Visual Code.
 
 # INTRODUCCIÓN AL VIDEOJUEGO
 
@@ -106,14 +111,6 @@ Con el fin de conseguir un mejor acabado, las intersecciones entre niveles que t
 Debido a la formación de un equipo de desarrollo más centrado en la programación que en el apartado artístico, el objetivo primordial es conseguir un título jugable y efectivo con unas mecánicas lo más pulidas posibles. En primera instancia, teniendo en cuenta las diferentes entregas del proyecto, se plantea implementar un modo arcade con varios niveles para elegir y un modo historia a modo de early access con unos pocos niveles y algo de historia de Expotion.
 
 Según avance el desarrollo del videojuego será posible encontrar otros frentes que se puedan explorar, pero con este primer contacto, el objetivo será éste que, aunque algo ambicioso, puede dar un interesante resultado. No obstante, ya se han pensado ideas para expandir la experiencia del videojuego, como una inclusión de un modo para hasta cuatro jugadores, un modo competitivo por equipos o individual y más niveles del modo historia.
-
-
-
-
-
-
-
-
 
 
 # MECÁNICAS DE JUEGO		
@@ -214,73 +211,46 @@ De esta forma, se engloban las diferentes interfaces que puede visitar el jugado
 
 Cuando cualquier jugador comienza una partida nueva en Expotion lo primero que va a ver nada más arrancarlo será una animación con el logo del equipo encargado de ellos. Esto sirve como carta de presentación para que el propio usuario conozca al estudio detrás de todo el proyecto que se ha realizado. No presenta ningún momento de interacción con el usuario, solo dejando que ocurra y luego continúa con la siguiente interfaz.
 
-
-
 # 4.3- Selección de nombre
 
 Antes de poder empezar a desarrollar cualquier tipo de partida será importante llevar un registro del nombre que va a usar el usuario. Por esta razón, justo después de comenzar con la presentación del estudio encargado, la aplicación solicita el nombre al usuario, de forma que luego pueda reconocerse en el propio juego compartido.
 De esta forma, se obtiene el primer momento de comunicación entre el usuario y el videojuego, solicitando que se escriba el nombre que va a usar dentro del recuadro que queda marcado.
 
-
 # 4.4- Menú principal
 
 Llega la primera interfaz donde existirá más libertad para el propio usuario. Utilizando el propio ratón para seleccionar una opción u otra existirán varias opciones, como quedaron previamente detalladas. Eligiendo cada una de ellas, el jugador se trasladará a otra interfaz centrada en el propósito que define el propio botón. Si se escoge la opción de salir, será posible volver a ver el logo del estudio, es decir, una interfaz que ya se vio, y la aplicación se cerrará, mientras que en el resto de las opciones se permanece en la aplicación.
-
-
 
 # 4.5- Controles
 
 Es preciso poder adaptar el videojuego a todo tipo de jugador. De esta forma, existe una opción para que cada uno de los jugadores que ejecute el videojuego sea capaz de adaptar los controles a sus gustos. Con esta interfaz, donde aparecen cada uno de los botones y la acción que realizan, el usuario podrá modificarlo a su gusto, tan solo seleccionándolo y cambiándolo por el que prefieran. Para esta interfaz, las opciones del usuario se quedan reducidas a cambiar los controles y volver al menú principal, pulsando para esto último el botón de volver.
 
-
 # 4.6- Ajustes
 
 Otra de las opciones que puede tener el jugador una vez que se encuentra en el menú principal será los ajustes. En ellos será posible adecuar un poco más las condiciones audiovisuales del videojuego para que el jugador se encuentre más cómodo. Se da opción de poder tener la música activada o no, además de ajustar el propio brillo del videojuego o el idioma en el que se quiera jugar. La última opción viable, al igual que en controles, será la vuelta al menú principal.
-
-
-
 
 # 4.7- Selección de personajes
 
 Tanto si el jugador decide ir al modo arcade como al modo historia, deberá elegir con qué personaje quiere jugar. En dicha interfaz se presenta una imagen del personaje con una breve descripción y su posición en la historia del juego. Con unas flechas se puede ir cambiando de personaje para poder ver a los cuatro posibles que hay. Desde aquí, el jugador podrá volver al menú, si decide elegir otra opción o salir, y podrá, una vez que ha escogido a su personaje, jugar una partida.
 
-
-
-
-
 # 4.8- Selección de niveles
 
 Continuando con las escenas comunes entre los dos modos de videojuego se encuentra la selección de niveles. Tanto en uno como en otro se irán actualizando los niveles en función se vayan desbloqueando dentro del propio modo historia, por lo que si no se han jugado en el modo historia no aparecerán en el modo arcade. En la interfaz aparecerá una imagen del nivel, describiéndolo, con el nombre del nivel y la opción de seleccionarlo. Una vez que se ha escogido se marca la opción de jugar y se empieza el nivel.
-
-
-
-
 
 # 4.9- Nivel
 
 Aquí se encuentra la jugabilidad máxima del título, donde el jugador podrá poner en funcionamiento las teclas con las que moverá al personaje, realizando las acciones que vayan surgiendo para el progreso del nivel. El jugador podrá mover al personaje por la zona jugable, pero podrá ver también las comandas que deberá realizar, la puntuación y el tiempo que queda para que termine el nivel.
 
-
-
-
-
 # 4.10- Pantalla victoria
 
 Este tipo de pantalla solo se podrá ver en el modo historia, ya que se exige una puntuación para poder obtener la victoria, es decir, dos o tres estrellas. De esta forma, se muestran las estrellas conseguidas con el número de puntuación y diferentes posibilidades que tiene el jugador. Las tres opciones que tendrá serán: volver al menú principal, continuar con el modo historia o reintentar el nivel para buscar más puntuación.
-
-
 
 # 4.11- Pantalla derrota
 
 Se trata de otra interfaz que solo se verá en el modo historia, por la misma razón que la interfaz previa de la importancia de obtener una u otra puntuación. Para este caso, el jugador no podrá continuar en la historia, mientras que solo se le permite reintentar el nivel en el que se ha quedado o volver al menú principal. Al igual que en el caso anterior, aparecerá la puntuación y las estrellas que se han obtenido, siendo como máximo una.
 
-
 # 4.12- Recuento de puntos
 
 La única interfaz que será exclusiva del modo arcade, ya que, para el otro modo, aunque también es determinante la puntuación, no se determina el progreso de una historia. En dicha pantalla se observará un ranking de la puntuación que hay en el nivel escogido, además de la posición que han ocupado los dos jugadores que están jugando en línea.
-
-
-
 
 # DISEÑO AUDIOVISUAL
 
@@ -304,8 +274,6 @@ Reuniendo todas las ideas en mente, el estilo musical escogido para el videojueg
 
 Como se puede observar, no existirán efectos de sonido ni grabaciones de voces. Todos los diálogos serán sustituidos por ruidos similares a una voz y aparecerán los textos de los mismos a través de la pantalla. Utilizando esta herramienta se le da más importancia a los hilos musicales que al resto de los efectos sonoros.
 
-
-
 # EQUIPO DE DESARROLLO
 
 Una cosa ha quedado clara a lo largo del documento acerca del apartado visual del propio título y es que no cuenta con un equipo que tenga grandes aptitudes en él. Todo el equipo que conforma Aim High Studios son perfiles de la industria de los videojuegos más destinados a la programación, por lo que puede ser que otros aspectos queden un poco más descolgados.
@@ -314,13 +282,9 @@ A pesar de la realidad, uno de los objetivos importantes establecidos para conse
 
 Con el propósito de aclararlo mejor, se ha decidido establecer una matriz de multifuncionalidad con los apartados básicos para el videojuego de Expotion. De esta forma se observan los puntos fuertes de cada uno y algunos en los que hay una aptitud más baja y que pretende seguirse mejorando, en pos del proyecto.
 
-
-
 Al final del proyecto, el objetivo de todos será conseguir grandes aptitudes en todos los campos que se han marcado, además de establecer un gran proyecto para la asignatura de Juegos en Red, que no deja de ser el principal objetivo.
 
 # BIBLIOGRAFÍA
-
-
 
 El Documentalista Audiovisual. Documentación en Videojuegos: Documento de diseño (GDD). El Documentalista Audiovisual. 2015. Disponible online en: https://eldocumentalistaudiovisual.com/2015/02/06/documentacion-en-videojuegos-documento-de-diseno-gdd/
 
@@ -329,4 +293,75 @@ Ryan T. The Anatomy of a Design Document, Part 1: Documentation Guidelines for t
 
 Manual del Game Designer. Design Document (GDD).  Manual del Game Designer. 2014. Disponible online en: http://manualdelgamedesigner.blogspot.com/2014/08/design-document-gdd.html
 
+# RECURSOS DE LIBRE ACCESO USADOS
 
+Con el fin de poder obtener un correcto uso de los elementos que hemos encontrado de otros artistas que los dejan libres de acceso, hemos decidido modificarlos en cierta manera para que no queden tal cual. A continuación se dejan enlaces directos a los elementos utilizados de base y luego modificados.
+
+RELOJ DE ARENA 
+https://www.pngkey.com/detail/u2q8q8w7t4t4o0i1_sand-clock-svg-png-icon-free-download-hourglass/
+
+MURO
+https://www.pixilart.com/art/dungeon-tileset-91dcf397b84d654
+
+ALA DE MURCIÉLAGO
+https://es.vexels.com/png-svg/vista-previa/202513/icono-de-dibujos-animados-de-ala-de-murcielago
+
+POCIÓN VERDE 
+https://www.kindpng.com/imgv/ixxowTh_zelda-potion-bottle-drawing-hd-png-download/
+
+HOJA VERDE
+https://www.pngkit.com/bigpic/u2w7y3u2r5y3o0a9/
+
+ESTANTERÍA
+https://seminecraftgratuit.blogspot.com/2019/08/make-pixel-art.html
+
+PUERTA
+https://www.pinterest.es/pin/283163895305825926/?amp_client_id=CLIENT_ID(_)&mweb_unauth_id=&amp_url=https%3A%2F%2Fwww.pinterest.es%2Famp%2Fpin%2F283163895305825926%2F&amp_expand=true
+
+PERGAMINO
+https://es.123rf.com/photo_21233700_old-cartoon-pergamino-ilustración-vectorial.html
+
+CAJAS
+https://www.pinterest.es/pin/574068283735760242/
+
+SUELO
+https://bepxl.art/2020/03/16/texturas-pixel-art/
+
+CALDERO
+https://twitter.com/duckbearlab/status/1094279786464247808
+
+POCIÓN MORADA
+https://ageofmagicgame.fandom.com/wiki/Level_and_Experience_Potions
+
+BARRAS DE PROGRESO
+https://es.clipdealer.com/vector/media/A:86375486
+
+LIBRO ABIERTO
+https://www.dreamstime.com/pixel-art-design-bit-retro-icon-opened-closed-book-dark-background-image157429343
+
+PREPARADO
+https://www.dlf.pt/ddetail/hRToih_bowl-of-rice-cartoon-hd-png-download/
+
+CUCHILLO
+https://roobs.artstation.com/projects/rgdZO
+
+EFECTOS DE SONIDO
+https://mixkit.co/free-sound-effects/
+
+TEXTURA DE CUERO
+https://www.freepik.es/fotos-premium/fondo-textura-cuero-marron-oscuro-superficie-transparente-alta-resolucion_6564939.html
+
+PÓCIMA MORADA++
+https://www.google.com/search?q=659BC07C-E83E-11E9-BE85-F00384B3E742&tbm=isch&ved=2ahUKEwiC-r_Z79DtAhVIexoKHcQVDlUQ2-cCegQIABAA&oq=659BC07C-E83E-11E9-BE85-F00384B3E742&gs_lcp=CgNpbWcQA1DPygFYz8oBYIngAWgAcAB4AIABnAGIAZwBkgEDMC4xmAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=yyLZX8LoJ8j2acSruKgF&bih=942&biw=917&client=opera-gx#imgrc=6a6asCjgpdf_KM
+
+PÓCIMA NARANJA
+https://www.pngkey.com/maxpic/u2q8e6r5u2e6t4u2/
+
+PÓCIMA VERDE++
+https://ar.pinterest.com/pin/581457001883421009/
+
+FOSO
+https://www.pinterest.es/pin/15692298681653507/
+
+PARED DE BACKGROUND
+https://www.redbubble.com/es/people/stevenfholmes/works/27821328-paredes-del-castillo-de-pixel-art
