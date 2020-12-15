@@ -239,7 +239,7 @@ class GameScene extends Phaser.Scene {
 
         //GOAL AREA
         this.physics.add.overlap(this.playerOne, this.goalArea, function () {
-            if (GameManager.scene.playerOne.lastMov == 2 && GameManager.scene.cursorsFirstPlayer.take.isDown) {
+            if (GameManager.scene.playerOne.lastMov == 2 && GameManager.scene.cursorsFirstPlayer.take.isDown && GameManager.scene.playerOne.haveObject && (GameManager.objectPlayerOne.texture.key== "herbal_potion" || GameManager.objectPlayerOne.texture.key== "bat_potion")) {
                 GameManager.scene.leavePotion(1);
                 GameManager.objectPlayerOne.destroy();
                 GameManager.scene.playerOne.haveObject = false;
@@ -435,7 +435,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
                     GameManager.scene.putIngredient(1, 0);
                 }
-                if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true) {
+                if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerOne.haveObject) {
                     GameManager.scene.takePotion(1, 0);
                 }
 
@@ -446,7 +446,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
                     GameManager.scene.putIngredient(1, 0);
                 }
-                if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true) {
+                if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerOne.haveObject) {
                     GameManager.scene.takePotion(1, 0);
                 }
 
@@ -460,7 +460,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
                     GameManager.scene.putIngredient(1, 1);
                 }
-                if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true) {
+                if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerOne.haveObject) {
                     GameManager.scene.takePotion(1, 1);
                 }
             }
@@ -471,7 +471,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
                     GameManager.scene.putIngredient(1, 1);
                 }
-                if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true) {
+                if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerOne.haveObject) {
                     GameManager.scene.takePotion(1, 1);
                 }
 
@@ -581,6 +581,18 @@ class GameScene extends Phaser.Scene {
         this.physics.add.overlap(this.playerTwo, this.batAreaTwo, function () {
             if (GameManager.scene.playerTwo.lastMov == 0 && GameManager.scene.cursorsSecondPlayer.take.isDown) {
                 GameManager.scene.takeObject(2, 8)
+            }
+        })
+
+        //GOAL AREA
+        this.physics.add.overlap(this.playerTwo, this.goalArea, function () {
+            if (GameManager.scene.playerTwo.lastMov == 2 && GameManager.scene.cursorsSecondPlayer.take.isDown && GameManager.scene.playerTwo.haveObject && (GameManager.objectPlayerTwo.texture.key== "herbal_potion" || GameManager.objectPlayerTwo.texture.key== "bat_potion")) {
+                GameManager.scene.leavePotion(2);
+                GameManager.objectPlayerTwo.destroy();
+                GameManager.scene.playerTwo.haveObject = false;
+                if (GameManager.scene.comandToErase >= 0 && GameManager.scene.comandsType[GameManager.scene.comandToErase] != undefined) {
+                    GameManager.scene.comandsType[GameManager.scene.comandToErase].destroy();
+                }
             }
         })
 
@@ -770,7 +782,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
                     GameManager.scene.putIngredient(2, 0);
                 }
-                if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2) {
+                if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerTwo.haveObject) {
                     GameManager.scene.takePotion(2, 0);
                 }
             }
@@ -781,7 +793,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
                     GameManager.scene.putIngredient(2, 0);
                 }
-                if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2) {
+                if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerTwo.haveObject) {
                     GameManager.scene.takePotion(2, 0);
                 }
 
@@ -795,7 +807,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
                     GameManager.scene.putIngredient(2, 1);
                 }
-                if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2) {
+                if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerTwo.haveObject) {
                     GameManager.scene.takePotion(2, 1);
                 }
             }
@@ -806,7 +818,7 @@ class GameScene extends Phaser.Scene {
                 if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
                     GameManager.scene.putIngredient(2, 1);
                 }
-                if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2) {
+                if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerTwo.haveObject) {
                     GameManager.scene.takePotion(2, 1);
                 }
 
@@ -841,7 +853,7 @@ class GameScene extends Phaser.Scene {
             });
         }
         if (Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == false && !Slot.cookingSlotsList.getAt(1).cooking) {
-            Slot.cookingSlotsList.getAt(0).cooking=true;
+            Slot.cookingSlotsList.getAt(1).cooking=true;
             this.cauldronOne.anims.play('cooking', true);
              this.time.addEvent({
                 delay: 3000, callback: function () {
@@ -1102,21 +1114,23 @@ class GameScene extends Phaser.Scene {
             this.playerOne.haveObject = false;
             Slot.cookingSlotsList.getAt(slot).ingredients[Slot.cookingSlotsList.getAt(slot).numIngredients].setPosition(Slot.cookingSlotsList.getAt(slot).x + (20 * Slot.cookingSlotsList.getAt(slot).numIngredients), Slot.cookingSlotsList.getAt(slot).y).setScale(1);
             Slot.cookingSlotsList.getAt(slot).numIngredients++;
+            console.log("Ning: "+Slot.cookingSlotsList.getAt(slot).numIngredients +" readiu: "+Slot.cookingSlotsList.getAt(slot).ready+ " cçooking: "+Slot.cookingSlotsList.getAt(slot).cooking)
         }
         if (player == 2 && GameManager.scene.playerTwo.haveObject && (GameManager.objectPlayerTwo.texture.key == "cut_bat" || GameManager.objectPlayerTwo.texture.key == "cut_herb")) {
             Slot.cookingSlotsList.getAt(slot).ingredients[Slot.cookingSlotsList.getAt(slot).numIngredients] = GameManager.objectPlayerTwo;
             this.playerTwo.haveObject = false;
             Slot.cookingSlotsList.getAt(slot).ingredients[Slot.cookingSlotsList.getAt(slot).numIngredients].setPosition(Slot.cookingSlotsList.getAt(slot).x + (20 * Slot.cookingSlotsList.getAt(slot).numIngredients), Slot.cookingSlotsList.getAt(slot).y).setScale(1);
             Slot.cookingSlotsList.getAt(slot).numIngredients++;
+            console.log("Ning: "+Slot.cookingSlotsList.getAt(slot).numIngredients +" readiu: "+Slot.cookingSlotsList.getAt(slot).ready+ " cçooking: "+Slot.cookingSlotsList.getAt(slot).cooking)
         }
     }
 
     takePotion(player, slot) {
         GameManager.scene.comandDone = false;
-        if (player == 1 && !GameManager.scene.playerOne.haveObject) {
+        Slot.cookingSlotsList.getAt(slot).numIngredients=0;
+        Slot.cookingSlotsList.getAt(slot).ready=false;
+        if (player == 1) {
             this.playerOne.haveObject = true;
-            Slot.cookingSlotsList.getAt(slot).numIngredients=0;
-            Slot.cookingSlotsList.getAt(slot).ready=false;
             var type = Slot.cookingSlotsList.getAt(slot).ingredients[slot].texture.key;
             switch (type) {
                 case 'cut_herb':
@@ -1134,12 +1148,11 @@ class GameScene extends Phaser.Scene {
             else if(slot==1){
                 this.cauldronOne.anims.play("empty",true)
             }
+            console.log("Ning: "+Slot.cookingSlotsList.getAt(slot).numIngredients +" readiu: "+Slot.cookingSlotsList.getAt(slot).ready+ " cçooking: "+Slot.cookingSlotsList.getAt(slot).cooking)
         }
-        else if (player == 2 && !GameManager.playerTwo.haveObject) {
+        else if (player == 2) {
             this.playerTwo.haveObject = true;
-            Slot.cookingSlotsList.getAt(slot).numIngredients=0;
-            Slot.cookingSlotsList.getAt(slot).ready=false;
-            var type = Slot.cookingSlotsList.getAt(slot).ingredients;
+            var type = Slot.cookingSlotsList.getAt(slot).ingredients[slot].texture.key;
             switch (type) {
                 case 'cut_herb':
                     GameManager.objectPlayerTwo = this.add.sprite(GameManager.scene.playerTwo.bagCoord[0], GameManager.scene.playerTwo.bagCoord[1], 'herbal_potion').setScale(1.5);
@@ -1150,13 +1163,13 @@ class GameScene extends Phaser.Scene {
             }
             Slot.cookingSlotsList.getAt(slot).ingredients[0].destroy();
             Slot.cookingSlotsList.getAt(slot).ingredients[1].destroy();
-            Slot.cookingSlotsList.getAt(slot).ocuppied=false;
             if(slot==0){
                 this.cauldronZero.anims.play("empty",true)
             }
             else if(slot==1){
                 this.cauldronOne.anims.play("empty",true)
             }
+            console.log("Ning: "+Slot.cookingSlotsList.getAt(slot).numIngredients +" readiu: "+Slot.cookingSlotsList.getAt(slot).ready+ " cçooking: "+Slot.cookingSlotsList.getAt(slot).cooking)
         }
     }
 
