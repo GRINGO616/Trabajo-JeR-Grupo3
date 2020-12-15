@@ -35,7 +35,7 @@ class PreloadLevel extends Phaser.Scene{
         }
         
         if (level === 2){
-            scene.scene.start("Level2");
+            scene.scene.start("GameScene");
         }
     });
         setTimeout(function(){

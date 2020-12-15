@@ -58,7 +58,7 @@ class GameScene extends Phaser.Scene {
         GameManager.objectPlayerOne = null;
         GameManager.objectPlayerTwo = null;
         //Comandas
-        this.rithim = 0.4;
+        this.rithim = 0.99;
         this.comandDone = false;
         Slot.cuttingSlotsList.removeAll();
         Slot.cookingSlotsList.removeAll();
@@ -965,7 +965,7 @@ class GameScene extends Phaser.Scene {
                 var freeSlot = this.findFreeSlot();
                 if (freeSlot != -1) {
                     Slot.comandSlots.getAt(freeSlot).currentObject = this.add.sprite(Slot.comandSlots.getAt(freeSlot).x, Slot.comandSlots.getAt(freeSlot).y, 'comandBat').setScale(0.65);
-                    this.rithim -= 0.1;
+                    this.rithim -= 0.2;
                 }
             }
         }
@@ -974,7 +974,7 @@ class GameScene extends Phaser.Scene {
                 var freeSlot = this.findFreeSlot();
                 if (freeSlot != -1) {
                     Slot.comandSlots.getAt(freeSlot).currentObject = this.add.sprite(Slot.comandSlots.getAt(freeSlot).x, Slot.comandSlots.getAt(freeSlot).y, 'comandHerb').setScale(0.65);
-                    this.rithim -= 0.1;
+                    this.rithim -= 0.2;
                 }
 
             }
@@ -1337,9 +1337,6 @@ class GameScene extends Phaser.Scene {
 
         }
 
-
-
-
         if (player == 2) {
             var i = 0;
             while (i < Slot.comandSlots.length) {
@@ -1397,7 +1394,7 @@ class GameScene extends Phaser.Scene {
 
 class GameManager {
     static scene;
-    static gameTime = 30;
+    static gameTime = 120;
     static timeLeft;
     static levelCoins;
     static objectPlayerOne;

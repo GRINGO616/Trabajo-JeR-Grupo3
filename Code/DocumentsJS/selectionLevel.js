@@ -11,8 +11,8 @@ class SelectionLevel extends Phaser.Scene{
 
         // Declaración de los botones del menú de configuration.
 
-        this.level1_button =this.add.image(config.width/3.25,config.height/1.6,'level1Hold');
-        this.level2_button =this.add.image(config.width/1.5,config.height/1.6,'level2Hold');
+        this.level1_button =this.add.image(config.width/2,config.height/1.6,'level1Hold');
+        //this.level2_button =this.add.image(config.width/1.5,config.height/1.6,'level2Hold');
 
         if(spanish === true){
             this.next_button =this.add.image(config.width/1.4,config.height/9,'nextSelectionLevelSpanish');
@@ -36,11 +36,11 @@ class SelectionLevel extends Phaser.Scene{
                 targets:this.level1_button,
                 scale: 1.15,
             });
-            this.tweens.add({
+            /*this.tweens.add({
                 targets: this.level2_button,
                 scale: 1.0,
                 duration: 10
-            })
+            })*/
             this.next_button.setTint();
         })
 
@@ -60,7 +60,7 @@ class SelectionLevel extends Phaser.Scene{
         })
 
         this.level1_button.setInteractive().on('pointerout',()=>{
-            if(elected === false || this.level2_button.scale === 1.15){
+            if(elected === false /*|| this.level2_button.scale === 1.15*/){
                 this.tweens.add({
                     targets:this.level1_button,
                     duration:200,
@@ -69,7 +69,7 @@ class SelectionLevel extends Phaser.Scene{
             }
         })
 
-        this.level2_button.setInteractive().on('pointerdown', () => {
+        /*this.level2_button.setInteractive().on('pointerdown', () => {
             elected = true;
             level = 2;
             this.tweens.add({
@@ -107,7 +107,7 @@ class SelectionLevel extends Phaser.Scene{
                     scale: 1,
                 });
             }
-        })
+        })*/
 
         this.selection_level_return_button.setInteractive().on('pointerdown', () => {
             if(musicON===true){
