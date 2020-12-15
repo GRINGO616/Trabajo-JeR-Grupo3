@@ -11,10 +11,10 @@ class FinishGameScene extends Phaser.Scene{
         this.thirdblackStarFinishedGame=this.add.sprite(config.width*0.6,config.height*0.45,'blackStar');
 
         if(spanish === true){
-        this.levelFinishedGameText=this.add.text(config.width*0.52,config.height*0.35,"Nivel "+GameManager.level, { font: "38px PixelFont", fill: "#ffffff", align: "center" }).setOrigin(0.5).setResolution(10);
+        this.levelFinishedGameText=this.add.text(config.width*0.52,config.height*0.35,"Nivel "+level, { font: "38px PixelFont", fill: "#ffffff", align: "center" }).setOrigin(0.5).setResolution(10);
         }
         if(english=== true){
-            this.levelFinishedGameText=this.add.text(config.width*0.52,config.height*0.35,"Level "+GameManager.level, { font: "38px PixelFont", fill: "#ffffff", align: "center" }).setOrigin(0.5).setResolution(10);
+            this.levelFinishedGameText=this.add.text(config.width*0.52,config.height*0.35,"Level "+level, { font: "38px PixelFont", fill: "#ffffff", align: "center" }).setOrigin(0.5).setResolution(10);
         }
 
         this.firstStar=this.add.image(config.width*0.4,config.height*0.45,'star').setScale(0);

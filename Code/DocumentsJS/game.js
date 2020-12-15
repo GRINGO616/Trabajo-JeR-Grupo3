@@ -5,7 +5,7 @@ var config = {
     backgroundColor: 0x000000,
     pixelArt: true, //Prevent pixel art from becoming blurred when scaled.
     //antialias: true,
-    scene: [Loading,Login,Menu,Settings,Configuration,Credits,SelectionLevel,PreloadLevel,Level1,Level2,FinishGameScene],
+    scene: [Loading,Login,Menu,Settings,Configuration,Credits,SelectionLevel,PreloadLevel,GameScene,FinishGameScene],
     physics: {
         default: 'arcade',
         arcade: {

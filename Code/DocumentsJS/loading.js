@@ -104,46 +104,54 @@ class Loading extends Phaser.Scene {
 
         // Elementos de pantallas de juego.
 
-            // Animacion y sprites de personajes nivel 1
-            this.load.spritesheet('Lysha_forward','Assets/level1Scene/charactersAnimation/Lysha_forward.png',{frameWidth: 75, frameHeight: 140});
-            this.load.spritesheet('Lysha_left','Assets/level1Scene/charactersAnimation/Lysha_left.png',{frameWidth: 75, frameHeight: 150});
-            this.load.spritesheet('Lysha_right','Assets/level1Scene/charactersAnimation/Lysha_right.png',{frameWidth: 75, frameHeight: 140});
-            this.load.spritesheet('Lysha_backwards','Assets/level1Scene/charactersAnimation/Lysha_backwards.png',{frameWidth: 75, frameHeight: 140});
-            this.load.spritesheet('Freddie_forward','Assets/level1Scene/charactersAnimation/Freddie_forward.png',{frameWidth: 75, frameHeight: 140});
-            this.load.spritesheet('Freddie_left','Assets/level1Scene/charactersAnimation/Freddie_left.png',{frameWidth: 75, frameHeight: 145});
-            this.load.spritesheet('Freddie_right','Assets/level1Scene/charactersAnimation/Freddie_right.png',{frameWidth: 75, frameHeight: 145});
-            this.load.spritesheet('Freddie_backwards','Assets/level1Scene/charactersAnimation/Freddie_backwards.png',{frameWidth: 75, frameHeight: 140});
-            this.load.spritesheet('Lysha_walkcycle','Assets/level1Scene/charactersAnimation/Lysha_walk_cycle_1.png', {frameWidth: 75 , frameHeight: 154} );
-            this.load.spritesheet('Lysha_walkcycle_2','Assets/level1Scene/charactersAnimation/Lysha_walk_cycle_2.png', {frameWidth: 77 , frameHeight: 154});
-            this.load.spritesheet('Lysha_walkcycle_3','Assets/level1Scene/charactersAnimation/Lysha_walk_cycle_3.png', {frameWidth: 75 , frameHeight: 150});
-            this.load.spritesheet('Lysha_walkcycle_4','Assets/level1Scene/charactersAnimation/Lysha_walk_cycle_4.png', {frameWidth: 75 , frameHeight: 150});  
-            this.load.spritesheet('Freddie_walkcycle','Assets/level1Scene/charactersAnimation/Freddie_walk_cycle_1.png', {frameWidth: 75 , frameHeight: 154} );
-            this.load.spritesheet('Freddie_walkcycle_2','Assets/level1Scene/charactersAnimation/Freddie_walk_cycle_2.png', {frameWidth: 75 , frameHeight: 154});
-            this.load.spritesheet('Freddie_walkcycle_3','Assets/level1Scene/charactersAnimation/Freddie_walk_cycle_3.png', {frameWidth: 75 , frameHeight: 150});
-            this.load.spritesheet('Freddie_walkcycle_4','Assets/level1Scene/charactersAnimation/Freddie_walk_cycle_4.png', {frameWidth: 75 , frameHeight: 150});
+            // Animacion y sprites de personajes 
+            this.load.spritesheet('Lysha_forward','Assets/charactersAnimation/Lysha_forward.png',{frameWidth: 75, frameHeight: 140});
+            this.load.spritesheet('Lysha_left','Assets/charactersAnimation/Lysha_left.png',{frameWidth: 75, frameHeight: 150});
+            this.load.spritesheet('Lysha_right','Assets/charactersAnimation/Lysha_right.png',{frameWidth: 75, frameHeight: 140});
+            this.load.spritesheet('Lysha_backwards','Assets/charactersAnimation/Lysha_backwards.png',{frameWidth: 75, frameHeight: 140});
+            this.load.spritesheet('Freddie_forward','Assets/charactersAnimation/Freddie_forward.png',{frameWidth: 75, frameHeight: 140});
+            this.load.spritesheet('Freddie_left','Assets/charactersAnimation/Freddie_left.png',{frameWidth: 75, frameHeight: 145});
+            this.load.spritesheet('Freddie_right','Assets/charactersAnimation/Freddie_right.png',{frameWidth: 75, frameHeight: 145});
+            this.load.spritesheet('Freddie_backwards','Assets/charactersAnimation/Freddie_backwards.png',{frameWidth: 75, frameHeight: 140});
+            this.load.spritesheet('Lysha_walkcycle','Assets/charactersAnimation/Lysha_walk_cycle_1.png', {frameWidth: 75 , frameHeight: 154} );
+            this.load.spritesheet('Lysha_walkcycle_2','Assets/charactersAnimation/Lysha_walk_cycle_2.png', {frameWidth: 77 , frameHeight: 154});
+            this.load.spritesheet('Lysha_walkcycle_3','Assets/charactersAnimation/Lysha_walk_cycle_3.png', {frameWidth: 75 , frameHeight: 150});
+            this.load.spritesheet('Lysha_walkcycle_4','Assets/charactersAnimation/Lysha_walk_cycle_4.png', {frameWidth: 75 , frameHeight: 150});  
+            this.load.spritesheet('Freddie_walkcycle','Assets/charactersAnimation/Freddie_walk_cycle_1.png', {frameWidth: 75 , frameHeight: 154} );
+            this.load.spritesheet('Freddie_walkcycle_2','Assets/charactersAnimation/Freddie_walk_cycle_2.png', {frameWidth: 75 , frameHeight: 154});
+            this.load.spritesheet('Freddie_walkcycle_3','Assets/charactersAnimation/Freddie_walk_cycle_3.png', {frameWidth: 75 , frameHeight: 150});
+            this.load.spritesheet('Freddie_walkcycle_4','Assets/charactersAnimation/Freddie_walk_cycle_4.png', {frameWidth: 75 , frameHeight: 150});
 
-            // Elementos de interacción nivel 1
-            this.load.spritesheet('cauldronAnimation','Assets/level1Scene/interactiveElements/cauldronAnimation.png', {frameWidth: 53 , frameHeight: 60});
-            this.load.spritesheet('cauldron','Assets/level1Scene/interactiveElements/cauldron.png', {frameWidth: 53 , frameHeight: 47});
-            this.load.spritesheet('empty_cauldron','Assets/level1Scene/interactiveElements/empty_cauldron.png', {frameWidth: 53 , frameHeight: 47});
-            this.load.image('bat','Assets/level1Scene/interactiveElements/bat.png');
-            this.load.image('bat_potion','Assets/level1Scene/interactiveElements/bat_potion.png');
-            this.load.image('cut_bat','Assets/level1Scene/interactiveElements/cut_bat.png');
-            this.load.image('bat_potion_order','Assets/level1Scene/interactiveElements/bat.png');
-            this.load.image('herb','Assets/level1Scene/interactiveElements/herb.png');
-            this.load.image('cut_herb','Assets/level1Scene/interactiveElements/cut_herb.png');
-            this.load.image('herbal_potion','Assets/level1Scene/interactiveElements/herbal_potion.png');
-            this.load.image('herbal_potion_order','Assets/level1Scene/interactiveElements/herb.png');
             
-            // Elementos de interfaz nivel 1
-            this.load.image('coins','Assets/level1Scene/interfaceElements/coins.png');
-            this.load.image('time','Assets/level1Scene/interfaceElements/time.png');
-            this.load.image('progress','Assets/level1Scene/interfaceElements/progress.png');
-            this.load.image('empty_bar','Assets/level1Scene/interfaceElements/empty_bar.png');
-            this.load.image('comandBat','Assets/level1Scene/interfaceElements/comandBat.png');
-            this.load.image('comandHerb','Assets/level1Scene/interfaceElements/comandHerb.png');
-            this.load.image('bag','Assets/level1Scene/interfaceElements/bag.png');
+            // Elementos de interacción
+            this.load.spritesheet('cauldronAnimation','Assets/interactiveElements/cauldronAnimation.png', {frameWidth: 53 , frameHeight: 60});
+            this.load.spritesheet('cauldron','Assets/interactiveElements/cauldron.png', {frameWidth: 53 , frameHeight: 47});
+            this.load.spritesheet('empty_cauldron','Assets/interactiveElements/empty_cauldron.png', {frameWidth: 53 , frameHeight: 47});
+            this.load.image('bat','Assets/interactiveElements/bat.png');
+            this.load.image('bat_potion','Assets/interactiveElements/bat_potion.png');
+            this.load.image('cut_bat','Assets/interactiveElements/cut_bat.png');
+            this.load.image('bat_potion_order','Assets/interactiveElements/bat.png');
+            this.load.image('herb','Assets/interactiveElements/herb.png');
+            this.load.image('cut_herb','Assets/interactiveElements/cut_herb.png');
+            this.load.image('herbal_potion','Assets/interactiveElements/herbal_potion.png');
+            this.load.image('herbal_potion_order','Assets/interactiveElements/herb.png');
+            this.load.image('resist_potion','Assets/interactiveElements/resist_potion.png');
+            this.load.image('herbal+_potion','Assets/interactiveElements/herbal+_potion.png');
+            this.load.image('bat+_potion','Assets/interactiveElements/bat+_potion.png');
 
+            // Elementos de interfaz
+            this.load.image('coins','Assets/interfaceElements/coins.png');
+            this.load.image('time','Assets/interfaceElements/time.png');
+            this.load.image('progress','Assets/interfaceElements/progress.png');
+            this.load.image('empty_bar','Assets/interfaceElements/empty_bar.png');
+            this.load.image('comandBat','Assets/interfaceElements/comandBat.png');
+            this.load.image('comandHerb','Assets/interfaceElements/comandHerb.png');
+            this.load.image('comandResist','Assets/interfaceElements/comandResist.png');
+            this.load.image('comandHerb+','Assets/interfaceElements/comandHerb+.png');
+            this.load.image('comandBat+','Assets/interfaceElements/comandBat+.png');
+            this.load.image('bag','Assets/interfaceElements/bag.png');
+
+            
             // Elementos de colisión nivel 1
             this.load.image('ground','Assets/level1Scene/colisionElements/ground.png');
             this.load.image('wall1','Assets/level1Scene/colisionElements/wall1.png');
@@ -156,65 +164,13 @@ class Loading extends Phaser.Scene {
             this.load.image('goal_box','Assets/level1Scene/colisionElements/goal_box.png');
             this.load.image('bookshelf','Assets/level1Scene/colisionElements/bookshelf.png');
 
-            // Animacion y sprites de personajes nivel 2
-            this.load.spritesheet('Lysha_forward','Assets/level2Scene/charactersAnimation/Lysha_forward.png',{frameWidth: 75, frameHeight: 140});
-            this.load.spritesheet('Lysha_left','Assets/level2Scene/charactersAnimation/Lysha_left.png',{frameWidth: 75, frameHeight: 150});
-            this.load.spritesheet('Lysha_right','Assets/level2Scene/charactersAnimation/Lysha_right.png',{frameWidth: 75, frameHeight: 140});
-            this.load.spritesheet('Lysha_backwards','Assets/level2Scene/charactersAnimation/Lysha_backwards.png',{frameWidth: 75, frameHeight: 140});
-            this.load.spritesheet('Freddie_forward','Assets/level2Scene/charactersAnimation/Freddie_forward.png',{frameWidth: 75, frameHeight: 140});
-            this.load.spritesheet('Freddie_left','Assets/level2Scene/charactersAnimation/Freddie_left.png',{frameWidth: 75, frameHeight: 145});
-            this.load.spritesheet('Freddie_right','Assets/level2Scene/charactersAnimation/Freddie_right.png',{frameWidth: 75, frameHeight: 145});
-            this.load.spritesheet('Freddie_backwards','Assets/level2Scene/charactersAnimation/Freddie_backwards.png',{frameWidth: 75, frameHeight: 140});
-            this.load.spritesheet('Lysha_walkcycle','Assets/level2Scene/charactersAnimation/Lysha_walk_cycle_1.png', {frameWidth: 75 , frameHeight: 154} );
-            this.load.spritesheet('Lysha_walkcycle_2','Assets/level2Scene/charactersAnimation/Lysha_walk_cycle_2.png', {frameWidth: 77 , frameHeight: 154});
-            this.load.spritesheet('Lysha_walkcycle_3','Assets/level2Scene/charactersAnimation/Lysha_walk_cycle_3.png', {frameWidth: 75 , frameHeight: 150});
-            this.load.spritesheet('Lysha_walkcycle_4','Assets/level2Scene/charactersAnimation/Lysha_walk_cycle_4.png', {frameWidth: 75 , frameHeight: 150});  
-            this.load.spritesheet('Freddie_walkcycle','Assets/level2Scene/charactersAnimation/Freddie_walk_cycle_1.png', {frameWidth: 75 , frameHeight: 154} );
-            this.load.spritesheet('Freddie_walkcycle_2','Assets/level2Scene/charactersAnimation/Freddie_walk_cycle_2.png', {frameWidth: 75 , frameHeight: 154});
-            this.load.spritesheet('Freddie_walkcycle_3','Assets/level2Scene/charactersAnimation/Freddie_walk_cycle_3.png', {frameWidth: 75 , frameHeight: 150});
-            this.load.spritesheet('Freddie_walkcycle_4','Assets/level2Scene/charactersAnimation/Freddie_walk_cycle_4.png', {frameWidth: 75 , frameHeight: 150});
-
-            // Elementos de interacción nivel 2
-            this.load.spritesheet('cauldronAnimation','Assets/level2Scene/interactiveElements/cauldronAnimation.png', {frameWidth: 53 , frameHeight: 60});
-            this.load.spritesheet('cauldron','Assets/level2Scene/interactiveElements/cauldron.png', {frameWidth: 53 , frameHeight: 47});
-            this.load.spritesheet('empty_cauldron','Assets/level2Scene/interactiveElements/empty_cauldron.png', {frameWidth: 53 , frameHeight: 47});
-            this.load.image('bat','Assets/level2Scene/interactiveElements/bat.png');
-            this.load.image('bat_potion','Assets/level2Scene/interactiveElements/bat_potion.png');
-            this.load.image('cut_bat','Assets/level2Scene/interactiveElements/cut_bat.png');
-            this.load.image('bat_potion_order','Assets/level2Scene/interactiveElements/bat.png');
-            this.load.image('herb','Assets/level2Scene/interactiveElements/herb.png');
-            this.load.image('cut_herb','Assets/level2Scene/interactiveElements/cut_herb.png');
-            this.load.image('herbal_potion','Assets/level2Scene/interactiveElements/herbal_potion.png');
-            this.load.image('herbal_potion_order','Assets/level2Scene/interactiveElements/herb.png');
-            this.load.image('resist_potion','Assets/level2Scene/interactiveElements/resist_potion.png');
-            this.load.image('herbal+_potion','Assets/level2Scene/interactiveElements/herbal+_potion.png');
-            this.load.image('bat+_potion','Assets/level2Scene/interactiveElements/bat+_potion.png');
-
-            // Elementos de interfaz nivel 2
-            this.load.image('coins','Assets/level2Scene/interfaceElements/coins.png');
-            this.load.image('time','Assets/level2Scene/interfaceElements/time.png');
-            this.load.image('progress','Assets/level2Scene/interfaceElements/progress.png');
-            this.load.image('empty_bar','Assets/level2Scene/interfaceElements/empty_bar.png');
-            this.load.image('comandBat','Assets/level2Scene/interfaceElements/comandBat.png');
-            this.load.image('comandHerb','Assets/level2Scene/interfaceElements/comandHerb.png');
-            this.load.image('comandResist','Assets/level2Scene/interfaceElements/comandResist.png');
-            this.load.image('comandHerb+','Assets/level2Scene/interfaceElements/comandHerb+.png');
-            this.load.image('comandBat+','Assets/level2Scene/interfaceElements/comandBat+.png');
-            this.load.image('bag','Assets/level2Scene/interfaceElements/bag.png');
-
             // Elementos de colisión nivel 2
-            this.load.image('ground','Assets/level2Scene/colisionElements/ground.png');
-            this.load.image('wall1','Assets/level2Scene/colisionElements/wall1.png');
-            this.load.image('wall2','Assets/level2Scene/colisionElements/wall2.png');
-            this.load.image('wall3','Assets/level1Scene/colisionElements/wall3.png');
-            this.load.image('wall4','Assets/level2Scene/colisionElements/wall4.png');
-            this.load.image('table','Assets/level2Scene/colisionElements/table.png');
+            this.load.image('ground_level2','Assets/level2Scene/colisionElements/ground.png');
+            this.load.image('table_level2','Assets/level2Scene/colisionElements/table.png');
             this.load.image('centralBoxes','Assets/level2Scene/colisionElements/centralBoxes.png');
             this.load.image('boxesBat','Assets/level2Scene/colisionElements/boxesBat.png');
             this.load.image('boxesHerb','Assets/level2Scene/colisionElements/boxesHerb.png');
-            this.load.image('box','Assets/level2Scene/colisionElements/box.png');
-            this.load.image('goal_box1','Assets/level2Scene/colisionElements/goal_box.png');
-            this.load.image('goal_box2','Assets/level2Scene/colisionElements/goal_box.png');
+            this.load.image('goal_box_level2','Assets/level2Scene/colisionElements/goal_box.png');
     }
 
     create(){
@@ -222,6 +178,7 @@ class Loading extends Phaser.Scene {
         // Se establece la escena inicial del propio videojuego.
         var scene=this; 
         // Se establecen los elementos principales de la pantalla de carga.
+        /*
         var white = this.add.image(config.width/2,config.height/2,'loadingBackground');
         var logo = this.add.image(config.width/2,config.height/2,'logo');
                 this.cameras.main.once('camerafadeoutcomplete', function (camera) {
@@ -229,6 +186,7 @@ class Loading extends Phaser.Scene {
             white.destroy();
             scene.scene.start("Menu");
         });
+        */
         
         // Se establecen los parámetros para poder declarar la música del videojuego.
         menuMusic = this.sound.add('menuMusic',{loop:true, volume: 0.0});
@@ -243,9 +201,11 @@ class Loading extends Phaser.Scene {
         // Se establecen los parámetros para poder establecer el idioma.
         spanish = true;
         english = false;
-
+        /*
         setTimeout(function(){
             scene.cameras.main.fadeOut(2000);
-             }, 2000);
+             }, 2000);*/
+        level=2;
+        scene.scene.start("GameScene");
     }
 }

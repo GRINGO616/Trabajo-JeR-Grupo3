@@ -31,7 +31,7 @@ class PreloadLevel extends Phaser.Scene{
         instructionsZone.destroy();
 
         if (level === 1){
-            scene.scene.start("Level1");
+            scene.scene.start("GameScene");
         }
         
         if (level === 2){
