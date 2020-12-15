@@ -58,12 +58,11 @@ class GameScene extends Phaser.Scene {
         GameManager.objectPlayerOne = null;
         GameManager.objectPlayerTwo = null;
         //Comandas
-        this.rithim = 0.9;
-        this.comandsType = [];
+        this.rithim = 0.4;
         this.comandDone = false;
-        this.comandToErase = -1;
         Slot.cuttingSlotsList.removeAll();
         Slot.cookingSlotsList.removeAll();
+        Slot.comandSlots.removeAll();
     }
 
     levelOneSettings() {
@@ -95,11 +94,11 @@ class GameScene extends Phaser.Scene {
 
         //Comands
         Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 0.1, 0));
-        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 1, 1));
-        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 1.9, 2));
-        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 2.8, 3));
-        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 3.7, 4));
-        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 4.6, 5));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 0.2, 1));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 0.3, 2));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 0.4, 3));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 0.5, 4));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 0.6, 5));
 
         //Goal area
         this.goalArea = this.physics.add.sprite(config.width * 0.5, config.height * 0.87, 'box').setScale(5.2, 0.4).setVisible(false);
@@ -145,7 +144,7 @@ class GameScene extends Phaser.Scene {
 
     levelTwoSettings() {
         //Sprites escenario
-        this.add.sprite(config.width*0.514, config.height*0.6, 'ground_level2');
+        this.add.sprite(config.width * 0.514, config.height * 0.6, 'ground_level2');
         this.colisionableObjects.create(config.width * 0.52, config.height * 0.57, 'centralBoxes');
         this.colisionableObjects.create(config.width * 0.9, config.height * 0.4, 'boxesBat');
         this.colisionableObjects.create(config.width * 0.13, config.height * 0.75, 'boxesHerb');
@@ -157,7 +156,7 @@ class GameScene extends Phaser.Scene {
         this.colisionableObjects.create(config.width * 0.72, config.height * 0.95, 'goal_box_level2');
 
         //Collider zona central
-        this.colisionableObjects.create(config.width * 0.52, config.height * 0.6, 'box').setSize(50.0,1000.0).setVisible(false);
+        this.colisionableObjects.create(config.width * 0.52, config.height * 0.6, 'box').setSize(50.0, 1000.0).setVisible(false);
 
         //Taking objects area
         this.herbArea = this.physics.add.sprite(config.width * 0.17, config.height * 0.75, 'box').setScale(0.5, 1.3).setVisible(false);
@@ -336,9 +335,6 @@ class GameScene extends Phaser.Scene {
                     GameManager.scene.leavePotion(1);
                     GameManager.objectPlayerOne.destroy();
                     GameManager.scene.playerOne.haveObject = false;
-                    if (GameManager.scene.comandToErase >= 0 && GameManager.scene.comandsType[GameManager.scene.comandToErase] != undefined) {
-                        GameManager.scene.comandsType[GameManager.scene.comandToErase].destroy();
-                    }
                 }
             })
 
@@ -685,9 +681,6 @@ class GameScene extends Phaser.Scene {
                     GameManager.scene.leavePotion(2);
                     GameManager.objectPlayerTwo.destroy();
                     GameManager.scene.playerTwo.haveObject = false;
-                    if (GameManager.scene.comandToErase >= 0 && GameManager.scene.comandsType[GameManager.scene.comandToErase] != undefined) {
-                        GameManager.scene.comandsType[GameManager.scene.comandToErase].destroy();
-                    }
                 }
             })
 
@@ -967,45 +960,46 @@ class GameScene extends Phaser.Scene {
 
     updateComands() {
         var numComand = Math.random() * 10;
-        var freeSlot = this.findFreeSlot();
-        
-            if (numComand <= 5) {
-                if (GameManager.timeLeft <= GameManager.gameTime * this.rithim && freeSlot > -1) {
-                    Slot.comandSlots.getAt(freeSlot) = this.add.sprite(config.width * 0.05, config.height * Slot.comandSlots.getAt(freeSlot).y, 'comandBat').setScale(0.65);
-                    this.rithim -= 0.1;
-                    
-                }
-            }
-            else {
-                if (GameManager.timeLeft <= GameManager.gameTime * this.rithim && freeSlot > -1) {
-                    Slot.comandSlots.getAt(freeSlot) = this.add.sprite(config.width * 0.05, config.height * Slot.comandSlots.getAt(freeSlot).y, 'comandHerb').setScale(0.65);
+        if (numComand <= 5) {
+            if (GameManager.timeLeft <= GameManager.gameTime * this.rithim) {
+                var freeSlot = this.findFreeSlot();
+                if (freeSlot != -1) {
+                    Slot.comandSlots.getAt(freeSlot).currentObject = this.add.sprite(Slot.comandSlots.getAt(freeSlot).x, Slot.comandSlots.getAt(freeSlot).y, 'comandBat').setScale(0.65);
                     this.rithim -= 0.1;
                 }
             }
-        
+        }
+        else {
+            if (GameManager.timeLeft <= GameManager.gameTime * this.rithim) {
+                var freeSlot = this.findFreeSlot();
+                if (freeSlot != -1) {
+                    Slot.comandSlots.getAt(freeSlot).currentObject = this.add.sprite(Slot.comandSlots.getAt(freeSlot).x, Slot.comandSlots.getAt(freeSlot).y, 'comandHerb').setScale(0.65);
+                    this.rithim -= 0.1;
+                }
+
+            }
+        }
     }
-    
-    findFreeSlot(){
-       
-        var i=0;
+
+    findFreeSlot() {
+
+        var i = 0;
         var slot;
         var slotId = -1;
         var found = false;
-        var maxSlots=6;
-       
-          while(i<maxSlots && !found)
-          {
+        var maxSlots = 6;
+
+        while (i < maxSlots && !found) {
             slot = Slot.comandSlots.getAt(i);
-            if(!slot.occupied)
-            {
-              Slot.comandOccupiedSlots++;
-              slot.occupied = true;
-              slotId = i;
-              found = true;
+            if (!slot.occupied) {
+                Slot.comandOccupiedSlots++;
+                slot.occupied = true;
+                slotId = i;
+                found = true;
             }
             i++;
-          } 
-          return slotId;
+        }
+        return slotId;
     }
 
     updateFirstPlayer() {
@@ -1294,14 +1288,10 @@ class GameScene extends Phaser.Scene {
 
     leavePotion(player) {
         if (player == 1) {
-            this.comandsType.forEach(function (element, index, array) {
-                var type = element.texture.key;
-
-                if (GameManager.scene.comandDone == false) {
-                    GameManager.scene.comandToErase += 1;
-                }
-
-                if (GameManager.objectPlayerOne.texture.key == 'herbal_potion' && type == 'comandHerb' && GameManager.scene.comandDone == false) {
+            var i = 0;
+            while (i < Slot.comandSlots.length && GameManager.scene.comandDone == false) {
+                var type = Slot.comandSlots.getAt(i).currentObject.texture.key;
+                if (GameManager.objectPlayerOne.texture.key == 'herbal_potion' && type == 'comandHerb'  && Slot.comandSlots.getAt(i).occupied == true) {
 
                     if (GameManager.timeLeft > (GameManager.gameTime / 2)) {
 
@@ -1319,9 +1309,10 @@ class GameScene extends Phaser.Scene {
                         GameManager.scene.comandDone = true;
 
                     }
-
+                    Slot.comandSlots.getAt(i).currentObject.destroy();
+                    Slot.comandSlots.getAt(i).occupied = false;
                 }
-                else if (GameManager.objectPlayerOne.texture.key == 'bat_potion' && type == 'comandBat' && GameManager.scene.comandDone == false) {
+                else if (GameManager.objectPlayerOne.texture.key == 'bat_potion' && type == 'comandBat'  && Slot.comandSlots.getAt(i).occupied == true) {
 
                     if (GameManager.timeLeft > (GameManager.gameTime / 2)) {
                         GameManager.levelCoins += 100;
@@ -1338,24 +1329,23 @@ class GameScene extends Phaser.Scene {
                         GameManager.scene.comandDone = true;
 
                     }
+                    Slot.comandSlots.getAt(i).currentObject.destroy();
+                    Slot.comandSlots.getAt(i).occupied = false;
                 }
+                i++;
+            }
 
-            })
         }
 
 
 
 
         if (player == 2) {
+            var i = 0;
+            while (i < Slot.comandSlots.length) {
+                var type = Slot.comandSlots.getAt(i).texture.key;
 
-            this.comandsType.forEach(function (element, index, array) {
-                var type = element.texture.key;
-
-                if (GameManager.scene.comandDone == false) {
-                    GameManager.scene.comandToErase += 1;
-                }
-
-                if (GameManager.objectPlayerTwo.texture.key == 'herbal_potion' && type == 'comandHerb' && GameManager.scene.comandDone == false) {
+                if (GameManager.objectPlayerTwo.texture.key == 'herbal_potion' && type == 'comandHerb' && Slot.comandSlots.getAt(i).occupied == true) {
                     if (GameManager.timeLeft > (GameManager.gameTime / 2)) {
 
                         GameManager.levelCoins += 100;
@@ -1369,9 +1359,11 @@ class GameScene extends Phaser.Scene {
                         GameManager.levelCoins += 300;
                         GameManager.scene.comandDone = true;
                     }
+                    Slot.comandSlots.getAt(i).currentObject.destroy();
+                    Slot.comandSlots.getAt(i).occupied = false;
 
                 }
-                else if (GameManager.objectPlayerTwo.texture.key == 'bat_potion' && type == 'comandBat' && GameManager.scene.comandDone == false) {
+                else if (GameManager.objectPlayerTwo.texture.key == 'bat_potion' && type == 'comandBat' && Slot.comandSlots.getAt(i).occupied == true) {
                     if (GameManager.timeLeft > (GameManager.gameTime / 2)) {
                         GameManager.levelCoins += 100;
                         GameManager.scene.comandDone = true;
@@ -1384,9 +1376,12 @@ class GameScene extends Phaser.Scene {
                         GameManager.levelCoins += 300;
                         GameManager.scene.comandDone = true;
                     }
+                    Slot.comandSlots.getAt(i).currentObject.destroy();
+                    Slot.comandSlots.getAt(i).occupied = false;
                 }
+                i++;
+            }
 
-            })
         }
         GameManager.scene.coinsText.setText(GameManager.levelCoins);
     }
@@ -1426,7 +1421,7 @@ class Slot {
         this.numIngredients = 0;
         this.ingredients = [];
         this.ready = false;
-        this.cooking=false;
+        this.cooking = false;
         //Comands
         this.comandOccupiedSlots = 0;
         this.occupied = false;

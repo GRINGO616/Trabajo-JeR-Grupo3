@@ -178,7 +178,7 @@ class Loading extends Phaser.Scene {
         // Se establece la escena inicial del propio videojuego.
         var scene=this; 
         // Se establecen los elementos principales de la pantalla de carga.
-        /*
+        
         var white = this.add.image(config.width/2,config.height/2,'loadingBackground');
         var logo = this.add.image(config.width/2,config.height/2,'logo');
                 this.cameras.main.once('camerafadeoutcomplete', function (camera) {
@@ -186,7 +186,7 @@ class Loading extends Phaser.Scene {
             white.destroy();
             scene.scene.start("Menu");
         });
-        */
+        
         
         // Se establecen los parámetros para poder declarar la música del videojuego.
         menuMusic = this.sound.add('menuMusic',{loop:true, volume: 0.0});
@@ -201,11 +201,10 @@ class Loading extends Phaser.Scene {
         // Se establecen los parámetros para poder establecer el idioma.
         spanish = true;
         english = false;
-        /*
+        
         setTimeout(function(){
             scene.cameras.main.fadeOut(2000);
-             }, 2000);*/
-        level=2;
-        scene.scene.start("GameScene");
+             }, 2000);
+        
     }
 }
