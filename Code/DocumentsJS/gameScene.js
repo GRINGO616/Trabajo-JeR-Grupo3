@@ -199,6 +199,14 @@ class GameScene extends Phaser.Scene {
         this.goalArea = this.physics.add.sprite(config.width * 0.3, config.height * 0.87, 'box').setScale(2.6, 0.4).setVisible(false);
         this.goalArea = this.physics.add.sprite(config.width * 0.72, config.height * 0.87, 'box').setScale(2.6, 0.4).setVisible(false);
 
+         //Comands
+         Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 0.1, 0));
+         Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 1, 1));
+         Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 1.9, 2));
+         Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 2.8, 3));
+         Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 3.7, 4));
+         Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 4.6, 5));
+
 
     }
 
