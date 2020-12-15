@@ -933,7 +933,7 @@ class GameScene extends Phaser.Scene {
             this.updateSecondPlayer();
         }
         this.updateCauldron();
-        //this.updateComands();
+        this.updateComands();
 
     }
 
