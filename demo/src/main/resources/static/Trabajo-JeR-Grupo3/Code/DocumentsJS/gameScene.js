@@ -9,7 +9,21 @@ class GameScene extends Phaser.Scene {
         this.resetVariables();
 
         this.gameTimer = this.time.addEvent({ delay: (GameManager.gameTime * 10), callback: this.finishGame, callbackScope: this });
-        this.textTime = this.time.addEvent({ delay: 1000, loop: true, callback: subtractTime, callbackScope: this })
+        this.textTime = this.time.addEvent({ delay: 1000, loop: true, callback: subtractTime, callbackScope: this });
+
+        this.timerP1 = this.time.addEvent({
+            delay: 500, // ms
+            callback: this.updatePlayer,
+            args:[nameP1],
+            loop: true,
+        });
+    
+        this.timerP2 = this.time.addEvent({
+            delay: 500, // ms
+            callback: this.updatePlayer,
+            args:[nameP2],
+            loop: true,
+        });
 
         this.anims.create({
             key: 'cooking',
@@ -1396,6 +1410,19 @@ class GameScene extends Phaser.Scene {
     startGame() {
         this.scene.resume("GameScene");
     }
+
+    updatePlayer(name) {
+        $.ajax({
+          method: "PUT",
+          url: "http://localhost:8080/playersConected/" + name,
+          processData: false,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).done(function (player) {
+          console.log("Updated player: " + JSON.stringify(player));
+        });
+      }
 }
 
 class GameManager {

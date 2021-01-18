@@ -10,6 +10,20 @@ class FinishGameScene extends Phaser.Scene{
         this.secondblackStarFinishedGame=this.add.sprite(config.width*0.5,config.height*0.45,'blackStar');
         this.thirdblackStarFinishedGame=this.add.sprite(config.width*0.6,config.height*0.45,'blackStar');
 
+        this.timerP1 = this.time.addEvent({
+            delay: 500, // ms
+            callback: this.updatePlayer,
+            args:[nameP1],
+            loop: true,
+        });
+    
+        this.timerP2 = this.time.addEvent({
+            delay: 500, // ms
+            callback: this.updatePlayer,
+            args:[nameP2],
+            loop: true,
+        });
+
         this.AddTeam(this.getPlayer(nameP1),this.getPlayer(nameP2),GameManager.levelCoins);
 
         if(spanish === true){
@@ -206,6 +220,19 @@ class FinishGameScene extends Phaser.Scene{
                 });
             })
     }
+
+    updatePlayer(name) {
+        $.ajax({
+          method: "PUT",
+          url: "http://localhost:8080/playersConected/" + name,
+          processData: false,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).done(function (player) {
+          console.log("Updated player: " + JSON.stringify(player));
+        });
+      }
 
     getPlayer(Name) {
         fetch("http://localhost:8080/players/"+ Name)

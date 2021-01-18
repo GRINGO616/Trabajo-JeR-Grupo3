@@ -134,14 +134,14 @@ class Login extends Phaser.Scene {
             //aqui intenta meter al jugador en mapa
             //if falla activa mensaje de error, sino el de ready
             if (this.inputNamePlayerOne.value != "" && this.inputPasswordPlayerOne.value != "") {
-                this.getPlayer(this.inputNamePlayerOne.value, this.inputPasswordPlayerOne.value, 1);
+                this.getPlayer(this.inputNamePlayerOne.value, this.inputPasswordPlayerOne.value, 1,this);
             }
         })
         this.readyButtonPlayerTwo.setInteractive().on('pointerdown', () => {
             //aqui intenta meter al jugador en mapa
             //if falla activa mensaje de error, sino el de ready
             if (this.inputNamePlayerTwo.value != "" && this.inputPasswordPlayerTwo.value != "") {
-                this.getPlayer(this.inputNamePlayerTwo.value, this.inputPasswordPlayerTwo.value, 1);
+                this.getPlayer(this.inputNamePlayerTwo.value, this.inputPasswordPlayerTwo.value, 2,this);
                 if (this.readyPlayerTwo) {
 
                 }
@@ -165,33 +165,35 @@ class Login extends Phaser.Scene {
         })
 
     }
-
-    getPlayer(name, password, jugador) {
-        fetch("http://localhost:8080/players/" + name)
-            .then(response => response.json())
-            .then(data => this.mostrarTimer(name,password,jugador,data))
-            .catch(err => this.correctLogin(name, password, jugador,true)); // Hacer algo con el error
-
-    }
-
-    postPlayer(Name, Password) {
-        fetch("http://localhost:8080/players", {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: Name,
-                password: Password
+    /*
+        getPlayer(name, password, jugador) {
+            fetch("http://localhost:8080/players/" + name)
+                .then(response => response.json())
+                .then(data => this.mostrarTimer(name,password,jugador,data))
+                .catch(err => this.correctLogin(name, password, jugador,true)); // Hacer algo con el error
+    
+        }
+    
+        postPlayer(Name, Password) {
+            fetch("http://localhost:8080/players", {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: Name,
+                    password: Password
+                })
             })
-        })
-            .then(response => response.json())
-            .then(data => console.log(data));
-    }
-
-    correctLogin(name, password, jugador,nuevo) {
-        if(nuevo)
+                .then(response => response.json())
+                .then(data => console.log(data));
+        }
+    */
+    
+    correctLogin(name, password, jugador, nuevo) {
+        this.conectPlayer(name,password)
+        if (nuevo)
             this.postPlayer(name, password);
         if (jugador == 1) {
             this.playerOneText.setVisible(false);
@@ -204,13 +206,19 @@ class Login extends Phaser.Scene {
             this.readyNamePlayerOne.setVisible(true);
             this.readyButtonPlayerOne.setVisible(false);
             nameP1 = this.inputNamePlayerOne.value;
-            this.readyPlayerOne=true;
+            this.readyPlayerOne = true;
             if ((!singlePlayer && this.readyPlayerTwo) || singlePlayer) {
                 this.continueButton.setVisible(true);
                 this.continueButton.setInteractive().on('pointerdown', () => {
                     this.scene.start("Menu");
                 })
             }
+            this.timerP1 = this.time.addEvent({
+                delay: 500, // ms
+                callback: this.updatePlayer,
+                args:[nameP1],
+                loop: true,
+            });
         }
         else if (jugador == 2) {
             this.playerTwoText.setVisible(false);
@@ -230,17 +238,22 @@ class Login extends Phaser.Scene {
                     this.scene.start("Menu");
                 })
             }
-            
+            this.timerP2 = this.time.addEvent({
+                delay: 500, // ms
+                callback: this.updatePlayer,
+                args:[nameP2],
+                loop: true,
+            });
         }
-
+        
 
     }
 
-    mostrarTimer(name,password,jugador,data) {
-        if(password==data.password){
+    mostrarTimer(name, password, jugador, data) {
+        if (password == data.password) {
             this.correctLogin(name, password, jugador, false);
         }
-        else{
+        else {
             if (jugador == 1) {
                 this.errorPlayerOne.setVisible(true);
             }
@@ -258,7 +271,71 @@ class Login extends Phaser.Scene {
                 }, callbackScope: this
             })
         }
-        
+
+    }
+    getPlayer(name, password, jugador,scene) {
+        $.ajax({
+            url: "http://localhost:8080/players/"+name,
+        }).done(function (data) {
+            scene.mostrarTimer(name,password,jugador,data)
+        }).fail(function () {
+            scene.correctLogin(name, password, jugador,true)
+        });
+    }
+
+    postPlayer(Name, Password) {
+        let request = {
+            name: Name,
+            password: Password
+        };
+        $.ajax({
+          method: "POST",
+          url: "http://localhost:8080/players",
+          data: JSON.stringify(request),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8", // Indica el contenido
+          },
+        })
+          .done((data) => {
+            console.log(data);
+          })
+          .fail((jqXHR, Status, errorThrown) => {
+            console.log(errorThrown);
+          });
+    }
+    updatePlayer(name) {
+        $.ajax({
+          method: "PUT",
+          url: "http://localhost:8080/playersConected/" + name,
+          processData: false,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).done(function (player) {
+          console.log("Updated player: " + JSON.stringify(player));
+        });
+      }
+
+      conectPlayer(Name,Password) {
+        let request = {
+            name: Name,
+            password: Password,
+            date:new Date()
+        };
+        $.ajax({
+          method: "POST",
+          url: "http://localhost:8080/playersConected",
+          data: JSON.stringify(request),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8", // Indica el contenido
+          },
+        })
+          .done((data) => {
+            console.log(data.name+ " conected");
+          })
+          .fail((jqXHR, Status, errorThrown) => {
+            console.log(errorThrown);
+          });
     }
 }
 

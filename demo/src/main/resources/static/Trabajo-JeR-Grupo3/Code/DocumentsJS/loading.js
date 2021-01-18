@@ -39,6 +39,7 @@ class Loading extends Phaser.Scene {
         this.load.image('controls_button_english','Assets/menuScene/controls_button_english.png');
         this.load.image('credits_button_english','Assets/menuScene/credits_button_english.png');
 
+
         // Elementos de pantalla de configuración
         this.load.image('configurationBackground','Assets/configurationScene/configurationBackground.jpg');
         this.load.image('controlsArea','Assets/configurationScene/controlsArea.png');
@@ -138,6 +139,8 @@ class Loading extends Phaser.Scene {
             this.load.image('resist_potion','Assets/interactiveElements/resist_potion.png');
             this.load.image('herbal+_potion','Assets/interactiveElements/herbal+_potion.png');
             this.load.image('bat+_potion','Assets/interactiveElements/bat+_potion.png');
+            this.load.image('players_conected_spanish','Assets/interfaceElements/playersConected.png');
+            this.load.image('players_conected_english','Assets/interfaceElements/playersConectedENG.png');
 
             // Elementos de interfaz
             this.load.image('coins','Assets/interfaceElements/coins.png');
