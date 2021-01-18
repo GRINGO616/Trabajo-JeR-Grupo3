@@ -1,5 +1,10 @@
 package com.example.demo;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
@@ -112,6 +117,7 @@ public class PlayerController {
     @ResponseStatus(HttpStatus.CREATED)
     public Player AddPlayer(@RequestBody Player p){
         players.put(p.getName(),p);
+        p.savePlayer(p.name, p.password);
         return p;
     }
 
@@ -141,7 +147,40 @@ public class PlayerController {
         }
     }
 
+    public void loadAllPlayers()
+    {
+        File file = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+  
+        try {
+           // Apertura del fichero y creacion de BufferedReader para poder
+           // hacer una lectura comoda (disponer del metodo readLine()).
+           ArrayList <String> arrayAux = new ArrayList <String>(); 
+           file = new File ("Players.txt");
+           fr = new FileReader (file);
+           br = new BufferedReader(fr);
+  
+           // Lectura del fichero
+           String line;
+           while((line=br.readLine())!=null)
+           {
+              arrayAux.add(line);
+           }
+           for(int i = 0; i < arrayAux.size(); i++)
+           { 
+               Player aux = new Player();
+                aux.setName(arrayAux.get(i));
+                i++;
+                aux.setPassword(arrayAux.get(i));
+           }
+        }
+        catch (IOException e) 
+            {
+                System.out.println("File not found: " + e.getMessage());
+            }
     
 
 
+    }
 }
