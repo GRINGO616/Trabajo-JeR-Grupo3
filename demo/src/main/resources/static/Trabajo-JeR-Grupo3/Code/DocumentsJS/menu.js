@@ -170,7 +170,6 @@ class Menu extends Phaser.Scene{
                 pulseEffect.play();
             }
             this.scene.start("Credits")
-            this.getPetition();
         })
 
         
@@ -191,5 +190,7 @@ class Menu extends Phaser.Scene{
         })
         
 
-    }
+    } 
+
+    
 }

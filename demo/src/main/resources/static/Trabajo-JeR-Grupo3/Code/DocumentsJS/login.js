@@ -8,7 +8,7 @@ class Login extends Phaser.Scene {
         // Declaración de la configuración principal del menú de logging.
         this.cameras.main.fadeIn(2000)
         this.background = this.add.image(config.width / 2, config.height / 2, 'loginBackground');
-        
+
 
         menuMusic.play();
 
@@ -32,7 +32,7 @@ class Login extends Phaser.Scene {
         this.lyshaIcon = this.add.image(config.width * 0.2, config.height * 0.18, 'Lysha_forward').setScale(0.7);
         this.lyshaIcon2 = this.add.image(config.width * 0.6, config.height * 0.18, 'Lysha_forward').setScale(0.7);
         this.freddieIcon = this.add.image(config.width * 0.8, config.height * 0.18, 'Freddie_forward').setScale(0.7);
-        this.continueButton = this.add.image(config.width/1.4,config.height/9, 'loginNextButton').setScale(1.2).setVisible(false);
+        this.continueButton = this.add.image(config.width / 1.4, config.height / 9, 'loginNextButton').setScale(1.2).setVisible(false);
         this.readyPlayerOne = false;
         this.readyPlayerTwo = false;
 
@@ -133,79 +133,44 @@ class Login extends Phaser.Scene {
         this.readyButtonPlayerOne.setInteractive().on('pointerdown', () => {
             //aqui intenta meter al jugador en mapa
             //if falla activa mensaje de error, sino el de ready
-            if (this.inputNamePlayerOne.value != "") {
-                this.playerOneText.setVisible(false);
-                this.namePlayerOne.setVisible(false);
-                this.passwordPlayerOne.setVisible(false);
-                this.inputNamePlayerOne.style.display = "none";
-                this.inputPasswordPlayerOne.style.display = "none";
-                this.readyTextPlayerOne.setVisible(true);
-                this.readyNamePlayerOne.setText("" + this.inputNamePlayerOne.value);
-                this.readyNamePlayerOne.setVisible(true);
-                this.readyPlayerOne = true;
-                this.readyButtonPlayerOne.setVisible(false);
-
-                nameP1 = this.inputNamePlayerOne.value;
-                this.postPlayer(this.inputNamePlayerOne.value, this.inputPasswordPlayerOne.value);
-
-                if ((!singlePlayer && this.readyPlayerTwo) || singlePlayer) {
-                    this.continueButton.setVisible(true);
-                    this.continueButton.setInteractive().on('pointerdown', () => {
-                        this.scene.start("Menu");
-                    })
-                }
-
-
+            if (this.inputNamePlayerOne.value != "" && this.inputPasswordPlayerOne.value != "") {
+                this.getPlayer(this.inputNamePlayerOne.value, this.inputPasswordPlayerOne.value, 1);
             }
         })
         this.readyButtonPlayerTwo.setInteractive().on('pointerdown', () => {
             //aqui intenta meter al jugador en mapa
             //if falla activa mensaje de error, sino el de ready
-            this.playerTwoText.setVisible(false);
-            this.namePlayerTwo.setVisible(false);
-            this.passwordPlayerTwo.setVisible(false);
-            this.inputNamePlayerTwo.style.display = "none";
-            this.inputPasswordPlayerTwo.style.display = "none";
-            this.readyTextPlayerTwo.setVisible(true);
-            this.readyNamePlayerTwo.setText("" + this.inputNamePlayerTwo.value);
-            this.readyNamePlayerTwo.setVisible(true);
-            this.readyPlayerTwo = true;
-            this.readyButtonPlayerTwo.setVisible(false);
-            
-            nameP2 = this.inputNamePlayerTwo.value;
-            
-            this.postPlayer(this.inputNamePlayerTwo.value, this.inputPasswordPlayerTwo.value);
+            if (this.inputNamePlayerTwo.value != "" && this.inputPasswordPlayerTwo.value != "") {
+                this.getPlayer(this.inputNamePlayerTwo.value, this.inputPasswordPlayerTwo.value, 1);
+                if (this.readyPlayerTwo) {
 
-            if (this.readyPlayerOne) {
-                this.continueButton.setVisible(true);
-                this.continueButton.setInteractive().on('pointerdown', () => {
-                    this.scene.start("Menu");
-                })
+                }
             }
         })
 
         this.continueButton.setInteractive().on('pointerover', () => {
             this.tweens.add({
-                targets:this.continueButton,
-                duration:200,
+                targets: this.continueButton,
+                duration: 200,
                 scale: 1.2,
             });
         })
 
-        this.continueButton.setInteractive().on('pointerout',()=>{
+        this.continueButton.setInteractive().on('pointerout', () => {
             this.tweens.add({
-                targets:this.continueButton,
-                duration:200,
+                targets: this.continueButton,
+                duration: 200,
                 scale: 1.05,
             });
         })
 
     }
 
-    getPlayers() {
-        fetch("http://localhost:8080/players")
+    getPlayer(name, password, jugador) {
+        fetch("http://localhost:8080/players/" + name)
             .then(response => response.json())
-            .then(data => console.log(data));
+            .then(data => this.mostrarTimer(name,password,jugador,data))
+            .catch(err => this.correctLogin(name, password, jugador,true)); // Hacer algo con el error
 
     }
 
@@ -217,7 +182,7 @@ class Login extends Phaser.Scene {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: Name ,
+                name: Name,
                 password: Password
             })
         })
@@ -225,5 +190,75 @@ class Login extends Phaser.Scene {
             .then(data => console.log(data));
     }
 
+    correctLogin(name, password, jugador,nuevo) {
+        if(nuevo)
+            this.postPlayer(name, password);
+        if (jugador == 1) {
+            this.playerOneText.setVisible(false);
+            this.namePlayerOne.setVisible(false);
+            this.passwordPlayerOne.setVisible(false);
+            this.inputNamePlayerOne.style.display = "none";
+            this.inputPasswordPlayerOne.style.display = "none";
+            this.readyTextPlayerOne.setVisible(true);
+            this.readyNamePlayerOne.setText("" + this.inputNamePlayerOne.value);
+            this.readyNamePlayerOne.setVisible(true);
+            this.readyButtonPlayerOne.setVisible(false);
+            nameP1 = this.inputNamePlayerOne.value;
+            this.readyPlayerOne=true;
+            if ((!singlePlayer && this.readyPlayerTwo) || singlePlayer) {
+                this.continueButton.setVisible(true);
+                this.continueButton.setInteractive().on('pointerdown', () => {
+                    this.scene.start("Menu");
+                })
+            }
+        }
+        else if (jugador == 2) {
+            this.playerTwoText.setVisible(false);
+            this.namePlayerTwo.setVisible(false);
+            this.passwordPlayerTwo.setVisible(false);
+            this.inputNamePlayerTwo.style.display = "none";
+            this.inputPasswordPlayerTwo.style.display = "none";
+            this.readyTextPlayerTwo.setVisible(true);
+            this.readyNamePlayerTwo.setText("" + this.inputNamePlayerTwo.value);
+            this.readyNamePlayerTwo.setVisible(true);
+            this.readyButtonPlayerTwo.setVisible(false);
+            nameP2 = this.inputNamePlayerTwo.value;
+            this.readyPlayerTwo = true;
+            if (this.readyPlayerOne) {
+                this.continueButton.setVisible(true);
+                this.continueButton.setInteractive().on('pointerdown', () => {
+                    this.scene.start("Menu");
+                })
+            }
+            
+        }
+
+
+    }
+
+    mostrarTimer(name,password,jugador,data) {
+        if(password==data.password){
+            this.correctLogin(name, password, jugador, false);
+        }
+        else{
+            if (jugador == 1) {
+                this.errorPlayerOne.setVisible(true);
+            }
+            else if (jugador == 2) {
+                this.errorPlayerTwo.setVisible(true);
+            }
+            this.time.addEvent({
+                delay: 2000, callback: function () {
+                    if (jugador == 1) {
+                        this.errorPlayerOne.setVisible(false);
+                    }
+                    else if (jugador == 2) {
+                        this.errorPlayerTwo.setVisible(false);
+                    }
+                }, callbackScope: this
+            })
+        }
+        
+    }
 }
 
