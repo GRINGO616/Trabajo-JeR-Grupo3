@@ -242,7 +242,6 @@ class GameScene extends Phaser.Scene {
 
         //Bag
         this.add.sprite(config.width * 0.1, config.height * 0.9, 'bag');
-        this.add.sprite(config.width * 0.9, config.height * 0.9, 'bag');
     }
 
     firstCharacterSettings() {
@@ -604,6 +603,7 @@ class GameScene extends Phaser.Scene {
         this.playerTwo.haveObject = false;
         this.playerTwo.canMove = true;
         this.playerTwo.bagCoord = [config.width * 0.9, config.height * 0.9]
+        this.add.sprite(config.width * 0.9, config.height * 0.9, 'bag');
 
         //Animations
         this.anims.create({
@@ -1123,50 +1123,50 @@ class GameScene extends Phaser.Scene {
     }
 
     takeObject(player, slot) {
-
-        if (slot < 4) {
-            if (player == 1 && !this.playerOne.haveObject) {
-                Slot.cuttingSlotsList.getAt(slot).ocuppied = false;
-                GameManager.objectPlayerOne = Slot.cuttingSlotsList.getAt(slot).currentObject;
-                this.time.addEvent({
-                    delay: 300, callback: function () {
-                        this.playerOne.haveObject = true;
-                    }, callbackScope: this
-                });
-                GameManager.objectPlayerOne.setPosition(GameManager.scene.playerOne.bagCoord[0], GameManager.scene.playerOne.bagCoord[1]).setScale(1.5);
+        if(this.playerOne.canMove && player==1 || this.playerTwo.canMove && player==2){
+            if (slot < 4) {
+                if (player == 1 && !this.playerOne.haveObject) {
+                    Slot.cuttingSlotsList.getAt(slot).ocuppied = false;
+                    GameManager.objectPlayerOne = Slot.cuttingSlotsList.getAt(slot).currentObject;
+                    this.time.addEvent({
+                        delay: 300, callback: function () {
+                            this.playerOne.haveObject = true;
+                        }, callbackScope: this
+                    });
+                    GameManager.objectPlayerOne.setPosition(GameManager.scene.playerOne.bagCoord[0], GameManager.scene.playerOne.bagCoord[1]).setScale(1.5);
+                }
+                if (player == 2 && !this.playerTwo.haveObject) {
+                    Slot.cuttingSlotsList.getAt(slot).ocuppied = false;
+                    GameManager.objectPlayerTwo = Slot.cuttingSlotsList.getAt(slot).currentObject;
+                    this.time.addEvent({
+                        delay: 300, callback: function () {
+                            this.playerTwo.haveObject = true;
+                        }, callbackScope: this
+                    });
+                    GameManager.objectPlayerTwo.setPosition(GameManager.scene.playerTwo.bagCoord[0], GameManager.scene.playerTwo.bagCoord[1]).setScale(1.5);
+                }
             }
-            if (player == 2 && !this.playerTwo.haveObject) {
-                Slot.cuttingSlotsList.getAt(slot).ocuppied = false;
-                GameManager.objectPlayerTwo = Slot.cuttingSlotsList.getAt(slot).currentObject;
-                this.time.addEvent({
-                    delay: 300, callback: function () {
-                        this.playerTwo.haveObject = true;
-                    }, callbackScope: this
-                });
-                GameManager.objectPlayerTwo.setPosition(GameManager.scene.playerTwo.bagCoord[0], GameManager.scene.playerTwo.bagCoord[1]).setScale(1.5);
+            if (slot == 7) {
+                if (player == 1 && !this.playerOne.haveObject) {
+                    GameManager.objectPlayerOne = this.add.sprite(GameManager.scene.playerOne.bagCoord[0], GameManager.scene.playerOne.bagCoord[1], 'herb').setScale(1.5);
+                    this.playerOne.haveObject = true;
+                }
+                if (player == 2 && !this.playerTwo.haveObject) {
+                    GameManager.objectPlayerTwo = this.add.sprite(GameManager.scene.playerTwo.bagCoord[0], GameManager.scene.playerTwo.bagCoord[1], 'herb').setScale(1.5);
+                    this.playerTwo.haveObject = true;
+                }
+            }
+            if (slot == 8) {
+                if (player == 1 && !this.playerOne.haveObject) {
+                    GameManager.objectPlayerOne = this.add.sprite(GameManager.scene.playerOne.bagCoord[0], GameManager.scene.playerOne.bagCoord[1], 'bat').setScale(1.5);
+                    this.playerOne.haveObject = true;
+                }
+                if (player == 2 && !this.playerTwo.haveObject) {
+                    GameManager.objectPlayerTwo = this.add.sprite(GameManager.scene.playerTwo.bagCoord[0], GameManager.scene.playerTwo.bagCoord[1], 'bat').setScale(1.5);
+                    this.playerTwo.haveObject = true;
+                }
             }
         }
-        if (slot == 7) {
-            if (player == 1 && !this.playerOne.haveObject) {
-                GameManager.objectPlayerOne = this.add.sprite(GameManager.scene.playerOne.bagCoord[0], GameManager.scene.playerOne.bagCoord[1], 'herb').setScale(1.5);
-                this.playerOne.haveObject = true;
-            }
-            if (player == 2 && !this.playerTwo.haveObject) {
-                GameManager.objectPlayerTwo = this.add.sprite(GameManager.scene.playerTwo.bagCoord[0], GameManager.scene.playerTwo.bagCoord[1], 'herb').setScale(1.5);
-                this.playerTwo.haveObject = true;
-            }
-        }
-        if (slot == 8) {
-            if (player == 1 && !this.playerOne.haveObject) {
-                GameManager.objectPlayerOne = this.add.sprite(GameManager.scene.playerOne.bagCoord[0], GameManager.scene.playerOne.bagCoord[1], 'bat').setScale(1.5);
-                this.playerOne.haveObject = true;
-            }
-            if (player == 2 && !this.playerTwo.haveObject) {
-                GameManager.objectPlayerTwo = this.add.sprite(GameManager.scene.playerTwo.bagCoord[0], GameManager.scene.playerTwo.bagCoord[1], 'bat').setScale(1.5);
-                this.playerTwo.haveObject = true;
-            }
-        }
-
     }
 
     leaveObject(player, slot) {
