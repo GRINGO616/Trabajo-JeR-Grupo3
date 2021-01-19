@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 public class PlayerController {
 
-    public Map<String,Player> players=new ConcurrentHashMap<>();
+    public static Map<String,Player> players=new ConcurrentHashMap<>();
     Map<String,Player> playersConected=new ConcurrentHashMap<>();
     
     PlayerController(){}
@@ -173,7 +173,6 @@ public class PlayerController {
            while((line=br.readLine())!=null)
            {
               arrayAux.add(line);
-              System.out.println(arrayAux.get(arrayAux.size()-1));
            }
            for(int i = 0; i < arrayAux.size(); i++)
            { 
@@ -183,9 +182,7 @@ public class PlayerController {
                 aux.setPassword(arrayAux.get(i));
                 players.put(aux.getName(),aux);
                 System.out.println(players.get(aux.getName()));
-                
-
-           }
+            }
            
         }
         catch (IOException e) 

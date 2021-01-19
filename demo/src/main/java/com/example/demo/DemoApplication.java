@@ -9,12 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		Player prueba = new Player();
-		prueba.createDataBase();
+		//Player prueba = new Player();
+		//prueba.createDataBase();
+		SpringApplication.run(DemoApplication.class, args);
 		PlayerController aux = new PlayerController();
 		var map = aux.loadAllPlayers();
-		aux.players = map;
-		SpringApplication.run(DemoApplication.class, args);
+		PlayerController.players = map;
+		
 	}
 
 }
