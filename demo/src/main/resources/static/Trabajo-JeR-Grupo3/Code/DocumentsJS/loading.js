@@ -191,6 +191,7 @@ class Loading extends Phaser.Scene {
             logo.destroy();
             white.destroy();
             scene.scene.start("Login");
+            
         });
         
         

@@ -8,7 +8,7 @@ class Login extends Phaser.Scene {
         // Declaración de la configuración principal del menú de logging.
         this.cameras.main.fadeIn(2000)
         this.background = this.add.image(config.width / 2, config.height / 2, 'loginBackground');
-
+        this.getPlayers();
 
         menuMusic.play();
 
@@ -198,7 +198,6 @@ class Login extends Phaser.Scene {
 
         if (nuevo) {
             this.postPlayer(name, password);
-
         }
 
         if (jugador == 1) {
@@ -294,6 +293,17 @@ class Login extends Phaser.Scene {
             scene.correctLogin(name, password, jugador, true)
         });
     }
+
+    getPlayers() {
+        $.ajax({
+            url: "http://localhost:8080/players",
+        }).done(function (data) {
+            console.log(data);
+        }).fail(function () {
+            //
+        });
+    }
+
 
     postPlayer(Name, Password) {
         let request = {

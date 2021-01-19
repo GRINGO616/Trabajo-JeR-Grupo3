@@ -52,7 +52,7 @@ public class Player {
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw))
             {
-                out.println(name + "\n" + password + "\n"); 
+                out.println(name + "\n" + password); 
             } 
             catch (IOException e) 
             {
@@ -60,4 +60,6 @@ public class Player {
             }
            
     }
+
+    
 }

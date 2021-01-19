@@ -35,9 +35,10 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 public class PlayerController {
 
-    Map<String,Player> players=new ConcurrentHashMap<>();
+    public Map<String,Player> players=new ConcurrentHashMap<>();
     Map<String,Player> playersConected=new ConcurrentHashMap<>();
     
+    PlayerController(){}
 
     //PLAYERS CONECTED
 
@@ -114,6 +115,11 @@ public class PlayerController {
         }
     }
 
+    @GetMapping("/players")
+    public Collection<Player> getPlayers(){
+        return players.values();
+    }
+
     @PostMapping("/players")
     @ResponseStatus(HttpStatus.CREATED)
     public Player AddPlayer(@RequestBody Player p){
@@ -147,10 +153,10 @@ public class PlayerController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-    public void loadAllPlayers()
+    
+    public Map<String,Player> loadAllPlayers()
     {
-        File file = null;
+        //File file = null;
         FileReader fr = null;
         BufferedReader br = null;
   
@@ -158,8 +164,8 @@ public class PlayerController {
            // Apertura del fichero y creacion de BufferedReader para poder
            // hacer una lectura comoda (disponer del metodo readLine()).
            ArrayList <String> arrayAux = new ArrayList <String>(); 
-           file = new File ("Players.txt");
-           fr = new FileReader (file);
+           //file = new File ("Players.txt");
+           fr = new FileReader ("Players.txt");
            br = new BufferedReader(fr);
   
            // Lectura del fichero
@@ -167,6 +173,7 @@ public class PlayerController {
            while((line=br.readLine())!=null)
            {
               arrayAux.add(line);
+              System.out.println(arrayAux.get(arrayAux.size()-1));
            }
            for(int i = 0; i < arrayAux.size(); i++)
            { 
@@ -175,16 +182,19 @@ public class PlayerController {
                 i++;
                 aux.setPassword(arrayAux.get(i));
                 players.put(aux.getName(),aux);
+                System.out.println(players.get(aux.getName()));
                 
 
            }
+           
         }
         catch (IOException e) 
             {
                 System.out.println("File not found: " + e.getMessage());
             }
     
-
+            return players;
 
     }
+    
 }
