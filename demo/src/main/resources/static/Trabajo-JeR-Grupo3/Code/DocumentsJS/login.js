@@ -25,6 +25,7 @@ class Login extends Phaser.Scene {
 
             menuMusic.volume = 0.0;
         }
+        serverFailed = 0;
 
         // Declaración de los botones del menú de logging.
         this.onePlayer = this.add.image(config.width * 0.3, config.height * 0.3, 'loginNextButton').setScale(1.2);
@@ -134,17 +135,16 @@ class Login extends Phaser.Scene {
             //aqui intenta meter al jugador en mapa
             //if falla activa mensaje de error, sino el de ready
             if (this.inputNamePlayerOne.value != "" && this.inputPasswordPlayerOne.value != "") {
-                this.getPlayer(this.inputNamePlayerOne.value, this.inputPasswordPlayerOne.value, 1,this);
+                this.getPlayer(this.inputNamePlayerOne.value, this.inputPasswordPlayerOne.value, 1, this);
+
             }
         })
         this.readyButtonPlayerTwo.setInteractive().on('pointerdown', () => {
             //aqui intenta meter al jugador en mapa
             //if falla activa mensaje de error, sino el de ready
             if (this.inputNamePlayerTwo.value != "" && this.inputPasswordPlayerTwo.value != "") {
-                this.getPlayer(this.inputNamePlayerTwo.value, this.inputPasswordPlayerTwo.value, 2,this);
-                if (this.readyPlayerTwo) {
+                this.getPlayer(this.inputNamePlayerTwo.value, this.inputPasswordPlayerTwo.value, 2, this);
 
-                }
             }
         })
 
@@ -165,6 +165,7 @@ class Login extends Phaser.Scene {
         })
 
     }
+
     /*
         getPlayer(name, password, jugador) {
             fetch("http://localhost:8080/players/" + name)
@@ -190,11 +191,16 @@ class Login extends Phaser.Scene {
                 .then(data => console.log(data));
         }
     */
-    
+
     correctLogin(name, password, jugador, nuevo) {
-        this.conectPlayer(name,password)
-        if (nuevo)
+        this.conectPlayer(name, password)
+
+
+        if (nuevo) {
             this.postPlayer(name, password);
+
+        }
+
         if (jugador == 1) {
             this.playerOneText.setVisible(false);
             this.namePlayerOne.setVisible(false);
@@ -213,12 +219,15 @@ class Login extends Phaser.Scene {
                     this.scene.start("Menu");
                 })
             }
-            this.timerP1 = this.time.addEvent({
-                delay: 500, // ms
-                callback: this.updatePlayer,
-                args:[nameP1],
-                loop: true,
-            });
+            if (serverActive) {
+                this.timerP1 = this.time.addEvent({
+                    delay: 500, // ms
+                    callback: this.updatePlayer,
+                    args: [nameP1],
+                    loop: true,
+                });
+            }
+
         }
         else if (jugador == 2) {
             this.playerTwoText.setVisible(false);
@@ -238,14 +247,17 @@ class Login extends Phaser.Scene {
                     this.scene.start("Menu");
                 })
             }
-            this.timerP2 = this.time.addEvent({
-                delay: 500, // ms
-                callback: this.updatePlayer,
-                args:[nameP2],
-                loop: true,
-            });
+            if (serverActive) {
+                this.timerP2 = this.time.addEvent({
+                    delay: 500, // ms
+                    callback: this.updatePlayer,
+                    args: [nameP2],
+                    loop: true,
+                });
+            }
+
         }
-        
+
 
     }
 
@@ -273,13 +285,13 @@ class Login extends Phaser.Scene {
         }
 
     }
-    getPlayer(name, password, jugador,scene) {
+    getPlayer(name, password, jugador, scene) {
         $.ajax({
-            url: "http://localhost:8080/players/"+name,
+            url: "http://localhost:8080/players/" + name,
         }).done(function (data) {
-            scene.mostrarTimer(name,password,jugador,data)
+            scene.mostrarTimer(name, password, jugador, data)
         }).fail(function () {
-            scene.correctLogin(name, password, jugador,true)
+            scene.correctLogin(name, password, jugador, true)
         });
     }
 
@@ -289,53 +301,63 @@ class Login extends Phaser.Scene {
             password: Password
         };
         $.ajax({
-          method: "POST",
-          url: "http://localhost:8080/players",
-          data: JSON.stringify(request),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8", // Indica el contenido
-          },
+            method: "POST",
+            url: "http://localhost:8080/players",
+            data: JSON.stringify(request),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8", // Indica el contenido
+            },
         })
-          .done((data) => {
-            console.log(data);
-          })
-          .fail((jqXHR, Status, errorThrown) => {
-            console.log(errorThrown);
-          });
+            .done((data) => {
+                console.log(data);
+            })
+            .fail((jqXHR, Status, errorThrown) => {
+                console.log(errorThrown);
+            });
     }
     updatePlayer(name) {
         $.ajax({
-          method: "PUT",
-          url: "http://localhost:8080/playersConected/" + name,
-          processData: false,
-          headers: {
-            "Content-Type": "application/json",
-          },
+            method: "PUT",
+            url: "http://localhost:8080/playersConected/" + name,
+            processData: false,
+            headers: {
+                "Content-Type": "application/json",
+            },
         }).done(function (player) {
-          console.log("Updated player: " + JSON.stringify(player));
+            console.log("Updated player: " + JSON.stringify(player));
+            serverFailed = 0;
+        }).fail(function (jqXHR, Status, errorThrown) {
+            //aqui va el numero de veces que falla, if falla cinco veces, servidor caido
+            if (name == nameP1) {
+                serverFailed++;
+                if (serverFailed > 3) {
+                    console.log("Servidor caido");
+                    serverActive = true;
+                }
+            }
         });
-      }
+    }
 
-      conectPlayer(Name,Password) {
+    conectPlayer(Name, Password) {
         let request = {
             name: Name,
             password: Password,
-            date:new Date()
+            date: new Date()
         };
         $.ajax({
-          method: "POST",
-          url: "http://localhost:8080/playersConected",
-          data: JSON.stringify(request),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8", // Indica el contenido
-          },
+            method: "POST",
+            url: "http://localhost:8080/playersConected",
+            data: JSON.stringify(request),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8", // Indica el contenido
+            },
         })
-          .done((data) => {
-            console.log(data.name+ " conected");
-          })
-          .fail((jqXHR, Status, errorThrown) => {
-            console.log(errorThrown);
-          });
+            .done((data) => {
+                console.log(data.name + " conected");
+            })
+            .fail((jqXHR, Status, errorThrown) => {
+                console.log(errorThrown);
+            });
     }
 }
 

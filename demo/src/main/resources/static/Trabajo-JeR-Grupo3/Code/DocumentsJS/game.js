@@ -43,6 +43,8 @@ var level;
 var singlePlayer;
 var nameP1 = null;
 var nameP2 = null;
+var serverFailed;
+var serverActive;
 
 window.onload = function(){
     var game = new Phaser.Game(config);

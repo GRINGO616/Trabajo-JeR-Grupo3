@@ -1421,7 +1421,15 @@ class GameScene extends Phaser.Scene {
           },
         }).done(function (player) {
           console.log("Updated player: " + JSON.stringify(player));
-        });
+        }).fail(function(jqXHR, Status, errorThrown){
+            //aqui va el numero de veces que falla, if falla cinco veces, servidor caido
+            if(name==nameP1){
+                serverFailed++;
+                if(serverFailed>3){
+                    console.log("Servidor caido");
+                }
+            }
+        });;
       }
 }
 
