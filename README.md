@@ -30,6 +30,8 @@ Versión 0.9: implementación local del videojuego con un solo nivel.
 
 Versión 1.0: implementación local del videojuego con los dos niveles propuestos.
 
+Versión 1.5: implementación con conexión y el uso de API REST para el funcionamiento de un login.
+
 
 #PRE-REQUISITOS
 
@@ -191,10 +193,6 @@ Usar objetos de la zona con el botón de acción 2, que estará por defecto en l
 Realizar sprint para llegar cuanto antes a cualquier dirección, manteniendo pulsado la tecla de CTRL IZQUIERDO y una dirección de movimiento, aunque se puede modificar.
 No son necesarias más interacciones entre el jugador y el nivel jugable de Expotion. A pesar de todo esto, los menús y las interfaces serán controladas a través del ratón del ordenador.
 
-
-
-
-
 # INTERFAZ
 
 Cuando se plantea un videojuego, siempre existe un esquema que debe de seguirse para ir pasando de un lugar a otro. Se pueden referir a ellos como estados de juego, teniendo en cuenta las diferentes circunstancias por las que va a pasar el proyecto. No solo se tratará de los niveles jugables que presenta el título, sino también hay que tener en cuenta todas las posibles pantallas con las que el jugador podrá interaccionar.
@@ -273,6 +271,34 @@ Para este tipo de juegos, en los que predomina mucho lo arcade, será bastante r
 Reuniendo todas las ideas en mente, el estilo musical escogido para el videojuego será algo similar a la música de los juglares de épocas medievales, pero con un filtro similar al de la música de 8bit. De esta forma no se deja de lado el estilo medieval y de magia, además de incluir el estilo visual dentro de la propia música. Lo planeado para el título será la realización de dos o tres melodías, siendo una para los menús y las otras destinadas a los niveles jugables.
 
 Como se puede observar, no existirán efectos de sonido ni grabaciones de voces. Todos los diálogos serán sustituidos por ruidos similares a una voz y aparecerán los textos de los mismos a través de la pantalla. Utilizando esta herramienta se le da más importancia a los hilos musicales que al resto de los efectos sonoros.
+
+# API-REST UTILIZADAS
+
+Con el objetivo de poder compartir información entre cliente y servidor por una posible conexión en red, se ha decidido usar este tipo de tecnologías para poder realizar un login. De esta forma, usando Spring Boot se ha podido elaborar el levantamiento de un servidor para el videojuego, que más tarde ha sido enlazado. Para poder gestionarlo se han dividido los recursos de la forma correcta, con su parte estática y su parte de servidor, creando 3 documentos .java para el levantamiento del servidor.
+
+- Player.java : se trata de una clase que va a servir como constructor de las variables Player, de forma que contengan como variables internas un nombre, un password y una variable "date", que almacena la "fecha", en milisegundos, en la que se ha hecho la última petición al servidor, además de todas las funciones de getters y setters que requiere la clase.
+
+- PlayerController.java: será la clase que se va a encargar de gestionar los métodos encargados de peticiones HTTP con el servidor que afecten a la clase Player, definiéndose, también, como manejador.
+
+- DemoApplication.java: a través de esta clase se lanza el servidor con el que se van a realizar las peticiones de servicio de conexión.
+
+Teniendo como objetivo, esquematizar un poco más todo, se concretará todo esto a través de un UML para observar las relaciones que hay entre estas clases.
+
+
+# EJECUCIÓN DE LA APLICACIÓN
+
+Debido a que nos encontramos frente a un juego en red, el establecimiento de algunas APIs REST puede ser fundamental para el funcionamiento de la conexión y el intercambio de datos. A través de la fase 3 de la asignatura se ha decidido implementar un tipo de API REST centrada en las actividades relacionadas con el login de usuario dentro de Expotion. Por esta sencilla razón, el juego debe de seguir una serie de pasos para poder llegar a ejecutarse, teniendo en mente que nuestra aplicación para desarrollar el juego ha sido Visual Code.
+
+1- Ejecutar el programa de Visual Code e importar el proyecto.
+
+2- Entrar dentro de archivo DemoApplication.java y comenzar a correr el servidor, para que pueda estar funcionando una vez que se comience el juego. 
+
+3- Escoger el elemento index.html y ejecutar el juego, de forma que aparecerá en el navegador que el usuario tenga por defecto.
+
+4- Disfrutar del videojuego.
+
+Un apunte que se quiere dejar claro es que el juego es tolerante a fallos, ya que, aunque surgen errores por consola con el servidor, nunca van a interrumpir la ejecución del videojuego.
+
 
 # EQUIPO DE DESARROLLO
 
