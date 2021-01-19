@@ -28,12 +28,12 @@ class Login extends Phaser.Scene {
         serverFailed = 0;
 
         // Declaración de los botones del menú de logging.
-        this.onePlayer = this.add.image(config.width * 0.3, config.height * 0.3, 'loginNextButton').setScale(1.2);
-        this.twoPlayers = this.add.image(config.width * 0.7, config.height * 0.3, 'loginNextButton').setScale(1.2);
+        this.onePlayer = this.add.image(config.width * 0.3, config.height * 0.3, 'one_player').setScale(1.2);
+        this.twoPlayers = this.add.image(config.width * 0.7, config.height * 0.3, 'two_players').setScale(1.2);
         this.lyshaIcon = this.add.image(config.width * 0.2, config.height * 0.18, 'Lysha_forward').setScale(0.7);
         this.lyshaIcon2 = this.add.image(config.width * 0.6, config.height * 0.18, 'Lysha_forward').setScale(0.7);
         this.freddieIcon = this.add.image(config.width * 0.8, config.height * 0.18, 'Freddie_forward').setScale(0.7);
-        this.continueButton = this.add.image(config.width / 1.4, config.height / 9, 'loginNextButton').setScale(1.2).setVisible(false);
+        this.continueButton = this.add.image(config.width *0.5, config.height *0.9, 'loginNextButton').setScale(1.2).setVisible(false);
         this.readyPlayerOne = false;
         this.readyPlayerTwo = false;
 
@@ -56,8 +56,8 @@ class Login extends Phaser.Scene {
         this.passwordPlayerOne = this.add.text(config.width * 0.1, config.height * 0.62, "Contraseña:", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
         this.passwordPlayerTwo = this.add.text(config.width * 0.55, config.height * 0.62, "Contraseña:", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
 
-        this.readyButtonPlayerOne = this.add.image(config.width * 0.25, config.height * 0.72, 'loginNextButton').setScale(0.7).setVisible(false);
-        this.readyButtonPlayerTwo = this.add.image(config.width * 0.7, config.height * 0.72, 'loginNextButton').setScale(0.7).setVisible(false);
+        this.readyButtonPlayerOne = this.add.image(config.width * 0.25, config.height * 0.72, 'readyButton').setScale(0.7).setVisible(false);
+        this.readyButtonPlayerTwo = this.add.image(config.width * 0.7, config.height * 0.72, 'readyButton').setScale(0.7).setVisible(false);
 
 
         this.inputNamePlayerOne = document.getElementById("inputNamePlayerOne");

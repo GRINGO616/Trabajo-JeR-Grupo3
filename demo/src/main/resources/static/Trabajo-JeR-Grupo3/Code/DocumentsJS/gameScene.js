@@ -17,13 +17,17 @@ class GameScene extends Phaser.Scene {
             args:[nameP1],
             loop: true,
         });
+
+        if(!singlePlayer){
+            this.timerP2 = this.time.addEvent({
+                delay: 500, // ms
+                callback: this.updatePlayer,
+                args:[nameP2],
+                loop: true,
+            });
+        }
     
-        this.timerP2 = this.time.addEvent({
-            delay: 500, // ms
-            callback: this.updatePlayer,
-            args:[nameP2],
-            loop: true,
-        });
+        
 
         this.anims.create({
             key: 'cooking',

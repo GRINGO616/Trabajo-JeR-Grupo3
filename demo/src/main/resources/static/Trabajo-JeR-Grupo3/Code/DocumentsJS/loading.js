@@ -141,6 +141,10 @@ class Loading extends Phaser.Scene {
             this.load.image('bat+_potion','Assets/interactiveElements/bat+_potion.png');
             this.load.image('players_conected_spanish','Assets/interfaceElements/playersConected.png');
             this.load.image('players_conected_english','Assets/interfaceElements/playersConectedENG.png');
+            this.load.image('one_player','Assets/interfaceElements/one_player.png');
+            this.load.image('two_players','Assets/interfaceElements/two_players.png');
+            this.load.image('readyButton','Assets/interfaceElements/readyButton.png');
+
 
             // Elementos de interfaz
             this.load.image('coins','Assets/interfaceElements/coins.png');
