@@ -37,6 +37,7 @@ public class PlayerController {
 
     Map<String,Player> players=new ConcurrentHashMap<>();
     Map<String,Player> playersConected=new ConcurrentHashMap<>();
+    
 
     //PLAYERS CONECTED
 
@@ -173,6 +174,9 @@ public class PlayerController {
                 aux.setName(arrayAux.get(i));
                 i++;
                 aux.setPassword(arrayAux.get(i));
+                players.put(aux.getName(),aux);
+                
+
            }
         }
         catch (IOException e) 

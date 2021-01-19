@@ -11,7 +11,6 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		Player prueba = new Player();
 		prueba.createDataBase();
-		
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
