@@ -14,7 +14,13 @@ class GameScene extends Phaser.Scene {
 
         connection.onmessage = function (msg) {
             switch (msg) {
-                case move:
+                case moveN:
+                    break;
+                case moveE:
+                    break;
+                case moveS:
+                    break;
+                case moveO:
                     break;
                 case points:
                     break;
@@ -23,18 +29,18 @@ class GameScene extends Phaser.Scene {
             }
         }
 
-        connection.onerror = function(e){
-            console.log("Se ha producido el error "+e);
+        connection.onerror = function (e) {
+            console.log("Se ha producido el error " + e);
         }
 
-        connection.onclose = function(){
+        connection.onclose = function () {
             console.log("La conexión se ha cerrado con éxito");
         }
     }
 
     create() {
         var gm = new GameManager(this);
-        
+
         connection.open();
 
         this.startGame();
