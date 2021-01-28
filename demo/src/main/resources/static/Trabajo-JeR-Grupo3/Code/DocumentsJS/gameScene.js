@@ -3,31 +3,62 @@ class GameScene extends Phaser.Scene {
         super("GameScene")
     }
 
+    preload() {
+        // Conexión para WebSockets
+
+        var connection = new WebSocket('ws://127.0.0.1:8080/echo');
+
+        connection.onopen = function () {
+            connection.send('Conexion establecida');
+        }
+
+        connection.onmessage = function (msg) {
+            switch (msg) {
+                case move:
+                    break;
+                case points:
+                    break;
+                case table:
+                    break;
+            }
+        }
+
+        connection.onerror = function(e){
+            console.log("Se ha producido el error "+e);
+        }
+
+        connection.onclose = function(){
+            console.log("La conexión se ha cerrado con éxito");
+        }
+    }
+
     create() {
         var gm = new GameManager(this);
+        
+        connection.open();
+
         this.startGame();
         this.resetVariables();
-
         this.gameTimer = this.time.addEvent({ delay: (GameManager.gameTime * 10), callback: this.finishGame, callbackScope: this });
         this.textTime = this.time.addEvent({ delay: 1000, loop: true, callback: subtractTime, callbackScope: this });
 
         this.timerP1 = this.time.addEvent({
             delay: 500, // ms
             callback: this.updatePlayer,
-            args:[nameP1],
+            args: [nameP1],
             loop: true,
         });
 
-        if(!singlePlayer){
+        if (!singlePlayer) {
             this.timerP2 = this.time.addEvent({
                 delay: 500, // ms
                 callback: this.updatePlayer,
-                args:[nameP2],
+                args: [nameP2],
                 loop: true,
             });
         }
-    
-        
+
+
 
         this.anims.create({
             key: 'cooking',
@@ -65,10 +96,10 @@ class GameScene extends Phaser.Scene {
 
         this.interfaceSettings();
         this.firstCharacterSettings();
-        if(!singlePlayer){
+        if (!singlePlayer) {
             this.secondCharacterSettings();
         }
-        
+
     }
 
     resetVariables() {
@@ -187,7 +218,7 @@ class GameScene extends Phaser.Scene {
         this.batAreaThree = this.physics.add.sprite(config.width * 0.9, config.height * 0.305, 'box').setScale(0.7, 0.3).setVisible(false);
         this.midZoneLeft = this.physics.add.sprite(config.width * 0.47, config.height * 0.57, 'box').setScale(0.5, 2.0).setVisible(false);
         this.midZoneRight = this.physics.add.sprite(config.width * 0.57, config.height * 0.57, 'box').setScale(0.5, 2.0).setVisible(false);
-        
+
         //Cutting area
         Slot.cuttingSlotsList.add(new Slot(config.width * 0.32, config.height * 0.22, 0));
         Slot.cuttingSlotsList.add(new Slot(config.width * 0.71, config.height * 0.22, 1));
@@ -197,11 +228,11 @@ class GameScene extends Phaser.Scene {
         this.cuttingAreaZero = [];
         this.cuttingAreaZero[0] = this.physics.add.sprite(config.width * 0.14, config.height * 0.52, 'box').setScale(0.7, 0.3).setVisible(false);
         this.cuttingAreaZero[1] = this.physics.add.sprite(config.width * 0.19, config.height * 0.45, 'box').setScale(0.5, 0.6).setVisible(false);
-        
+
 
         this.cuttingAreaOne = [];
         this.cuttingAreaOne[0] = this.physics.add.sprite(config.width * 0.85, config.height * 0.75, 'box').setScale(0.5, 0.7).setVisible(false);
-        
+
 
         //Cooking area
         this.cookingAreaZero = [];
@@ -219,13 +250,13 @@ class GameScene extends Phaser.Scene {
         this.goalArea = this.physics.add.sprite(config.width * 0.3, config.height * 0.87, 'box').setScale(2.6, 0.4).setVisible(false);
         this.goalArea = this.physics.add.sprite(config.width * 0.72, config.height * 0.87, 'box').setScale(2.6, 0.4).setVisible(false);
 
-         //Comands
-         Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 0.1, 0));
-         Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 1, 1));
-         Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 1.9, 2));
-         Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 2.8, 3));
-         Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 3.7, 4));
-         Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 4.6, 5));
+        //Comands
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 0.1, 0));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 1, 1));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 1.9, 2));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 2.8, 3));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 3.7, 4));
+        Slot.comandSlots.add(new Slot(config.width * 0.05, config.height * 4.6, 5));
 
 
     }
@@ -943,12 +974,12 @@ class GameScene extends Phaser.Scene {
         if (this.playerOne.canMove) {
             this.updateFirstPlayer();
         }
-        if(!singlePlayer){
+        if (!singlePlayer) {
             if (this.playerTwo.canMove) {
                 this.updateSecondPlayer();
             }
         }
-        
+
         this.updateCauldron();
         this.updateComands();
 
@@ -1127,7 +1158,7 @@ class GameScene extends Phaser.Scene {
     }
 
     takeObject(player, slot) {
-        if(this.playerOne.canMove && player==1 || this.playerTwo.canMove && player==2){
+        if (this.playerOne.canMove && player == 1 || this.playerTwo.canMove && player == 2) {
             if (slot < 4) {
                 if (player == 1 && !this.playerOne.haveObject) {
                     Slot.cuttingSlotsList.getAt(slot).ocuppied = false;
@@ -1315,7 +1346,7 @@ class GameScene extends Phaser.Scene {
             var i = 0;
             while (i < Slot.comandSlots.length && GameManager.scene.comandDone == false) {
                 var type = Slot.comandSlots.getAt(i).currentObject.texture.key;
-                if (GameManager.objectPlayerOne.texture.key == 'herbal_potion' && type == 'comandHerb'  && Slot.comandSlots.getAt(i).occupied == true) {
+                if (GameManager.objectPlayerOne.texture.key == 'herbal_potion' && type == 'comandHerb' && Slot.comandSlots.getAt(i).occupied == true) {
 
                     if (GameManager.timeLeft > (GameManager.gameTime / 2)) {
 
@@ -1336,7 +1367,7 @@ class GameScene extends Phaser.Scene {
                     Slot.comandSlots.getAt(i).currentObject.destroy();
                     Slot.comandSlots.getAt(i).occupied = false;
                 }
-                else if (GameManager.objectPlayerOne.texture.key == 'bat_potion' && type == 'comandBat'  && Slot.comandSlots.getAt(i).occupied == true) {
+                else if (GameManager.objectPlayerOne.texture.key == 'bat_potion' && type == 'comandBat' && Slot.comandSlots.getAt(i).occupied == true) {
 
                     if (GameManager.timeLeft > (GameManager.gameTime / 2)) {
                         GameManager.levelCoins += 100;
@@ -1417,24 +1448,24 @@ class GameScene extends Phaser.Scene {
 
     updatePlayer(name) {
         $.ajax({
-          method: "PUT",
-          url: "http://localhost:8080/playersConected/" + name,
-          processData: false,
-          headers: {
-            "Content-Type": "application/json",
-          },
+            method: "PUT",
+            url: "http://localhost:8080/playersConected/" + name,
+            processData: false,
+            headers: {
+                "Content-Type": "application/json",
+            },
         }).done(function (player) {
-          console.log("Updated player: " + JSON.stringify(player));
-        }).fail(function(jqXHR, Status, errorThrown){
+            console.log("Updated player: " + JSON.stringify(player));
+        }).fail(function (jqXHR, Status, errorThrown) {
             //aqui va el numero de veces que falla, if falla cinco veces, servidor caido
-            if(name==nameP1){
+            if (name == nameP1) {
                 serverFailed++;
-                if(serverFailed>3){
+                if (serverFailed > 3) {
                     console.log("Servidor caido");
                 }
             }
         });;
-      }
+    }
 }
 
 class GameManager {
