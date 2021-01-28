@@ -96,7 +96,7 @@ public class PlayerController {
         for (Player player : playersConected.values()) {
             long elapsed = new Date().getTime()-player.getDate().getTime();
             System.out.println(elapsed);
-            if ( elapsed >5000) {
+            if ( elapsed >10000) {
                 DisconectPlayer(player.getName());
             }
         }

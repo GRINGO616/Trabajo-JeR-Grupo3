@@ -33,7 +33,7 @@ class Login extends Phaser.Scene {
         this.lyshaIcon = this.add.image(config.width * 0.2, config.height * 0.18, 'Lysha_forward').setScale(0.7);
         this.lyshaIcon2 = this.add.image(config.width * 0.6, config.height * 0.18, 'Lysha_forward').setScale(0.7);
         this.freddieIcon = this.add.image(config.width * 0.8, config.height * 0.18, 'Freddie_forward').setScale(0.7);
-        this.continueButton = this.add.image(config.width *0.5, config.height *0.9, 'loginNextButton').setScale(1.2).setVisible(false);
+        this.continueButton = this.add.image(config.width * 0.5, config.height * 0.9, 'loginNextButton').setScale(1.2).setVisible(false);
         this.readyPlayerOne = false;
         this.readyPlayerTwo = false;
 
@@ -218,14 +218,13 @@ class Login extends Phaser.Scene {
                     this.scene.start("Menu");
                 })
             }
-            if (serverActive) {
-                this.timerP1 = this.time.addEvent({
-                    delay: 500, // ms
-                    callback: this.updatePlayer,
-                    args: [nameP1],
-                    loop: true,
-                });
-            }
+            this.timerP1 = this.time.addEvent({
+                delay: 500, // ms
+                callback: this.updatePlayer,
+                args: [nameP1],
+                loop: true,
+            });
+
 
         }
         else if (jugador == 2) {
@@ -246,14 +245,13 @@ class Login extends Phaser.Scene {
                     this.scene.start("Menu");
                 })
             }
-            if (serverActive) {
-                this.timerP2 = this.time.addEvent({
-                    delay: 500, // ms
-                    callback: this.updatePlayer,
-                    args: [nameP2],
-                    loop: true,
-                });
-            }
+            this.timerP2 = this.time.addEvent({
+                delay: 500, // ms
+                callback: this.updatePlayer,
+                args: [nameP2],
+                loop: true,
+            });
+
 
         }
 
