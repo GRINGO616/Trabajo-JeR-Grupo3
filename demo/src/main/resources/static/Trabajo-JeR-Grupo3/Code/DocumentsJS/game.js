@@ -45,6 +45,24 @@ var nameP1 = null;
 var nameP2 = null;
 var serverFailed;
 var serverActive;
+let connection = new WebSocket('ws://127.0.0.1:8080/echo');
+
+connection.onopen = function () {
+    connection.send('Conexion establecida');
+}
+
+connection.onmessage = function (msg) {
+    
+    console.log("Mensaje "+msg.data)
+}
+
+connection.onerror = function (e) {
+    console.log("Se ha producido el error " + e);
+}
+
+connection.onclose = function () {
+    console.log("La conexión se ha cerrado con éxito");
+}
 
 window.onload = function(){
     var game = new Phaser.Game(config);

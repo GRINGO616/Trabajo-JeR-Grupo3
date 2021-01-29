@@ -6,36 +6,8 @@ class GameScene extends Phaser.Scene {
     preload() {
         // Conexión para WebSockets
 
-        var connection = new WebSocket('ws://127.0.0.1:8080/echo');
-
-        connection.onopen = function () {
-            connection.send('Conexion establecida');
-        }
-
-        connection.onmessage = function (msg) {
-            switch (msg) {
-                case moveN:
-                    break;
-                case moveE:
-                    break;
-                case moveS:
-                    break;
-                case moveO:
-                    break;
-                case points:
-                    break;
-                case table:
-                    break;
-            }
-        }
-
-        connection.onerror = function (e) {
-            console.log("Se ha producido el error " + e);
-        }
-
-        connection.onclose = function () {
-            console.log("La conexión se ha cerrado con éxito");
-        }
+        
+        
     }
 
     create() {

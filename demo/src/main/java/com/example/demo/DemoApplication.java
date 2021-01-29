@@ -1,12 +1,15 @@
 package com.example.demo;
 
-import java.io.File;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 @SpringBootApplication
-public class DemoApplication {
+@EnableWebSocket
+public class DemoApplication implements WebSocketConfigurer{
 
 	public static void main(String[] args) {
 		//Player prueba = new Player();
@@ -17,5 +20,15 @@ public class DemoApplication {
 		PlayerController.players = map;
 		
 	}
+
+	@Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(echoHandler(), "/echo").setAllowedOrigins("*");
+    }
+
+    @Bean
+    public WebSocketEchoHandler echoHandler() {
+        return new WebSocketEchoHandler();
+    }
 
 }
