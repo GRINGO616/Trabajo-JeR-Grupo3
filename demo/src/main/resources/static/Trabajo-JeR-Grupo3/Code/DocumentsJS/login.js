@@ -215,7 +215,7 @@ class Login extends Phaser.Scene {
             if ((!singlePlayer && this.readyPlayerTwo) || singlePlayer) {
                 this.continueButton.setVisible(true);
                 this.continueButton.setInteractive().on('pointerdown', () => {
-                    this.scene.start("Menu");
+                    this.scene.start("Menu");                   
                 })
             }
             this.timerP1 = this.time.addEvent({

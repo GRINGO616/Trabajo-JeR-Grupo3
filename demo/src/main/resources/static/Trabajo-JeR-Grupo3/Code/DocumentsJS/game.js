@@ -53,7 +53,7 @@ connection.onopen = function () {
 
 connection.onmessage = function (msg) {
     
-    console.log("Mensaje "+msg.data)
+    console.log("Mensaje "+ msg.data);
 }
 
 connection.onerror = function (e) {

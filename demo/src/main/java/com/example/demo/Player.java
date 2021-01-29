@@ -41,7 +41,7 @@ public class Player {
 
     public void createDataBase()
     {
-        File Players = new File("Players.txt");
+        new File("Players.txt");
     }
 
     public void savePlayer(String name, String password)
