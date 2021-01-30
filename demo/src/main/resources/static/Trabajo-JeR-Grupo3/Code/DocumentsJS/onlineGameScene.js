@@ -1,6 +1,6 @@
-class GameScene extends Phaser.Scene {
+class OnlineGameScene extends Phaser.Scene {
     constructor() {
-        super("GameScene")
+        super("OnlineGameScene")
     }
 
     preload() {
@@ -72,9 +72,8 @@ class GameScene extends Phaser.Scene {
 
         this.interfaceSettings();
         this.firstCharacterSettings();
-        if (!singlePlayer) {
-            this.secondCharacterSettings();
-        }
+        this.secondCharacterSettings();
+        
 
     }
 
@@ -256,14 +255,17 @@ class GameScene extends Phaser.Scene {
     }
 
     firstCharacterSettings() {
-        this.cursorsFirstPlayer = this.input.keyboard.addKeys({
-            up: Phaser.Input.Keyboard.KeyCodes.W,
-            down: Phaser.Input.Keyboard.KeyCodes.S,
-            left: Phaser.Input.Keyboard.KeyCodes.A,
-            right: Phaser.Input.Keyboard.KeyCodes.D,
-            take: Phaser.Input.Keyboard.KeyCodes.E,
-            cut: Phaser.Input.Keyboard.KeyCodes.R
-        });
+        if(player==1){
+            this.cursorsFirstPlayer = this.input.keyboard.addKeys({
+                up: Phaser.Input.Keyboard.KeyCodes.W,
+                down: Phaser.Input.Keyboard.KeyCodes.S,
+                left: Phaser.Input.Keyboard.KeyCodes.A,
+                right: Phaser.Input.Keyboard.KeyCodes.D,
+                take: Phaser.Input.Keyboard.KeyCodes.E,
+                cut: Phaser.Input.Keyboard.KeyCodes.R
+            });
+        }
+        
 
         this.playerOne = this.physics.add.sprite(200, 450, 'Lysha_forward').setScale(0.5);
         this.playerOne.haveObject = false;
@@ -601,15 +603,18 @@ class GameScene extends Phaser.Scene {
     }
 
     secondCharacterSettings() {
-        this.cursorsSecondPlayer = this.input.keyboard.addKeys({
-            up: Phaser.Input.Keyboard.KeyCodes.U,
-            down: Phaser.Input.Keyboard.KeyCodes.J,
-            left: Phaser.Input.Keyboard.KeyCodes.H,
-            right: Phaser.Input.Keyboard.KeyCodes.K,
-            take: Phaser.Input.Keyboard.KeyCodes.I,
-            cut: Phaser.Input.Keyboard.KeyCodes.O
-        });
-
+        if(player==2){
+            this.cursorsSecondPlayer = this.input.keyboard.addKeys({
+                up: Phaser.Input.Keyboard.KeyCodes.W,
+                down: Phaser.Input.Keyboard.KeyCodes.S,
+                left: Phaser.Input.Keyboard.KeyCodes.A,
+                right: Phaser.Input.Keyboard.KeyCodes.D,
+                take: Phaser.Input.Keyboard.KeyCodes.E,
+                cut: Phaser.Input.Keyboard.KeyCodes.R
+            });
+    
+        }
+        
         this.playerTwo = this.physics.add.sprite(600, 450, 'Freddie_forward').setScale(0.5);
         this.playerTwo.haveObject = false;
         this.playerTwo.canMove = true;
@@ -950,11 +955,10 @@ class GameScene extends Phaser.Scene {
         if (this.playerOne.canMove) {
             this.updateFirstPlayer();
         }
-        if (!singlePlayer) {
-            if (this.playerTwo.canMove) {
+        if (this.playerTwo.canMove) {
                 this.updateSecondPlayer();
-            }
         }
+        
 
         this.updateCauldron();
         this.updateComands();
@@ -1036,101 +1040,206 @@ class GameScene extends Phaser.Scene {
     updateFirstPlayer() {
         this.playerOne.body.setVelocityX(0);
         this.playerOne.body.setVelocityY(0);
-        if (this.cursorsFirstPlayer.left.isDown) {
-            this.playerOne.lastMov = 0;
-            this.playerOne.body.offset.y = 130;
-            this.playerOne.setVelocityX(-160);
-            this.playerOne.anims.play('Lysha left', true);
-        }
-        else if (this.cursorsFirstPlayer.right.isDown) {
-            this.playerOne.lastMov = 1;
-            this.playerOne.body.offset.y = 130;
-            this.playerOne.setVelocityX(160);
-            this.playerOne.anims.play('Lysha right', true);
-        }
-        else if (this.cursorsFirstPlayer.down.isDown) {
-            this.playerOne.lastMov = 2;
-            this.playerOne.body.offset.y = 130;
-            this.playerOne.setVelocityY(160);
-            this.playerOne.anims.play('Lysha forward', true);
-        }
-        else if (this.cursorsFirstPlayer.up.isDown) {
-            this.playerOne.lastMov = 3;
-            this.playerOne.body.offset.y = 130;
-            this.playerOne.setVelocityY(-160);
-            this.playerOne.anims.play('Lysha backwards', true);
-
-        }
-        else {
-
-            this.playerOne.body.offset.y = 120;
-
-            switch (this.playerOne.lastMov) {
-                case 0:
-                    this.playerOne.anims.play('Lysha stop left', true);
-                    break;
-                case 1:
-                    this.playerOne.anims.play('Lysha stop right', true);
-                    break;
-                case 2:
-                    this.playerOne.anims.play('Lysha stop forward', true);
-                    break;
-                case 3:
-                    this.playerOne.anims.play('Lysha stop backwards', true);
-                    break;
+        if(player==1){
+            if (this.cursorsFirstPlayer.left.isDown) {
+                this.playerOne.lastMov = 0;
+                this.playerOne.body.offset.y = 130;
+                this.playerOne.setVelocityX(-160);
+                this.playerOne.anims.play('Lysha left', true);
+                connection.send("{\"id\":1,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"A\"}")
             }
-
+            else if (this.cursorsFirstPlayer.right.isDown) {
+                this.playerOne.lastMov = 1;
+                this.playerOne.body.offset.y = 130;
+                this.playerOne.setVelocityX(160);
+                this.playerOne.anims.play('Lysha right', true);
+                connection.send("{\"id\":1,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"D\"}")
+            }
+            else if (this.cursorsFirstPlayer.down.isDown) {
+                this.playerOne.lastMov = 2;
+                this.playerOne.body.offset.y = 130;
+                this.playerOne.setVelocityY(160);
+                this.playerOne.anims.play('Lysha forward', true);
+                connection.send("{\"id\":1,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"S\"}")
+            }
+            else if (this.cursorsFirstPlayer.up.isDown) {
+                this.playerOne.lastMov = 3;
+                this.playerOne.body.offset.y = 130;
+                this.playerOne.setVelocityY(-160);
+                this.playerOne.anims.play('Lysha backwards', true);
+                connection.send("{\"id\":1,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"W\"}")
+    
+            }
+            else {
+                connection.send("{\"id\":1,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
+                this.playerOne.body.offset.y = 120;
+    
+                switch (this.playerOne.lastMov) {
+                    case 0:
+                        this.playerOne.anims.play('Lysha stop left', true);
+                        break;
+                    case 1:
+                        this.playerOne.anims.play('Lysha stop right', true);
+                        break;
+                    case 2:
+                        this.playerOne.anims.play('Lysha stop forward', true);
+                        break;
+                    case 3:
+                        this.playerOne.anims.play('Lysha stop backwards', true);
+                        break;
+                }
+    
+            }
         }
+        else{
+            if (actionOnlinePlayer.action=="A") {
+                this.playerOne.lastMov = 0;
+                this.playerOne.body.offset.y = 130;
+                this.playerOne.setVelocityX(-160);
+                this.playerOne.anims.play('Lysha left', true);
+            }
+            else if (actionOnlinePlayer.action=="D") {
+                this.playerOne.lastMov = 1;
+                this.playerOne.body.offset.y = 130;
+                this.playerOne.setVelocityX(160);
+                this.playerOne.anims.play('Lysha right', true);
+            }
+            else if (actionOnlinePlayer.action=="S") {
+                this.playerOne.lastMov = 2;
+                this.playerOne.body.offset.y = 130;
+                this.playerOne.setVelocityY(160);
+                this.playerOne.anims.play('Lysha forward', true);
+            }
+            else if (actionOnlinePlayer.action=="W") {
+                this.playerOne.lastMov = 3;
+                this.playerOne.body.offset.y = 130;
+                this.playerOne.setVelocityY(-160);
+                this.playerOne.anims.play('Lysha backwards', true);
+    
+            }
+            else {
+    
+                this.playerOne.body.offset.y = 120;
+                switch (this.playerOne.lastMov) {
+                    case 0:
+                        this.playerOne.anims.play('Lysha stop left', true);
+                        break;
+                    case 1:
+                        this.playerOne.anims.play('Lysha stop right', true);
+                        break;
+                    case 2:
+                        this.playerOne.anims.play('Lysha stop forward', true);
+                        break;
+                    case 3:
+                        this.playerOne.anims.play('Lysha stop backwards', true);
+                        break;
+                }
+    
+            }
+        }
+        
     }
 
     updateSecondPlayer() {
         this.playerTwo.body.setVelocityX(0);
         this.playerTwo.body.setVelocityY(0);
-        if (this.cursorsSecondPlayer.left.isDown) {
-            this.playerTwo.lastMov = 0;
-            this.playerTwo.body.offset.y = 130;
-            this.playerTwo.setVelocityX(-160);
-            this.playerTwo.anims.play('Freddie left', true);
-        }
-        else if (this.cursorsSecondPlayer.right.isDown) {
-            this.playerTwo.lastMov = 1;
-            this.playerTwo.body.offset.y = 130;
-            this.playerTwo.setVelocityX(160);
-            this.playerTwo.anims.play('Freddie right', true);
-        }
-        else if (this.cursorsSecondPlayer.down.isDown) {
-            this.playerTwo.lastMov = 2;
-            this.playerTwo.body.offset.y = 130;
-            this.playerTwo.setVelocityY(160);
-            this.playerTwo.anims.play('Freddie forward', true);
-        }
-        else if (this.cursorsSecondPlayer.up.isDown) {
-            this.playerTwo.lastMov = 3;
-            this.playerTwo.body.offset.y = 130;
-            this.playerTwo.setVelocityY(-160);
-            this.playerTwo.anims.play('Freddie backwards', true);
-
-        }
-        else {
-
-            this.playerTwo.body.offset.y = 120;
-
-            switch (this.playerTwo.lastMov) {
-                case 0:
-                    this.playerTwo.anims.play('Freddie stop left', true);
-                    break;
-                case 1:
-                    this.playerTwo.anims.play('Freddie stop right', true);
-                    break;
-                case 2:
-                    this.playerTwo.anims.play('Freddie stop forward', true);
-                    break;
-                case 3:
-                    this.playerTwo.anims.play('Freddie stop backwards', true);
-                    break;
+        if(player==2){
+            if (this.cursorsSecondPlayer.left.isDown) {
+                this.playerTwo.lastMov = 0;
+                this.playerTwo.body.offset.y = 130;
+                this.playerTwo.setVelocityX(-160);
+                this.playerTwo.anims.play('Freddie left', true);
+                connection.send("{\"id\":1,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"A\"}")
             }
-
+            else if (this.cursorsSecondPlayer.right.isDown) {
+                this.playerTwo.lastMov = 1;
+                this.playerTwo.body.offset.y = 130;
+                this.playerTwo.setVelocityX(160);
+                this.playerTwo.anims.play('Freddie right', true);
+                connection.send("{\"id\":1,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"D\"}")
+            }
+            else if (this.cursorsSecondPlayer.down.isDown) {
+                this.playerTwo.lastMov = 2;
+                this.playerTwo.body.offset.y = 130;
+                this.playerTwo.setVelocityY(160);
+                this.playerTwo.anims.play('Freddie forward', true);
+                connection.send("{\"id\":1,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"S\"}")
+            }
+            else if (this.cursorsSecondPlayer.up.isDown) {
+                this.playerTwo.lastMov = 3;
+                this.playerTwo.body.offset.y = 130;
+                this.playerTwo.setVelocityY(-160);
+                this.playerTwo.anims.play('Freddie backwards', true);
+                connection.send("{\"id\":1,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"W\"}")
+            }
+            else {
+                connection.send("{\"id\":1,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
+                this.playerTwo.body.offset.y = 120;
+                switch (this.playerTwo.lastMov) {
+                    case 0:
+                        this.playerTwo.anims.play('Freddie stop left', true);
+                        break;
+                    case 1:
+                        this.playerTwo.anims.play('Freddie stop right', true);
+                        break;
+                    case 2:
+                        this.playerTwo.anims.play('Freddie stop forward', true);
+                        break;
+                    case 3:
+                        this.playerTwo.anims.play('Freddie stop backwards', true);
+                        break;
+                }
+    
+            }
         }
+        else{
+            if (actionOnlinePlayer.action=="A") {
+                this.playerTwo.lastMov = 0;
+                this.playerTwo.body.offset.y = 130;
+                this.playerTwo.setVelocityX(-160);
+                this.playerTwo.anims.play('Freddie left', true);
+            }
+            else if (actionOnlinePlayer.action=="D") {
+                this.playerTwo.lastMov = 1;
+                this.playerTwo.body.offset.y = 130;
+                this.playerTwo.setVelocityX(160);
+                this.playerTwo.anims.play('Freddie right', true);
+            }
+            else if (actionOnlinePlayer.action=="S") {
+                this.playerTwo.lastMov = 2;
+                this.playerTwo.body.offset.y = 130;
+                this.playerTwo.setVelocityY(160);
+                this.playerTwo.anims.play('Freddie forward', true);
+            }
+            else if (actionOnlinePlayer.action=="W") {
+                this.playerTwo.lastMov = 3;
+                this.playerTwo.body.offset.y = 130;
+                this.playerTwo.setVelocityY(-160);
+                this.playerTwo.anims.play('Freddie backwards', true);
+    
+            }
+            else {
+                
+                this.playerTwo.body.offset.y = 120;
+    
+                switch (this.playerTwo.lastMov) {
+                    case 0:
+                        this.playerTwo.anims.play('Freddie stop left', true);
+                        break;
+                    case 1:
+                        this.playerTwo.anims.play('Freddie stop right', true);
+                        break;
+                    case 2:
+                        this.playerTwo.anims.play('Freddie stop forward', true);
+                        break;
+                    case 3:
+                        this.playerTwo.anims.play('Freddie stop backwards', true);
+                        break;
+                }
+    
+            }
+        }
+        
     }
 
     takeObject(player, slot) {
@@ -1430,7 +1539,7 @@ class GameScene extends Phaser.Scene {
                 "Content-Type": "application/json",
             },
         }).done(function (player) {
-            console.log("Updated player: " + JSON.stringify(player));
+            //console.log("Updated player: " + JSON.stringify(player));
         }).fail(function (jqXHR, Status, errorThrown) {
             //aqui va el numero de veces que falla, if falla cinco veces, servidor caido
             if (name == nameP1) {
@@ -1443,38 +1552,6 @@ class GameScene extends Phaser.Scene {
     }
 }
 
-class GameManager {
-    static scene;
-    static gameTime = 120;
-    static timeLeft;
-    static levelCoins;
-    static objectPlayerOne;
-    static objectPlayerTwo;
-    constructor(scene) {
-        GameManager.scene = scene;
-    }
-}
-
-class Slot {
-    static cuttingSlotsList = new Phaser.Structs.List();
-    static cookingSlotsList = new Phaser.Structs.List();
-    static comandSlots = new Phaser.Structs.List();
-    constructor(x, y, index) {
-        this.x = x;
-        this.y = y;
-        this.index = index;
-        this.ocuppied = false;
-        this.currentObject;
-        //cooking
-        this.numIngredients = 0;
-        this.ingredients = [];
-        this.ready = false;
-        this.cooking = false;
-        //Comands
-        this.comandOccupiedSlots = 0;
-        this.occupied = false;
-    }
-}
 
 function subtractTime() {
     if (GameManager.timeLeft) {

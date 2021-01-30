@@ -194,7 +194,7 @@ class Loading extends Phaser.Scene {
                 this.cameras.main.once('camerafadeoutcomplete', function (camera) {
             logo.destroy();
             white.destroy();
-            scene.scene.start("Login");
+            scene.scene.start("Menu");
             
         });
         

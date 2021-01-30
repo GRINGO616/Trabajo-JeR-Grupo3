@@ -29,37 +29,25 @@ class Login extends Phaser.Scene {
 
         // Declaración de los botones del menú de logging.
         this.onePlayer = this.add.image(config.width * 0.3, config.height * 0.3, 'one_player').setScale(1.2);
-        this.twoPlayers = this.add.image(config.width * 0.7, config.height * 0.3, 'two_players').setScale(1.2);
         this.lyshaIcon = this.add.image(config.width * 0.2, config.height * 0.18, 'Lysha_forward').setScale(0.7);
-        this.lyshaIcon2 = this.add.image(config.width * 0.6, config.height * 0.18, 'Lysha_forward').setScale(0.7);
-        this.freddieIcon = this.add.image(config.width * 0.8, config.height * 0.18, 'Freddie_forward').setScale(0.7);
+        if(!online){
+            this.twoPlayers = this.add.image(config.width * 0.7, config.height * 0.3, 'two_players').setScale(1.2);
+            this.lyshaIcon2 = this.add.image(config.width * 0.6, config.height * 0.18, 'Lysha_forward').setScale(0.7);
+            this.freddieIcon = this.add.image(config.width * 0.8, config.height * 0.18, 'Freddie_forward').setScale(0.7);
+        }
+        
         this.continueButton = this.add.image(config.width * 0.5, config.height * 0.9, 'loginNextButton').setScale(1.2).setVisible(false);
         this.readyPlayerOne = false;
         this.readyPlayerTwo = false;
 
         //Seleccion de nombre y contraseña
         this.playerOneText = this.add.text(config.width * 0.15, config.height * 0.4, "Jugador 1", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
-        this.playerTwoText = this.add.text(config.width * 0.6, config.height * 0.4, "Jugador 2", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
-
         this.namePlayerOne = this.add.text(config.width * 0.1, config.height * 0.5, "Nombre:", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
-        this.namePlayerTwo = this.add.text(config.width * 0.55, config.height * 0.5, "Nombre:", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
-
         this.errorPlayerOne = this.add.text(config.width * 0.1, config.height * 0.57, "La contraseña es incorrecta", { font: "20px PixelFont", fill: "#ff0000", align: "center" }).setResolution(10).setVisible(false);
-        this.errorPlayerTwo = this.add.text(config.width * 0.55, config.height * 0.57, "La contraseña es incorrecta", { font: "20px PixelFont", fill: "#ff0000", align: "center" }).setResolution(10).setVisible(false);
-
         this.readyNamePlayerOne = this.add.text(config.width * 0.2, config.height * 0.52, "", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
-        this.readyNamePlayerTwo = this.add.text(config.width * 0.65, config.height * 0.52, "", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
-
         this.readyTextPlayerOne = this.add.text(config.width * 0.2, config.height * 0.57, "Listo", { font: "20px PixelFont", fill: "#00ff00", align: "center" }).setResolution(10).setVisible(false);
-        this.readyTextPlayerTwo = this.add.text(config.width * 0.65, config.height * 0.57, "Listo", { font: "20px PixelFont", fill: "#00ff00", align: "center" }).setResolution(10).setVisible(false);
-
         this.passwordPlayerOne = this.add.text(config.width * 0.1, config.height * 0.62, "Contraseña:", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
-        this.passwordPlayerTwo = this.add.text(config.width * 0.55, config.height * 0.62, "Contraseña:", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
-
         this.readyButtonPlayerOne = this.add.image(config.width * 0.25, config.height * 0.72, 'readyButton').setScale(0.7).setVisible(false);
-        this.readyButtonPlayerTwo = this.add.image(config.width * 0.7, config.height * 0.72, 'readyButton').setScale(0.7).setVisible(false);
-
-
         this.inputNamePlayerOne = document.getElementById("inputNamePlayerOne");
         this.inputNamePlayerOne.style.position = "absolute";
         this.inputNamePlayerOne.style.top = 470 + "px";
@@ -68,7 +56,23 @@ class Login extends Phaser.Scene {
         this.inputNamePlayerOne.style.height = 50 + "px";
         this.inputNamePlayerOne.style.backgroundColor = "#EBA5F0";
         this.inputNamePlayerOne.style.borderColor = "#EBA5F0";
+        
+        this.inputPasswordPlayerOne = document.getElementById("inputPasswordPlayerOne");
+        this.inputPasswordPlayerOne.style.position = "absolute";
+        this.inputPasswordPlayerOne.style.top = 580 + "px";
+        this.inputPasswordPlayerOne.style.left = 660 + "px";
+        this.inputPasswordPlayerOne.style.width = 300 + "px";
+        this.inputPasswordPlayerOne.style.height = 50 + "px";
+        this.inputPasswordPlayerOne.style.backgroundColor = "#EBA5F0";
+        this.inputPasswordPlayerOne.style.borderColor = "#EBA5F0";
 
+        this.playerTwoText = this.add.text(config.width * 0.6, config.height * 0.4, "Jugador 2", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
+        this.namePlayerTwo = this.add.text(config.width * 0.55, config.height * 0.5, "Nombre:", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
+        this.errorPlayerTwo = this.add.text(config.width * 0.55, config.height * 0.57, "La contraseña es incorrecta", { font: "20px PixelFont", fill: "#ff0000", align: "center" }).setResolution(10).setVisible(false);
+        this.readyNamePlayerTwo = this.add.text(config.width * 0.65, config.height * 0.52, "", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
+        this.readyTextPlayerTwo = this.add.text(config.width * 0.65, config.height * 0.57, "Listo", { font: "20px PixelFont", fill: "#00ff00", align: "center" }).setResolution(10).setVisible(false);
+        this.passwordPlayerTwo = this.add.text(config.width * 0.55, config.height * 0.62, "Contraseña:", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
+        this.readyButtonPlayerTwo = this.add.image(config.width * 0.7, config.height * 0.72, 'readyButton').setScale(0.7).setVisible(false);
 
         this.inputNamePlayerTwo = document.getElementById("inputNamePlayerTwo");
         this.inputNamePlayerTwo.style.position = "absolute";
@@ -79,17 +83,6 @@ class Login extends Phaser.Scene {
         this.inputNamePlayerTwo.style.backgroundColor = "#EBA5F0";
         this.inputNamePlayerTwo.style.borderColor = "#EBA5F0";
 
-
-        this.inputPasswordPlayerOne = document.getElementById("inputPasswordPlayerOne");
-        this.inputPasswordPlayerOne.style.position = "absolute";
-        this.inputPasswordPlayerOne.style.top = 580 + "px";
-        this.inputPasswordPlayerOne.style.left = 660 + "px";
-        this.inputPasswordPlayerOne.style.width = 300 + "px";
-        this.inputPasswordPlayerOne.style.height = 50 + "px";
-        this.inputPasswordPlayerOne.style.backgroundColor = "#EBA5F0";
-        this.inputPasswordPlayerOne.style.borderColor = "#EBA5F0";
-
-
         this.inputPasswordPlayerTwo = document.getElementById("inputPasswordPlayerTwo");
         this.inputPasswordPlayerTwo.style.position = "absolute";
         this.inputPasswordPlayerTwo.style.top = 580 + "px";
@@ -98,7 +91,6 @@ class Login extends Phaser.Scene {
         this.inputPasswordPlayerTwo.style.height = 50 + "px";
         this.inputPasswordPlayerTwo.style.backgroundColor = "#EBA5F0";
         this.inputPasswordPlayerTwo.style.borderColor = "#EBA5F0";
-
 
         this.onePlayer.setInteractive().on('pointerdown', () => {
             this.playerOneText.setVisible(true);
@@ -115,21 +107,24 @@ class Login extends Phaser.Scene {
             this.readyButtonPlayerOne.setVisible(true);
             this.readyButtonPlayerTwo.setVisible(false);
         })
-        this.twoPlayers.setInteractive().on('pointerdown', () => {
-            this.playerOneText.setVisible(true);
-            this.namePlayerOne.setVisible(true);
-            this.passwordPlayerOne.setVisible(true);
-            this.playerTwoText.setVisible(true);
-            this.namePlayerTwo.setVisible(true);
-            this.passwordPlayerTwo.setVisible(true);
-            this.inputNamePlayerOne.style.display = "inline";
-            this.inputNamePlayerTwo.style.display = "inline";
-            this.inputPasswordPlayerOne.style.display = "inline";
-            this.inputPasswordPlayerTwo.style.display = "inline";
-            singlePlayer = false;
-            this.readyButtonPlayerOne.setVisible(true);
-            this.readyButtonPlayerTwo.setVisible(true);
-        })
+        if(!online){
+            this.twoPlayers.setInteractive().on('pointerdown', () => {
+                this.playerOneText.setVisible(true);
+                this.namePlayerOne.setVisible(true);
+                this.passwordPlayerOne.setVisible(true);
+                this.playerTwoText.setVisible(true);
+                this.namePlayerTwo.setVisible(true);
+                this.passwordPlayerTwo.setVisible(true);
+                this.inputNamePlayerOne.style.display = "inline";
+                this.inputNamePlayerTwo.style.display = "inline";
+                this.inputPasswordPlayerOne.style.display = "inline";
+                this.inputPasswordPlayerTwo.style.display = "inline";
+                singlePlayer = false;
+                this.readyButtonPlayerOne.setVisible(true);
+                this.readyButtonPlayerTwo.setVisible(true);
+            })
+        }
+        
 
         this.readyButtonPlayerOne.setInteractive().on('pointerdown', () => {
             //aqui intenta meter al jugador en mapa
@@ -214,8 +209,13 @@ class Login extends Phaser.Scene {
             if ((!singlePlayer && this.readyPlayerTwo) || singlePlayer) {
                 this.continueButton.setVisible(true);
                 this.continueButton.setInteractive().on('pointerdown', () => {
-                    
-                    this.scene.start("Menu");                   
+                    if(!online){
+                        this.scene.start("GameScene"); 
+                    }
+                    else{
+                        this.scene.start("OnlineGameScene"); 
+                    }
+                                      
                 })
             }
             this.timerP1 = this.time.addEvent({
@@ -242,7 +242,12 @@ class Login extends Phaser.Scene {
             if (this.readyPlayerOne) {
                 this.continueButton.setVisible(true);
                 this.continueButton.setInteractive().on('pointerdown', () => {
-                    this.scene.start("Menu");
+                    if(!online){
+                        this.scene.start("GameScene"); 
+                    }
+                    else{
+                        this.scene.start("OnlineGameScene"); 
+                    }
                 })
             }
             this.timerP2 = this.time.addEvent({
