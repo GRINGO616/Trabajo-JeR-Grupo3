@@ -15,6 +15,7 @@ public class WebSocketEchoHandler extends TextWebSocketHandler {
         System.out.println("Message received: " +
         message.getPayload());
 
+        if (message.getPayload().equals("registrar")){
         if (usersRegistered == 0){
             sessionUsers[0] = session;
             session.sendMessage(new TextMessage("J1"));
@@ -27,9 +28,8 @@ public class WebSocketEchoHandler extends TextWebSocketHandler {
             usersRegistered++;
         }else{
             session.sendMessage(new TextMessage("Server Completed"));
-        }
-        
-
+        }   
+    }
         String msg = message.getPayload();
         session.sendMessage(new TextMessage(msg));
     }

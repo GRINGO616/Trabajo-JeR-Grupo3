@@ -155,7 +155,7 @@ class SelectionLevel extends Phaser.Scene {
                     stageMusic.volume = 0.4;
                     stageMusic.play();
                 }
-                this.scene.start("PreloadLevel");
+                this.scene.start("SelectionMode");
             }
         })
         this.next_button.setInteractive().on('pointerover', () => {

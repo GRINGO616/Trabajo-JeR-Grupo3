@@ -165,7 +165,7 @@ class Login extends Phaser.Scene {
         })
 
     }
-
+    
     /*
         getPlayer(name, password, jugador) {
             fetch("http://localhost:8080/players/" + name)
@@ -195,7 +195,6 @@ class Login extends Phaser.Scene {
     correctLogin(name, password, jugador, nuevo) {
         this.conectPlayer(name, password)
 
-
         if (nuevo) {
             this.postPlayer(name, password);
         }
@@ -215,6 +214,7 @@ class Login extends Phaser.Scene {
             if ((!singlePlayer && this.readyPlayerTwo) || singlePlayer) {
                 this.continueButton.setVisible(true);
                 this.continueButton.setInteractive().on('pointerdown', () => {
+                    
                     this.scene.start("Menu");                   
                 })
             }

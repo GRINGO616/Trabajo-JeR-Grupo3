@@ -6,7 +6,7 @@ var config = {
     backgroundColor: 0x000000,
     pixelArt: true, //Prevent pixel art from becoming blurred when scaled.
     //antialias: true,
-    scene: [Loading,Login,Menu,Settings,Configuration,Credits,SelectionLevel,PreloadLevel,GameScene,FinishGameScene],
+    scene: [Loading,Login,Menu,Settings,Configuration,Credits,SelectionLevel,SelectionMode,PreloadLevel,GameScene,FinishGameScene],
     physics: {
         default: 'arcade',
         arcade: {
@@ -45,6 +45,28 @@ var nameP1 = null;
 var nameP2 = null;
 var serverFailed;
 var serverActive;
+
+// Variables para el multijugador
+
+var idPlayer = 0;
+var infoWS = "";
+
+this.setJugador = function (msg) {
+    if (msg == "J1") {
+      this.idPlayer= 1;
+      console.log("Id del jugador: " + this.idPlayer);
+        
+      // Jugador 2 queda vinculado a los controladores del ws
+    } else if (msg == "J2") {
+    this.idPlayer = 2;
+    console.log("Id del jugador: " + this.idPlayer)
+    } else {
+        this.idPlayer = -1;
+        console.log("Servidor lleno");
+    }
+  };
+
+
 let connection = new WebSocket('ws://127.0.0.1:8080/echo');
 
 connection.onopen = function () {
@@ -52,7 +74,7 @@ connection.onopen = function () {
 }
 
 connection.onmessage = function (msg) {
-    
+    infoWS = msg;
     console.log("Mensaje "+ msg.data);
 }
 
@@ -63,6 +85,8 @@ connection.onerror = function (e) {
 connection.onclose = function () {
     console.log("La conexión se ha cerrado con éxito");
 }
+
+
 
 window.onload = function(){
     var game = new Phaser.Game(config);

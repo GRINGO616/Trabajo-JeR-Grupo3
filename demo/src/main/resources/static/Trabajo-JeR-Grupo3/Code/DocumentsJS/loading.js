@@ -5,8 +5,6 @@ class Loading extends Phaser.Scene {
     }
     preload(){
 
-        //this.load.plugin('rexinputtextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinputtextplugin.min.js', true);    
-
         this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true);
         this.load.plugin('rextexteditplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexteditplugin.min.js', true);
         
@@ -84,6 +82,12 @@ class Loading extends Phaser.Scene {
         this.load.image('returnSelectionLevelSpanish','Assets/selectionLevelScene/returnSelectionLevelSpanish.png');
         this.load.image('returnSelectionLevelEnglish','Assets/selectionLevelScene/returnSelectionLevelEnglish.png');
 
+        // Elementos de pantalla de selección de modo
+        this.load.image('modeSelectionBackground','Assets/modeSelection/modeSelectionBackground.jpg');
+        this.load.image('modeSelectionLocalButton','Assets/modeSelection/modeSelectionLocal.png');
+        this.load.image('modeSelectionOnlineButton','Assets/modeSelection/modeSelectionOnline.png');
+        this.load.image('modeSelectionNextButton','Assets/modeSelection/modeSelectionNext.png');
+        
         // Elementos de pantalla de precarga nivel
         this.load.image('preloadBackground','Assets/preloadLevelScene/preloadBackground.jpg');
         this.load.image('preloadControlsJ1Spanish','Assets/preloadLevelScene/preloadControlsJ1Spanish.png');
