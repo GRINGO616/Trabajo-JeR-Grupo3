@@ -53,21 +53,6 @@ public class WebSocketEchoHandler extends TextWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         
-        /* if (message.getPayload().equals("registrar")) {
-            if (usersRegistered%2 == 1) {
-                sessionUsers[0] = session;
-                session.sendMessage(new TextMessage("J1"));
-                System.out.println("J1 connected");
-                usersRegistered++;
-            } else if (usersRegistered%2 == 0) {
-                sessionUsers[1] = session;
-                session.sendMessage(new TextMessage("J2"));
-                System.out.println("J2 connected");
-                usersRegistered++;
-            } else {
-                session.sendMessage(new TextMessage("Server Completed"));
-            }
-        } */
         System.out.println("Message received: " + message.getPayload());
         JsonNode node= mapper.readTree(message.getPayload());
         sendOtherParticipants(session,node);

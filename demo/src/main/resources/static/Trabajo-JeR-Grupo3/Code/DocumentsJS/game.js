@@ -45,6 +45,7 @@ var online;
 var group;
 var player;
 var actionOnlinePlayer = { id: 1, group: 0, player: 0, action: "" }
+var actionObjectOnlinePlayer = { id: 2, group: 0, player: 0, action: "" }
 var nameP1 = null;
 var nameP2 = null;
 var serverFailed;
@@ -92,6 +93,9 @@ connection.onmessage = function (msg) {
             break;
         case 1: //movimiento
             actionOnlinePlayer=aux;
+            break;
+        case 2:
+            actionObjectOnlinePlayer=aux;
             break;
 
     }
