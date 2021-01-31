@@ -61,10 +61,9 @@ public class WebSocketEchoHandler extends TextWebSocketHandler {
     private void sendOtherParticipants(WebSocketSession session, JsonNode node) throws IOException {
         System.out.println("Message sent: " + node.toString());
 		
-        ObjectNode newNode = mapper.createObjectNode();
+        int id= node.get("group").asInt();
         
-        
-        for(WebSocketSession participant : sessions.values()) {
+        for(WebSocketSession participant : groups.get(id)) {
 			if(!participant.getId().equals(session.getId())) {
 				participant.sendMessage(new TextMessage(node.toString()));
 			}
