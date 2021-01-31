@@ -45,14 +45,14 @@ var online;
 var group;
 var player;
 var actionOnlinePlayer = { id: 1, group: 0, player: 0, action: "" }
-var actionObjectOnlinePlayer = { id: 2, group: 0, player: 0, action: "" }
+var actionOnlinePlayerObjects = {id: 2, group:0, player:0, action:""}
 var nameP1 = null;
 var nameP2 = null;
 var serverFailed;
 var serverActive;
 
 // Variables para el multijugador
-
+/*
 var idPlayer = 0;
 var infoWS = "";
 
@@ -69,7 +69,7 @@ this.setJugador = function (msg) {
         this.idPlayer = -1;
         console.log("Servidor lleno");
     }
-};
+};*/
 
 
 let connection = new WebSocket('ws://127.0.0.1:8080/echo');
@@ -95,9 +95,8 @@ connection.onmessage = function (msg) {
             actionOnlinePlayer=aux;
             break;
         case 2:
-            actionObjectOnlinePlayer=aux;
+            actionOnlinePlayerObjects = aux;
             break;
-
     }
 }
 

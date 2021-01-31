@@ -336,39 +336,51 @@ class OnlineGameScene extends Phaser.Scene {
         this.playerOne.lastMov = 2;
         if (level == 1) {
             //FOOD GENERATORS
-            if(player==1){
+
+            if (player == 1){
+            
             this.physics.add.overlap(this.playerOne, this.herbArea, function () {
                 if (GameManager.scene.playerOne.lastMov == 1 && GameManager.scene.cursorsFirstPlayer.take.isDown && GameManager.scene.playerOne.canMove) {
-                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                     GameManager.scene.takeObject(1, 7)
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
             })
             this.physics.add.overlap(this.playerOne, this.herbAreaTwo, function () {
                 if (GameManager.scene.playerOne.lastMov == 0 && GameManager.scene.cursorsFirstPlayer.take.isDown && GameManager.scene.playerOne.canMove) {
-                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                     GameManager.scene.takeObject(1, 7)
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
             })
             this.physics.add.overlap(this.playerOne, this.batArea, function () {
                 if (GameManager.scene.playerOne.lastMov == 1 && GameManager.scene.cursorsFirstPlayer.take.isDown && GameManager.scene.playerOne.canMove) {
-                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                     GameManager.scene.takeObject(1, 8)
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
             })
             this.physics.add.overlap(this.playerOne, this.batAreaTwo, function () {
-                if (GameManager.scene.playerOne.lastMov == 0 && GameManager.scene.cursorsFirstPlayer.take.isDown && GameManager.scene.playerOne.canMove) {
-                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
+                if (GameManager.scene.playerOne.lastMov == 0 && GameManager.scene.cursorsFirstPlayer.take.isDown && GameManager.scene.playerOne.canMove) {               
                     GameManager.scene.takeObject(1, 8)
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
             })
 
             //GOAL AREA
             this.physics.add.overlap(this.playerOne, this.goalArea, function () {
                 if (GameManager.scene.playerOne.lastMov == 2 && GameManager.scene.cursorsFirstPlayer.take.isDown && GameManager.scene.playerOne.haveObject && (GameManager.objectPlayerOne.texture.key == "herbal_potion" || GameManager.objectPlayerOne.texture.key == "bat_potion")) {
-                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                     GameManager.scene.leavePotion(1);
                     GameManager.objectPlayerOne.destroy();
                     GameManager.scene.playerOne.haveObject = false;
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E3\"}")
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
             })
 
@@ -377,51 +389,57 @@ class OnlineGameScene extends Phaser.Scene {
             this.physics.add.overlap(this.playerOne, this.cuttingAreaZero[0], function () {
                 if (GameManager.scene.playerOne.lastMov == 1) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.leaveObject(1, 0);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerOne.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takeObject(1, 0);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                         GameManager.scene.cut(1, 0);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                     }
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaZero[1], function () {
                 if (GameManager.scene.playerOne.lastMov == 3) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.leaveObject(1, 0);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
                     }
                     else if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerOne.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takeObject(1, 0);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                         GameManager.scene.cut(1, 0);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                     }
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaZero[2], function () {
                 if (GameManager.scene.playerOne.lastMov == 0) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.leaveObject(1, 0);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerOne.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takeObject(1, 0);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                         GameManager.scene.cut(1, 0);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                     }
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
@@ -431,51 +449,57 @@ class OnlineGameScene extends Phaser.Scene {
             this.physics.add.overlap(this.playerOne, this.cuttingAreaOne[0], function () {
                 if (GameManager.scene.playerOne.lastMov == 1) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.leaveObject(1, 1);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerOne.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takeObject(1, 1);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                         GameManager.scene.cut(1, 1);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                     }
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaOne[1], function () {
                 if (GameManager.scene.playerOne.lastMov == 3) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.leaveObject(1, 1);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
                     }
                     else if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerOne.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takeObject(1, 1);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                         GameManager.scene.cut(1, 1);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                     }
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaOne[2], function () {
                 if (GameManager.scene.playerOne.lastMov == 0) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.leaveObject(1, 1);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerOne.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takeObject(1, 1);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                         GameManager.scene.cut(1, 1);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                     }
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
@@ -485,51 +509,57 @@ class OnlineGameScene extends Phaser.Scene {
             this.physics.add.overlap(this.playerOne, this.cuttingAreaTwo[0], function () {
                 if (GameManager.scene.playerOne.lastMov == 2) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.leaveObject(1, 2);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerOne.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takeObject(1, 2);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                         GameManager.scene.cut(1, 2);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                     }
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaTwo[1], function () {
                 if (GameManager.scene.playerOne.lastMov == 0) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.leaveObject(1, 2);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
                     }
                     else if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerOne.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takeObject(1, 2);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                         GameManager.scene.cut(1, 2);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                     }
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaTwo[2], function () {
                 if (GameManager.scene.playerOne.lastMov == 3) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.leaveObject(1, 2);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerOne.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takeObject(1, 2);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                         GameManager.scene.cut(1, 2);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                     }
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
@@ -539,51 +569,57 @@ class OnlineGameScene extends Phaser.Scene {
             this.physics.add.overlap(this.playerOne, this.cuttingAreaThree[0], function () {
                 if (GameManager.scene.playerOne.lastMov == 2) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.leaveObject(1, 3);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerOne.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takeObject(1, 3);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                         GameManager.scene.cut(1, 3);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                     }
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaThree[1], function () {
                 if (GameManager.scene.playerOne.lastMov == 1) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.leaveObject(1, 3);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
                     }
                     else if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerOne.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takeObject(1, 3);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                         GameManager.scene.cut(1, 3);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                     }
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaThree[2], function () {
                 if (GameManager.scene.playerOne.lastMov == 3) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.leaveObject(1, 3);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerOne.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takeObject(1, 3);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                         GameManager.scene.cut(1, 3);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
                     }
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
@@ -592,27 +628,31 @@ class OnlineGameScene extends Phaser.Scene {
             this.physics.add.overlap(this.playerOne, this.cookingAreaZero[0], function () {
                 if (GameManager.scene.playerOne.lastMov == 3) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.putIngredient(1, 0);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E4\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerOne.haveObject) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takePotion(1, 0);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E5\"}")
                     }
 
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
             })
             this.physics.add.overlap(this.playerOne, this.cookingAreaZero[1], function () {
                 if (GameManager.scene.playerOne.lastMov == 0) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.putIngredient(1, 0);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E4\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerOne.haveObject) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takePotion(1, 0);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E5\"}")
                     }
 
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
@@ -621,56 +661,61 @@ class OnlineGameScene extends Phaser.Scene {
             this.physics.add.overlap(this.playerOne, this.cookingAreaOne[0], function () {
                 if (GameManager.scene.playerOne.lastMov == 1) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.putIngredient(1, 1);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E4\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerOne.haveObject) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takePotion(1, 1);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E5\"}")
                     }
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
             this.physics.add.overlap(this.playerOne, this.cookingAreaOne[1], function () {
                 if (GameManager.scene.playerOne.lastMov == 3) {
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.putIngredient(1, 1);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E4\"}")
                     }
                     if (GameManager.scene.cursorsFirstPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerOne.haveObject) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
                         GameManager.scene.takePotion(1, 1);
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E5\"}")
                     }
 
+                } else {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 }
 
             })
-        }
-        else{
+
+        } else {
+
             this.physics.add.overlap(this.playerOne, this.herbArea, function () {
-                if (GameManager.scene.playerOne.lastMov == 1 && actionObjectOnlinePlayer.action=="E" && GameManager.scene.playerOne.canMove) {
+                if (GameManager.scene.playerOne.lastMov == 1 && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action == "E1") {
                     GameManager.scene.takeObject(1, 7)
                 }
             })
             this.physics.add.overlap(this.playerOne, this.herbAreaTwo, function () {
-                if (GameManager.scene.playerOne.lastMov == 0 && actionOnlinePlayer.action=="E" && GameManager.scene.playerOne.canMove) {
+                if (GameManager.scene.playerOne.lastMov == 0 && GameManager.scene.playerOne.canMove&& actionOnlinePlayerObjects.action == "E1") {
                     GameManager.scene.takeObject(1, 7)
                 }
             })
             this.physics.add.overlap(this.playerOne, this.batArea, function () {
-                if (GameManager.scene.playerOne.lastMov == 1 && actionOnlinePlayer.action=="E" && GameManager.scene.playerOne.canMove) {
+                if (GameManager.scene.playerOne.lastMov == 1  && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action == "E1") {
                     GameManager.scene.takeObject(1, 8)
                 }
             })
             this.physics.add.overlap(this.playerOne, this.batAreaTwo, function () {
-                if (GameManager.scene.playerOne.lastMov == 0 && actionOnlinePlayer.action=="E" && GameManager.scene.playerOne.canMove) {
+                if (GameManager.scene.playerOne.lastMov == 0  && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action == "E1") {
                     GameManager.scene.takeObject(1, 8)
                 }
             })
 
             //GOAL AREA
             this.physics.add.overlap(this.playerOne, this.goalArea, function () {
-                if (GameManager.scene.playerOne.lastMov == 2 && actionOnlinePlayer.action=="E" && GameManager.scene.playerOne.haveObject && (GameManager.objectPlayerOne.texture.key == "herbal_potion" || GameManager.objectPlayerOne.texture.key == "bat_potion")) {
+                if (GameManager.scene.playerOne.lastMov == 2  && GameManager.scene.playerOne.haveObject && (GameManager.objectPlayerOne.texture.key == "herbal_potion" || GameManager.objectPlayerOne.texture.key == "bat_potion") && actionOnlinePlayerObjects.action == "E3") {
                     GameManager.scene.leavePotion(1);
                     GameManager.objectPlayerOne.destroy();
                     GameManager.scene.playerOne.haveObject = false;
@@ -681,13 +726,13 @@ class OnlineGameScene extends Phaser.Scene {
 
             this.physics.add.overlap(this.playerOne, this.cuttingAreaZero[0], function () {
                 if (GameManager.scene.playerOne.lastMov == 1) {
-                    if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                    if (!Slot.cuttingSlotsList.getAt(0).ocuppied && actionOnlinePlayerObjects.action== "E2") {
                         GameManager.scene.leaveObject(1, 0);
                     }
-                    if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerOne.canMove) {
+                    if ( Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action == "E1") {
                         GameManager.scene.takeObject(1, 0);
                     }
-                    if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                    if (Slot.cuttingSlotsList.getAt(0).ocuppied && actionOnlinePlayerObjects.action == "R") {
                         GameManager.scene.cut(1, 0);
                     }
                 }
@@ -695,13 +740,13 @@ class OnlineGameScene extends Phaser.Scene {
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaZero[1], function () {
                 if (GameManager.scene.playerOne.lastMov == 3) {
-                    if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                    if ( !Slot.cuttingSlotsList.getAt(0).ocuppied && actionOnlinePlayerObjects.action == "E2") {
                         GameManager.scene.leaveObject(1, 0);
                     }
-                    else if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerOne.canMove) {
+                    else if ( Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action == "E1") {
                         GameManager.scene.takeObject(1, 0);
                     }
-                    if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                    if (Slot.cuttingSlotsList.getAt(0).ocuppied && actionOnlinePlayerObjects.action == "R") {
                         GameManager.scene.cut(1, 0);
                     }
                 }
@@ -709,13 +754,13 @@ class OnlineGameScene extends Phaser.Scene {
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaZero[2], function () {
                 if (GameManager.scene.playerOne.lastMov == 0) {
-                    if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                    if (!Slot.cuttingSlotsList.getAt(0).ocuppied && actionOnlinePlayerObjects.action == "E2") {
                         GameManager.scene.leaveObject(1, 0);
                     }
-                    if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerOne.canMove) {
+                    if ( Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action == "E1") {
                         GameManager.scene.takeObject(1, 0);
                     }
-                    if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                    if (Slot.cuttingSlotsList.getAt(0).ocuppied && actionOnlinePlayerObjects.action == "R") {
                         GameManager.scene.cut(1, 0);
                     }
                 }
@@ -726,13 +771,13 @@ class OnlineGameScene extends Phaser.Scene {
 
             this.physics.add.overlap(this.playerOne, this.cuttingAreaOne[0], function () {
                 if (GameManager.scene.playerOne.lastMov == 1) {
-                    if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                    if ( !Slot.cuttingSlotsList.getAt(1).ocuppied && actionOnlinePlayerObjects.action == "E2") {
                         GameManager.scene.leaveObject(1, 1);
                     }
-                    if (GactionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerOne.canMove) {
+                    if (Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action== "E1") {
                         GameManager.scene.takeObject(1, 1);
                     }
-                    if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                    if (Slot.cuttingSlotsList.getAt(1).ocuppied && actionOnlinePlayerObjects.action == "R") {
                         GameManager.scene.cut(1, 1);
                     }
                 }
@@ -740,13 +785,13 @@ class OnlineGameScene extends Phaser.Scene {
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaOne[1], function () {
                 if (GameManager.scene.playerOne.lastMov == 3) {
-                    if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                    if ( !Slot.cuttingSlotsList.getAt(1).ocuppied && actionOnlinePlayerObjects.action == "E2") {
                         GameManager.scene.leaveObject(1, 1);
                     }
-                    else if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerOne.canMove) {
+                    else if (Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action== "E1") {
                         GameManager.scene.takeObject(1, 1);
                     }
-                    if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                    if ( Slot.cuttingSlotsList.getAt(1).ocuppied && actionOnlinePlayerObjects.action== "R") {
                         GameManager.scene.cut(1, 1);
                     }
                 }
@@ -754,13 +799,13 @@ class OnlineGameScene extends Phaser.Scene {
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaOne[2], function () {
                 if (GameManager.scene.playerOne.lastMov == 0) {
-                    if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                    if (!Slot.cuttingSlotsList.getAt(1).ocuppied && actionOnlinePlayerObjects.action== "E2") {
                         GameManager.scene.leaveObject(1, 1);
                     }
-                    if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerOne.canMove) {
+                    if ( Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action == "E1") {
                         GameManager.scene.takeObject(1, 1);
                     }
-                    if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                    if ( Slot.cuttingSlotsList.getAt(1).ocuppied && actionOnlinePlayerObjects.action == "R") {
                         GameManager.scene.cut(1, 1);
                     }
                 }
@@ -771,13 +816,13 @@ class OnlineGameScene extends Phaser.Scene {
 
             this.physics.add.overlap(this.playerOne, this.cuttingAreaTwo[0], function () {
                 if (GameManager.scene.playerOne.lastMov == 2) {
-                    if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                    if (!Slot.cuttingSlotsList.getAt(2).ocuppied && actionOnlinePlayerObjects.action== "E2") {
                         GameManager.scene.leaveObject(1, 2);
                     }
-                    if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerOne.canMove) {
+                    if (Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action == "E1") {
                         GameManager.scene.takeObject(1, 2);
                     }
-                    if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                    if (Slot.cuttingSlotsList.getAt(2).ocuppied && actionOnlinePlayerObjects.action == "R") {
                         GameManager.scene.cut(1, 2);
                     }
                 }
@@ -785,13 +830,13 @@ class OnlineGameScene extends Phaser.Scene {
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaTwo[1], function () {
                 if (GameManager.scene.playerOne.lastMov == 0) {
-                    if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                    if (!Slot.cuttingSlotsList.getAt(2).ocuppied && actionOnlinePlayerObjects.action == "E2") {
                         GameManager.scene.leaveObject(1, 2);
                     }
-                    else if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerOne.canMove) {
+                    else if ( Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action == "E1") {
                         GameManager.scene.takeObject(1, 2);
                     }
-                    if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                    if (Slot.cuttingSlotsList.getAt(2).ocuppied && actionOnlinePlayerObjects.action == "R") {
                         GameManager.scene.cut(1, 2);
                     }
                 }
@@ -799,13 +844,13 @@ class OnlineGameScene extends Phaser.Scene {
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaTwo[2], function () {
                 if (GameManager.scene.playerOne.lastMov == 3) {
-                    if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                    if ( !Slot.cuttingSlotsList.getAt(2).ocuppied && actionOnlinePlayerObjects.action == "E2") {
                         GameManager.scene.leaveObject(1, 2);
                     }
-                    if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerOne.canMove) {
+                    if (Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action == "E1") {
                         GameManager.scene.takeObject(1, 2);
                     }
-                    if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                    if (Slot.cuttingSlotsList.getAt(2).ocuppied && actionOnlinePlayerObjects.action == "R") {
                         GameManager.scene.cut(1, 2);
                     }
                 }
@@ -816,13 +861,13 @@ class OnlineGameScene extends Phaser.Scene {
 
             this.physics.add.overlap(this.playerOne, this.cuttingAreaThree[0], function () {
                 if (GameManager.scene.playerOne.lastMov == 2) {
-                    if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                    if (!Slot.cuttingSlotsList.getAt(3).ocuppied && actionOnlinePlayerObjects.action == "E2") {
                         GameManager.scene.leaveObject(1, 3);
                     }
-                    if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerOne.canMove) {
+                    if ( Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action == "E1") {
                         GameManager.scene.takeObject(1, 3);
                     }
-                    if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                    if ( Slot.cuttingSlotsList.getAt(3).ocuppied && actionOnlinePlayerObjects.action == "R") {
                         GameManager.scene.cut(1, 3);
                     }
                 }
@@ -830,13 +875,13 @@ class OnlineGameScene extends Phaser.Scene {
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaThree[1], function () {
                 if (GameManager.scene.playerOne.lastMov == 1) {
-                    if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                    if (!Slot.cuttingSlotsList.getAt(3).ocuppied && actionOnlinePlayerObjects.action == "E2") {
                         GameManager.scene.leaveObject(1, 3);
                     }
-                    else if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerOne.canMove) {
+                    else if (Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action == "E1") {
                         GameManager.scene.takeObject(1, 3);
                     }
-                    if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                    if ( Slot.cuttingSlotsList.getAt(3).ocuppied && actionOnlinePlayerObjects.action == "R") {
                         GameManager.scene.cut(1, 3);
                     }
                 }
@@ -844,13 +889,13 @@ class OnlineGameScene extends Phaser.Scene {
             })
             this.physics.add.overlap(this.playerOne, this.cuttingAreaThree[2], function () {
                 if (GameManager.scene.playerOne.lastMov == 3) {
-                    if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                    if (!Slot.cuttingSlotsList.getAt(3).ocuppied && actionOnlinePlayerObjects.action == "E2") {
                         GameManager.scene.leaveObject(1, 3);
                     }
-                    if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerOne.canMove) {
+                    if (Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerOne.canMove && actionOnlinePlayerObjects.action == "E1") {
                         GameManager.scene.takeObject(1, 3);
                     }
-                    if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                    if ( Slot.cuttingSlotsList.getAt(3).ocuppied && actionOnlinePlayerObjects.action == "R") {
                         GameManager.scene.cut(1, 3);
                     }
                 }
@@ -860,10 +905,10 @@ class OnlineGameScene extends Phaser.Scene {
             //COOKING AREA 0
             this.physics.add.overlap(this.playerOne, this.cookingAreaZero[0], function () {
                 if (GameManager.scene.playerOne.lastMov == 3) {
-                    if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
+                    if (Slot.cookingSlotsList.getAt(0).numIngredients < 2 && actionOnlinePlayerObjects.action == "E4") {
                         GameManager.scene.putIngredient(1, 0);
                     }
-                    if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerOne.haveObject) {
+                    if ( Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerOne.haveObject && actionOnlinePlayerObjects.action == "E5") {
                         GameManager.scene.takePotion(1, 0);
                     }
 
@@ -871,10 +916,10 @@ class OnlineGameScene extends Phaser.Scene {
             })
             this.physics.add.overlap(this.playerOne, this.cookingAreaZero[1], function () {
                 if (GameManager.scene.playerOne.lastMov == 0) {
-                    if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
+                    if ( Slot.cookingSlotsList.getAt(0).numIngredients < 2 && actionOnlinePlayerObjects.action == "E4") {
                         GameManager.scene.putIngredient(1, 0);
                     }
-                    if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerOne.haveObject) {
+                    if ( Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerOne.haveObject&& actionOnlinePlayerObjects.action == "E5") {
                         GameManager.scene.takePotion(1, 0);
                     }
 
@@ -885,10 +930,10 @@ class OnlineGameScene extends Phaser.Scene {
             //COOKING AREA 1
             this.physics.add.overlap(this.playerOne, this.cookingAreaOne[0], function () {
                 if (GameManager.scene.playerOne.lastMov == 1) {
-                    if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
+                    if ( Slot.cookingSlotsList.getAt(1).numIngredients < 2 && actionOnlinePlayerObjects.action == "E4") {
                         GameManager.scene.putIngredient(1, 1);
                     }
-                    if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerOne.haveObject) {
+                    if ( Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerOne.haveObject && actionOnlinePlayerObjects.action == "E5") {
                         GameManager.scene.takePotion(1, 1);
                     }
                 }
@@ -896,21 +941,22 @@ class OnlineGameScene extends Phaser.Scene {
             })
             this.physics.add.overlap(this.playerOne, this.cookingAreaOne[1], function () {
                 if (GameManager.scene.playerOne.lastMov == 3) {
-                    if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
+                    if ( Slot.cookingSlotsList.getAt(1).numIngredients < 2 && actionOnlinePlayerObjects.action == "E4") {
                         GameManager.scene.putIngredient(1, 1);
                     }
-                    if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerOne.haveObject) {
+                    if ( Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerOne.haveObject && actionOnlinePlayerObjects.action == "E5") {
                         GameManager.scene.takePotion(1, 1);
                     }
 
                 }
 
             })
-        }
 
         }
 
+        }
 
+  
     }
 
     secondCharacterSettings() {
@@ -996,582 +1042,584 @@ class OnlineGameScene extends Phaser.Scene {
 
         this.playerTwo.lastMov = 2;
         if (level == 1) {
-             //FOOD GENERATORS
-             if(player==1){
-                this.physics.add.overlap(this.playerTwo, this.herbArea, function () {
-                    if (GameManager.scene.playerTwo.lastMov == 1 && GameManager.scene.cursorsSecondPlayer.take.isDown && GameManager.scene.playerTwo.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                        GameManager.scene.takeObject(1, 7)
-                    }
-                })
-                this.physics.add.overlap(this.playerTwo, this.herbAreaTwo, function () {
-                    if (GameManager.scene.playerTwo.lastMov == 0 && GameManager.scene.cursorsSecondPlayer.take.isDown && GameManager.scene.playerTwo.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                        GameManager.scene.takeObject(1, 7)
-                    }
-                })
-                this.physics.add.overlap(this.playerTwo, this.batArea, function () {
-                    if (GameManager.scene.playerTwo.lastMov == 1 && GameManager.scene.cursorsSecondPlayer.take.isDown && GameManager.scene.playerTwo.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                        GameManager.scene.takeObject(1, 8)
-                    }
-                })
-                this.physics.add.overlap(this.playerTwo, this.batAreaTwo, function () {
-                    if (GameManager.scene.playerTwo.lastMov == 0 && GameManager.scene.cursorsSecondPlayer.take.isDown && GameManager.scene.playerTwo.canMove) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                        GameManager.scene.takeObject(1, 8)
-                    }
-                })
-    
-                //GOAL AREA
-                this.physics.add.overlap(this.playerTwo, this.goalArea, function () {
-                    if (GameManager.scene.playerTwo.lastMov == 2 && GameManager.scene.cursorsSecondPlayer.take.isDown && GameManager.scene.playerTwo.haveObject && (GameManager.objectPlayerTwo.texture.key == "herbal_potion" || GameManager.objectPlayerTwo.texture.key == "bat_potion")) {
-                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                        GameManager.scene.leavePotion(1);
-                        GameManager.objectPlayerTwo.destroy();
-                        GameManager.scene.playerTwo.haveObject = false;
-                    }
-                })
-    
-                //CUTTING AREA 0
-    
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaZero[0], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 1) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.leaveObject(1, 0);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takeObject(1, 0);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
-                            GameManager.scene.cut(1, 0);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaZero[1], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 3) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.leaveObject(1, 0);
-                        }
-                        else if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takeObject(1, 0);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
-                            GameManager.scene.cut(1, 0);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaZero[2], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 0) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.leaveObject(1, 0);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takeObject(1, 0);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
-                            GameManager.scene.cut(1, 0);
-                        }
-                    }
-    
-                })
-    
-                //CUTTING AREA 1
-    
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaOne[0], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 1) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.leaveObject(1, 1);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takeObject(1, 1);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
-                            GameManager.scene.cut(1, 1);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaOne[1], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 3) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.leaveObject(1, 1);
-                        }
-                        else if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takeObject(1, 1);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
-                            GameManager.scene.cut(1, 1);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaOne[2], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 0) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.leaveObject(1, 1);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takeObject(1, 1);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
-                            GameManager.scene.cut(1, 1);
-                        }
-                    }
-    
-                })
-    
-                //CUTTING AREA 2
-    
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaTwo[0], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 2) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.leaveObject(1, 2);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takeObject(1, 2);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
-                            GameManager.scene.cut(1, 2);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaTwo[1], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 0) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.leaveObject(1, 2);
-                        }
-                        else if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takeObject(1, 2);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
-                            GameManager.scene.cut(1, 2);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaTwo[2], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 3) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.leaveObject(1, 2);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takeObject(1, 2);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
-                            GameManager.scene.cut(1, 2);
-                        }
-                    }
-    
-                })
-    
-                //CUTTING AREA 3
-    
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaThree[0], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 2) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.leaveObject(1, 3);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takeObject(1, 3);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
-                            GameManager.scene.cut(1, 3);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaThree[1], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 1) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.leaveObject(1, 3);
-                        }
-                        else if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takeObject(1, 3);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
-                            GameManager.scene.cut(1, 3);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaThree[2], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 3) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.leaveObject(1, 3);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takeObject(1, 3);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
-                            GameManager.scene.cut(1, 3);
-                        }
-                    }
-    
-                })
-    
-                //COOKING AREA 0
-                this.physics.add.overlap(this.playerTwo, this.cookingAreaZero[0], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 3) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.putIngredient(1, 0);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerTwo.haveObject) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takePotion(1, 0);
-                        }
-    
-                    }
-                })
-                this.physics.add.overlap(this.playerTwo, this.cookingAreaZero[1], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 0) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.putIngredient(1, 0);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerTwo.haveObject) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takePotion(1, 0);
-                        }
-    
-                    }
-    
-                })
-    
-                //COOKING AREA 1
-                this.physics.add.overlap(this.playerTwo, this.cookingAreaOne[0], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 1) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.putIngredient(1, 1);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerTwo.haveObject) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takePotion(1, 1);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cookingAreaOne[1], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 3) {
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.putIngredient(1, 1);
-                        }
-                        if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerTwo.haveObject) {
-                            connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E\"}")
-                            GameManager.scene.takePotion(1, 1);
-                        }
-    
-                    }
-    
-                })
-            }
-            else{
-                this.physics.add.overlap(this.playerTwo, this.herbArea, function () {
-                    if (GameManager.scene.playerTwo.lastMov == 1 && actionObjectOnlinePlayer.action=="E" && GameManager.scene.playerTwo.canMove) {
-                        GameManager.scene.takeObject(1, 7)
-                    }
-                })
-                this.physics.add.overlap(this.playerTwo, this.herbAreaTwo, function () {
-                    if (GameManager.scene.playerTwo.lastMov == 0 && actionOnlinePlayer.action=="E" && GameManager.scene.playerTwo.canMove) {
-                        GameManager.scene.takeObject(1, 7)
-                    }
-                })
-                this.physics.add.overlap(this.playerTwo, this.batArea, function () {
-                    if (GameManager.scene.playerTwo.lastMov == 1 && actionOnlinePlayer.action=="E" && GameManager.scene.playerTwo.canMove) {
-                        GameManager.scene.takeObject(1, 8)
-                    }
-                })
-                this.physics.add.overlap(this.playerTwo, this.batAreaTwo, function () {
-                    if (GameManager.scene.playerTwo.lastMov == 0 && actionOnlinePlayer.action=="E" && GameManager.scene.playerTwo.canMove) {
-                        GameManager.scene.takeObject(1, 8)
-                    }
-                })
-    
-                //GOAL AREA
-                this.physics.add.overlap(this.playerTwo, this.goalArea, function () {
-                    if (GameManager.scene.playerTwo.lastMov == 2 && actionOnlinePlayer.action=="E" && GameManager.scene.playerTwo.haveObject && (GameManager.objectPlayerTwo.texture.key == "herbal_potion" || GameManager.objectPlayerTwo.texture.key == "bat_potion")) {
-                        GameManager.scene.leavePotion(1);
-                        GameManager.playerTwo.destroy();
-                        GameManager.scene.playerTwo.haveObject = false;
-                    }
-                })
-    
-                //CUTTING AREA 0
-    
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaZero[0], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 1) {
-                        if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                            GameManager.scene.leaveObject(1, 0);
-                        }
-                        if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            GameManager.scene.takeObject(1, 0);
-                        }
-                        if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                            GameManager.scene.cut(1, 0);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaZero[1], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 3) {
-                        if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                            GameManager.scene.leaveObject(1, 0);
-                        }
-                        else if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            GameManager.scene.takeObject(1, 0);
-                        }
-                        if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                            GameManager.scene.cut(1, 0);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaZero[2], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 0) {
-                        if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                            GameManager.scene.leaveObject(1, 0);
-                        }
-                        if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            GameManager.scene.takeObject(1, 0);
-                        }
-                        if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(0).ocuppied) {
-                            GameManager.scene.cut(1, 0);
-                        }
-                    }
-    
-                })
-    
-                //CUTTING AREA 1
-    
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaOne[0], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 1) {
-                        if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                            GameManager.scene.leaveObject(1, 1);
-                        }
-                        if (GactionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            GameManager.scene.takeObject(1, 1);
-                        }
-                        if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                            GameManager.scene.cut(1, 1);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaOne[1], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 3) {
-                        if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                            GameManager.scene.leaveObject(1, 1);
-                        }
-                        else if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            GameManager.scene.takeObject(1, 1);
-                        }
-                        if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                            GameManager.scene.cut(1, 1);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaOne[2], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 0) {
-                        if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                            GameManager.scene.leaveObject(1, 1);
-                        }
-                        if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            GameManager.scene.takeObject(1, 1);
-                        }
-                        if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(1).ocuppied) {
-                            GameManager.scene.cut(1, 1);
-                        }
-                    }
-    
-                })
-    
-                //CUTTING AREA 2
-    
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaTwo[0], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 2) {
-                        if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                            GameManager.scene.leaveObject(1, 2);
-                        }
-                        if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            GameManager.scene.takeObject(1, 2);
-                        }
-                        if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                            GameManager.scene.cut(1, 2);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaTwo[1], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 0) {
-                        if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                            GameManager.scene.leaveObject(1, 2);
-                        }
-                        else if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            GameManager.scene.takeObject(1, 2);
-                        }
-                        if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                            GameManager.scene.cut(1, 2);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaTwo[2], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 3) {
-                        if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                            GameManager.scene.leaveObject(1, 2);
-                        }
-                        if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            GameManager.scene.takeObject(1, 2);
-                        }
-                        if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(2).ocuppied) {
-                            GameManager.scene.cut(1, 2);
-                        }
-                    }
-    
-                })
-    
-                //CUTTING AREA 3
-    
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaThree[0], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 2) {
-                        if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                            GameManager.scene.leaveObject(1, 3);
-                        }
-                        if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            GameManager.scene.takeObject(1, 3);
-                        }
-                        if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                            GameManager.scene.cut(1, 3);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaThree[1], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 1) {
-                        if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                            GameManager.scene.leaveObject(1, 3);
-                        }
-                        else if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            GameManager.scene.takeObject(1, 3);
-                        }
-                        if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                            GameManager.scene.cut(1, 3);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cuttingAreaThree[2], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 3) {
-                        if (actionOnlinePlayer.action=="E" && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                            GameManager.scene.leaveObject(1, 3);
-                        }
-                        if (actionOnlinePlayer.action=="E" && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerTwo.canMove) {
-                            GameManager.scene.takeObject(1, 3);
-                        }
-                        if (actionOnlinePlayer.action=="R" && Slot.cuttingSlotsList.getAt(3).ocuppied) {
-                            GameManager.scene.cut(1, 3);
-                        }
-                    }
-    
-                })
-    
-                //COOKING AREA 0
-                this.physics.add.overlap(this.playerTwo, this.cookingAreaZero[0], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 3) {
-                        if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
-                            GameManager.scene.putIngredient(1, 0);
-                        }
-                        if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerTwo.haveObject) {
-                            GameManager.scene.takePotion(1, 0);
-                        }
-    
-                    }
-                })
-                this.physics.add.overlap(this.playerTwo, this.cookingAreaZero[1], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 0) {
-                        if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
-                            GameManager.scene.putIngredient(1, 0);
-                        }
-                        if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerTwo.haveObject) {
-                            GameManager.scene.takePotion(1, 0);
-                        }
-    
-                    }
-    
-                })
-    
-                //COOKING AREA 1
-                this.physics.add.overlap(this.playerTwo, this.cookingAreaOne[0], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 1) {
-                        if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
-                            GameManager.scene.putIngredient(1, 1);
-                        }
-                        if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerTwo.haveObject) {
-                            GameManager.scene.takePotion(1, 1);
-                        }
-                    }
-    
-                })
-                this.physics.add.overlap(this.playerTwo, this.cookingAreaOne[1], function () {
-                    if (GameManager.scene.playerTwo.lastMov == 3) {
-                        if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
-                            GameManager.scene.putIngredient(1, 1);
-                        }
-                        if (actionOnlinePlayer.action=="E" && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerTwo.haveObject) {
-                            GameManager.scene.takePotion(1, 1);
-                        }
-    
-                    }
-    
-                })
-            }
-        }
-    }
+            //FOOD GENERATORS
 
-    
+            if(player == 2){
+            
+            this.physics.add.overlap(this.playerTwo, this.herbArea, function () {
+                if (GameManager.scene.playerTwo.lastMov == 1 && GameManager.scene.cursorsSecondPlayer.take.isDown && GameManager.scene.playerTwo.canMove) {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                    GameManager.scene.takeObject(2, 7)
+                }
+            })
+            this.physics.add.overlap(this.playerTwo, this.herbAreaTwo, function () {
+                if (GameManager.scene.playerTwo.lastMov == 0 && GameManager.scene.cursorsSecondPlayer.take.isDown && GameManager.scene.playerTwo.canMove) {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                    GameManager.scene.takeObject(2, 7)
+                }
+            })
+            this.physics.add.overlap(this.playerTwo, this.batArea, function () {
+                if (GameManager.scene.playerTwo.lastMov == 1 && GameManager.scene.cursorsSecondPlayer.take.isDown && GameManager.scene.playerTwo.canMove) {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                    GameManager.scene.takeObject(2, 8)
+                }
+            })
+            this.physics.add.overlap(this.playerTwo, this.batAreaTwo, function () {
+                if (GameManager.scene.playerTwo.lastMov == 0 && GameManager.scene.cursorsSecondPlayer.take.isDown && GameManager.scene.playerTwo.canMove) {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                    GameManager.scene.takeObject(2, 8)
+                }
+            })
+
+            //GOAL AREA
+            this.physics.add.overlap(this.playerTwo, this.goalArea, function () {
+                if (GameManager.scene.playerTwo.lastMov == 2 && GameManager.scene.cursorsSecondPlayer.take.isDown && GameManager.scene.playerTwo.haveObject && (GameManager.objectPlayerTwo.texture.key == "herbal_potion" || GameManager.objectPlayerTwo.texture.key == "bat_potion")) {
+                    connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E3\"}")
+                    GameManager.scene.leavePotion(2);
+                    GameManager.objectPlayerTwo.destroy();
+                    GameManager.scene.playerTwo.haveObject = false;
+                }
+            })
+
+            //CUTTING AREA 0
+
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaZero[0], function () {
+                if (GameManager.scene.playerTwo.lastMov == 1) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
+                        GameManager.scene.leaveObject(2, 0);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                        GameManager.scene.takeObject(2, 0);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
+                        GameManager.scene.cut(2, 0);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaZero[1], function () {
+                if (GameManager.scene.playerTwo.lastMov == 3) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
+                        GameManager.scene.leaveObject(2, 0);
+                    }
+                    else if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                        GameManager.scene.takeObject(2, 0);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
+                        GameManager.scene.cut(2, 0);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaZero[2], function () {
+                if (GameManager.scene.playerTwo.lastMov == 0) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
+                        GameManager.scene.leaveObject(2, 0);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                        GameManager.scene.takeObject(2, 0);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
+                        GameManager.scene.cut(2, 0);
+                    }
+                }
+
+            })
+
+            //CUTTING AREA 1
+
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaOne[0], function () {
+                if (GameManager.scene.playerTwo.lastMov == 1) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
+                        GameManager.scene.leaveObject(2, 1);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                        GameManager.scene.takeObject(2, 1);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
+                        GameManager.scene.cut(2, 1);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaOne[1], function () {
+                if (GameManager.scene.playerTwo.lastMov == 3) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
+                        GameManager.scene.leaveObject(2, 1);
+                    }
+                    else if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                        GameManager.scene.takeObject(2, 1);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
+                        GameManager.scene.cut(2, 1);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaOne[2], function () {
+                if (GameManager.scene.playerTwo.lastMov == 0) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
+                        GameManager.scene.leaveObject(2, 1);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                        GameManager.scene.takeObject(2, 1);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
+                        GameManager.scene.cut(2, 1);
+                    }
+                }
+
+            })
+
+            //CUTTING AREA 2
+
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaTwo[0], function () {
+                if (GameManager.scene.playerTwo.lastMov == 2) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
+                        GameManager.scene.leaveObject(2, 2);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                        GameManager.scene.takeObject(2, 2);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
+                        GameManager.scene.cut(2, 2);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaTwo[1], function () {
+                if (GameManager.scene.playerTwo.lastMov == 0) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
+                        GameManager.scene.leaveObject(2, 2);
+                    }
+                    else if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                        GameManager.scene.takeObject(2, 2);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
+                        GameManager.scene.cut(2, 2);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaTwo[2], function () {
+                if (GameManager.scene.playerTwo.lastMov == 3) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
+                        GameManager.scene.leaveObject(2, 2);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                        GameManager.scene.takeObject(2, 2);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
+                        GameManager.scene.cut(2, 2);
+                    }
+                }
+
+            })
+
+            //CUTTING AREA 3
+
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaThree[0], function () {
+                if (GameManager.scene.playerTwo.lastMov == 2) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
+                        GameManager.scene.leaveObject(2, 3);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                        GameManager.scene.takeObject(2, 3);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
+                        GameManager.scene.cut(2, 3);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaThree[1], function () {
+                if (GameManager.scene.playerTwo.lastMov == 1) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
+                        GameManager.scene.leaveObject(2, 3);
+                    }
+                    else if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                        GameManager.scene.takeObject(2, 3);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
+                        GameManager.scene.cut(2, 3);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaThree[2], function () {
+                if (GameManager.scene.playerTwo.lastMov == 3) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E2\"}")
+                        GameManager.scene.leaveObject(2, 3);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E1\"}")
+                        GameManager.scene.takeObject(2, 3);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.cut.isDown && Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"R\"}")
+                        GameManager.scene.cut(2, 3);
+                    }
+                }
+
+            })
+
+            //COOKING AREA 0
+            this.physics.add.overlap(this.playerTwo, this.cookingAreaZero[0], function () {
+                if (GameManager.scene.playerTwo.lastMov == 3) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E4\"}")
+                        GameManager.scene.putIngredient(2, 0);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerTwo.haveObject) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E5\"}")
+                        GameManager.scene.takePotion(2, 0);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cookingAreaZero[1], function () {
+                if (GameManager.scene.playerTwo.lastMov == 0) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E4\"}")
+                        GameManager.scene.putIngredient(2, 0);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerTwo.haveObject) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E5\"}")
+                        GameManager.scene.takePotion(2, 0);
+                    }
+
+                }
+
+            })
+
+            //COOKING AREA 1
+            this.physics.add.overlap(this.playerTwo, this.cookingAreaOne[0], function () {
+                if (GameManager.scene.playerTwo.lastMov == 1) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E4\"}")
+                        GameManager.scene.putIngredient(2, 1);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerTwo.haveObject) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E5\"}")
+                        GameManager.scene.takePotion(2, 1);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cookingAreaOne[1], function () {
+                if (GameManager.scene.playerTwo.lastMov == 3) {
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E4\"}")
+                        GameManager.scene.putIngredient(2, 1);
+                    }
+                    if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerTwo.haveObject) {
+                        connection.send("{\"id\":2,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"E5\"}")
+                        GameManager.scene.takePotion(2, 1);
+                    }
+
+                }
+
+            })
+
+        }else{
+
+            this.physics.add.overlap(this.playerTwo, this.herbArea, function () {
+                if (GameManager.scene.playerTwo.lastMov == 1 && actionOnlinePlayerObjects.action == "E1" && GameManager.scene.playerTwo.canMove) {
+                    GameManager.scene.takeObject(2, 7)
+                }
+            })
+            this.physics.add.overlap(this.playerTwo, this.herbAreaTwo, function () {
+                if (GameManager.scene.playerTwo.lastMov == 0 && actionOnlinePlayerObjects.action == "E1" && GameManager.scene.playerTwo.canMove) {
+                    GameManager.scene.takeObject(2, 7)
+                }
+            })
+            this.physics.add.overlap(this.playerTwo, this.batArea, function () {
+                if (GameManager.scene.playerTwo.lastMov == 1 && actionOnlinePlayerObjects.action == "E1" && GameManager.scene.playerTwo.canMove) {
+                    GameManager.scene.takeObject(2, 8)
+                }
+            })
+            this.physics.add.overlap(this.playerTwo, this.batAreaTwo, function () {
+                if (GameManager.scene.playerTwo.lastMov == 0 && actionOnlinePlayerObjects.action == "E1"&& GameManager.scene.playerTwo.canMove) {
+                    GameManager.scene.takeObject(2, 8)
+                }
+            })
+
+            //GOAL AREA
+            this.physics.add.overlap(this.playerTwo, this.goalArea, function () {
+                if (GameManager.scene.playerTwo.lastMov == 2 && actionOnlinePlayerObjects.action == "E3" && GameManager.scene.playerTwo.haveObject && (GameManager.objectPlayerTwo.texture.key == "herbal_potion" || GameManager.objectPlayerTwo.texture.key == "bat_potion")) {
+                    GameManager.scene.leavePotion(2);
+                    GameManager.objectPlayerTwo.destroy();
+                    GameManager.scene.playerTwo.haveObject = false;
+                }
+            })
+
+            //CUTTING AREA 0
+
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaZero[0], function () {
+                if (GameManager.scene.playerTwo.lastMov == 1) {
+                    if (actionOnlinePlayerObjects.action == "E2" && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                        GameManager.scene.leaveObject(2, 0);
+                    }
+                    if (actionOnlinePlayerObjects.action == "E1" && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        GameManager.scene.takeObject(2, 0);
+                    }
+                    if (actionOnlinePlayerObjects.action == "R" && Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                        GameManager.scene.cut(2, 0);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaZero[1], function () {
+                if (GameManager.scene.playerTwo.lastMov == 3) {
+                    if (actionOnlinePlayerObjects.action == "E2" && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                        GameManager.scene.leaveObject(2, 0);
+                    }
+                    else if (actionOnlinePlayerObjects.action == "E1" && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        GameManager.scene.takeObject(2, 0);
+                    }
+                    if (actionOnlinePlayerObjects.action == "R" && Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                        GameManager.scene.cut(2, 0);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaZero[2], function () {
+                if (GameManager.scene.playerTwo.lastMov == 0) {
+                    if (actionOnlinePlayerObjects.action == "E2" && !Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                        GameManager.scene.leaveObject(2, 0);
+                    }
+                    if (actionOnlinePlayerObjects.action == "E1" && Slot.cuttingSlotsList.getAt(0).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        GameManager.scene.takeObject(2, 0);
+                    }
+                    if (actionOnlinePlayerObjects.action == "R" && Slot.cuttingSlotsList.getAt(0).ocuppied) {
+                        GameManager.scene.cut(2, 0);
+                    }
+                }
+
+            })
+
+            //CUTTING AREA 1
+
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaOne[0], function () {
+                if (GameManager.scene.playerTwo.lastMov == 1) {
+                    if (actionOnlinePlayerObjects.action == "E2" && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                        GameManager.scene.leaveObject(2, 1);
+                    }
+                    if (actionOnlinePlayerObjects.action == "E1" && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        GameManager.scene.takeObject(2, 1);
+                    }
+                    if (actionOnlinePlayerObjects.action == "R" && Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                        GameManager.scene.cut(2, 1);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaOne[1], function () {
+                if (GameManager.scene.playerTwo.lastMov == 3) {
+                    if (actionOnlinePlayerObjects.action == "E2" && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                        GameManager.scene.leaveObject(2, 1);
+                    }
+                    else if (actionOnlinePlayerObjects.action == "E1" && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        GameManager.scene.takeObject(2, 1);
+                    }
+                    if (actionOnlinePlayerObjects.action == "R" && Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                        GameManager.scene.cut(2, 1);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaOne[2], function () {
+                if (GameManager.scene.playerTwo.lastMov == 0) {
+                    if (actionOnlinePlayerObjects.action == "E2" && !Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                        GameManager.scene.leaveObject(2, 1);
+                    }
+                    if (actionOnlinePlayerObjects.action == "E1" && Slot.cuttingSlotsList.getAt(1).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        GameManager.scene.takeObject(2, 1);
+                    }
+                    if (actionOnlinePlayerObjects.action == "R" && Slot.cuttingSlotsList.getAt(1).ocuppied) {
+                        GameManager.scene.cut(2, 1);
+                    }
+                }
+
+            })
+
+            //CUTTING AREA 2
+
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaTwo[0], function () {
+                if (GameManager.scene.playerTwo.lastMov == 2) {
+                    if (actionOnlinePlayerObjects.action == "E2" && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                        GameManager.scene.leaveObject(2, 2);
+                    }
+                    if (actionOnlinePlayerObjects.action == "E1" && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        GameManager.scene.takeObject(2, 2);
+                    }
+                    if (actionOnlinePlayerObjects.action == "R" && Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                        GameManager.scene.cut(2, 2);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaTwo[1], function () {
+                if (GameManager.scene.playerTwo.lastMov == 0) {
+                    if (actionOnlinePlayerObjects.action == "E2" && !Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                        GameManager.scene.leaveObject(2, 2);
+                    }
+                    else if (actionOnlinePlayerObjects.action == "E1" && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        GameManager.scene.takeObject(2, 2);
+                    }
+                    if (actionOnlinePlayerObjects.action == "R" && Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                        GameManager.scene.cut(2, 2);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaTwo[2], function () {
+                if (GameManager.scene.playerTwo.lastMov == 3) {
+                    if (actionOnlinePlayerObjects.action == "E2"&& !Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                        GameManager.scene.leaveObject(2, 2);
+                    }
+                    if (actionOnlinePlayerObjects.action == "E1" && Slot.cuttingSlotsList.getAt(2).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        GameManager.scene.takeObject(2, 2);
+                    }
+                    if (actionOnlinePlayerObjects.action == "R" && Slot.cuttingSlotsList.getAt(2).ocuppied) {
+                        GameManager.scene.cut(2, 2);
+                    }
+                }
+
+            })
+
+            //CUTTING AREA 3
+
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaThree[0], function () {
+                if (GameManager.scene.playerTwo.lastMov == 2) {
+                    if (actionOnlinePlayerObjects.action == "E2" && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                        GameManager.scene.leaveObject(2, 3);
+                    }
+                    if (actionOnlinePlayerObjects.action == "E1" && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        GameManager.scene.takeObject(2, 3);
+                    }
+                    if (actionOnlinePlayerObjects.action == "R" && Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                        GameManager.scene.cut(2, 3);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaThree[1], function () {
+                if (GameManager.scene.playerTwo.lastMov == 1) {
+                    if (actionOnlinePlayerObjects.action == "E2" && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                        GameManager.scene.leaveObject(2, 3);
+                    }
+                    else if (actionOnlinePlayerObjects.action == "E1" && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        GameManager.scene.takeObject(2, 3);
+                    }
+                    if (actionOnlinePlayerObjects.action == "R" && Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                        GameManager.scene.cut(2, 3);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cuttingAreaThree[2], function () {
+                if (GameManager.scene.playerTwo.lastMov == 3) {
+                    if (actionOnlinePlayerObjects.action == "E2" && !Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                        GameManager.scene.leaveObject(2, 3);
+                    }
+                    if (actionOnlinePlayerObjects.action == "E1" && Slot.cuttingSlotsList.getAt(3).ocuppied && GameManager.scene.playerTwo.canMove) {
+                        GameManager.scene.takeObject(2, 3);
+                    }
+                    if (actionOnlinePlayerObjects.action == "R" && Slot.cuttingSlotsList.getAt(3).ocuppied) {
+                        GameManager.scene.cut(2, 3);
+                    }
+                }
+
+            })
+
+            //COOKING AREA 0
+            this.physics.add.overlap(this.playerTwo, this.cookingAreaZero[0], function () {
+                if (GameManager.scene.playerTwo.lastMov == 3) {
+                    if (actionOnlinePlayerObjects.action == "E4"&& Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
+                        GameManager.scene.putIngredient(2, 0);
+                    }
+                    if (actionOnlinePlayerObjects.action == "E5" && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerTwo.haveObject) {
+                        GameManager.scene.takePotion(2, 0);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cookingAreaZero[1], function () {
+                if (GameManager.scene.playerTwo.lastMov == 0) {
+                    if (actionOnlinePlayerObjects.action == "E4" && Slot.cookingSlotsList.getAt(0).numIngredients < 2) {
+                        GameManager.scene.putIngredient(2, 0);
+                    }
+                    if (actionOnlinePlayerObjects.action == "E5" && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerTwo.haveObject) {
+                        GameManager.scene.takePotion(2, 0);
+                    }
+
+                }
+
+            })
+
+            //COOKING AREA 1
+            this.physics.add.overlap(this.playerTwo, this.cookingAreaOne[0], function () {
+                if (GameManager.scene.playerTwo.lastMov == 1) {
+                    if (actionOnlinePlayerObjects.action == "E4" && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
+                        GameManager.scene.putIngredient(2, 1);
+                    }
+                    if (actionOnlinePlayerObjects.action == "E5" && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerTwo.haveObject) {
+                        GameManager.scene.takePotion(2, 1);
+                    }
+                }
+
+            })
+            this.physics.add.overlap(this.playerTwo, this.cookingAreaOne[1], function () {
+                if (GameManager.scene.playerTwo.lastMov == 3) {
+                    if (actionOnlinePlayerObjects.action == "E4" && Slot.cookingSlotsList.getAt(1).numIngredients < 2) {
+                        GameManager.scene.putIngredient(2, 1);
+                    }
+                    if (actionOnlinePlayerObjects.action == "E5" && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerTwo.haveObject) {
+                        GameManager.scene.takePotion(2, 1);
+                    }
+
+                }
+
+            })
+        }
+        }
+
+    }
 
     update() {
 
@@ -1796,7 +1844,7 @@ class OnlineGameScene extends Phaser.Scene {
                 connection.send("{\"id\":1,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"W\"}")
             }
             else {
-                //connection.send("{\"id\":1,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
+                connection.send("{\"id\":1,\"group\":"+group+",\"numPlayer\":"+player+",\"action\":\"\"}")
                 this.playerTwo.body.offset.y = 120;
                 switch (this.playerTwo.lastMov) {
                     case 0:
@@ -1865,9 +1913,9 @@ class OnlineGameScene extends Phaser.Scene {
         
     }
 
-    takeObject(Player, slot) {
+    takeObject(player, slot) {
         if (slot < 4) {
-                if (Player == 1 && !this.playerOne.haveObject) {
+                if (player == 1 && !this.playerOne.haveObject) {
                     Slot.cuttingSlotsList.getAt(slot).ocuppied = false;
                     GameManager.objectPlayerOne = Slot.cuttingSlotsList.getAt(slot).currentObject;
                     this.time.addEvent({
@@ -1877,7 +1925,7 @@ class OnlineGameScene extends Phaser.Scene {
                     });
                     GameManager.objectPlayerOne.setPosition(GameManager.scene.playerOne.bagCoord[0], GameManager.scene.playerOne.bagCoord[1]).setScale(1.5);
                 }
-                if (Player == 2 && !this.playerTwo.haveObject) {
+                if (player == 2 && !this.playerTwo.haveObject) {
                     Slot.cuttingSlotsList.getAt(slot).ocuppied = false;
                     GameManager.objectPlayerTwo = Slot.cuttingSlotsList.getAt(slot).currentObject;
                     this.time.addEvent({
@@ -1889,21 +1937,21 @@ class OnlineGameScene extends Phaser.Scene {
                 }
             }
             if (slot == 7) {
-                if (Player == 1 && !this.playerOne.haveObject) {
+                if (player == 1 && !this.playerOne.haveObject) {
                     GameManager.objectPlayerOne = this.add.sprite(GameManager.scene.playerOne.bagCoord[0], GameManager.scene.playerOne.bagCoord[1], 'herb').setScale(1.5);
                     this.playerOne.haveObject = true;
                 }
-                if (Player == 2 && !this.playerTwo.haveObject) {
+                if (player == 2 && !this.playerTwo.haveObject) {
                     GameManager.objectPlayerTwo = this.add.sprite(GameManager.scene.playerTwo.bagCoord[0], GameManager.scene.playerTwo.bagCoord[1], 'herb').setScale(1.5);
                     this.playerTwo.haveObject = true;
                 }
             }
             if (slot == 8) {
-                if (Player == 1 && !this.playerOne.haveObject) {
+                if (player == 1 && !this.playerOne.haveObject) {
                     GameManager.objectPlayerOne = this.add.sprite(GameManager.scene.playerOne.bagCoord[0], GameManager.scene.playerOne.bagCoord[1], 'bat').setScale(1.5);
                     this.playerOne.haveObject = true;
                 }
-                if (Player == 2 && !this.playerTwo.haveObject) {
+                if (player == 2 && !this.playerTwo.haveObject) {
                     GameManager.objectPlayerTwo = this.add.sprite(GameManager.scene.playerTwo.bagCoord[0], GameManager.scene.playerTwo.bagCoord[1], 'bat').setScale(1.5);
                     this.playerTwo.haveObject = true;
                 }
@@ -1911,8 +1959,8 @@ class OnlineGameScene extends Phaser.Scene {
         
     }
 
-    leaveObject(Player, slot) {
-        if (Player == 1 && GameManager.scene.playerOne.haveObject) {
+    leaveObject(player, slot) {
+        if (player == 1 && GameManager.scene.playerOne.haveObject) {
             Slot.cuttingSlotsList.getAt(slot).ocuppied = true;
             Slot.cuttingSlotsList.getAt(slot).currentObject = GameManager.objectPlayerOne;
             this.time.addEvent({
@@ -1923,7 +1971,7 @@ class OnlineGameScene extends Phaser.Scene {
             Slot.cuttingSlotsList.getAt(slot).currentObject.setPosition(Slot.cuttingSlotsList.getAt(slot).x, Slot.cuttingSlotsList.getAt(slot).y).setScale(1);
             this.playerOne.depth = Slot.cuttingSlotsList.getAt(slot).currentObject.depth + 0.1;
         }
-        if (Player == 2 && GameManager.scene.playerTwo.haveObject) {
+        if (player == 2 && GameManager.scene.playerTwo.haveObject) {
             Slot.cuttingSlotsList.getAt(slot).ocuppied = true;
             Slot.cuttingSlotsList.getAt(slot).currentObject = GameManager.objectPlayerTwo;
             this.time.addEvent({
@@ -1936,8 +1984,8 @@ class OnlineGameScene extends Phaser.Scene {
         }
     }
 
-    cut(Player, slot) {
-        if (Player == 1) {
+    cut(player, slot) {
+        if (player == 1) {
             this.playerOne.canMove = false;
             this.time.addEvent({
                 delay: 2000, callback: function () {
@@ -1959,7 +2007,7 @@ class OnlineGameScene extends Phaser.Scene {
             });
 
         }
-        else if (Player == 2) {
+        else if (player == 2) {
             this.playerTwo.canMove = false;
             this.time.addEvent({
                 delay: 2000, callback: function () {
@@ -1983,15 +2031,15 @@ class OnlineGameScene extends Phaser.Scene {
         }
     }
 
-    putIngredient(Player, slot) {
-        if (Player == 1 && GameManager.scene.playerOne.haveObject && (GameManager.objectPlayerOne.texture.key == "cut_bat" || GameManager.objectPlayerOne.texture.key == "cut_herb")) {
+    putIngredient(player, slot) {
+        if (player == 1 && GameManager.scene.playerOne.haveObject && (GameManager.objectPlayerOne.texture.key == "cut_bat" || GameManager.objectPlayerOne.texture.key == "cut_herb")) {
             Slot.cookingSlotsList.getAt(slot).ingredients[Slot.cookingSlotsList.getAt(slot).numIngredients] = GameManager.objectPlayerOne;
             this.playerOne.haveObject = false;
             Slot.cookingSlotsList.getAt(slot).ingredients[Slot.cookingSlotsList.getAt(slot).numIngredients].setPosition(Slot.cookingSlotsList.getAt(slot).x + (20 * Slot.cookingSlotsList.getAt(slot).numIngredients), Slot.cookingSlotsList.getAt(slot).y).setScale(1);
             Slot.cookingSlotsList.getAt(slot).numIngredients++;
             console.log("Ning: " + Slot.cookingSlotsList.getAt(slot).numIngredients + " readiu: " + Slot.cookingSlotsList.getAt(slot).ready + " cçooking: " + Slot.cookingSlotsList.getAt(slot).cooking)
         }
-        if (Player == 2 && GameManager.scene.playerTwo.haveObject && (GameManager.objectPlayerTwo.texture.key == "cut_bat" || GameManager.objectPlayerTwo.texture.key == "cut_herb")) {
+        if (player == 2 && GameManager.scene.playerTwo.haveObject && (GameManager.objectPlayerTwo.texture.key == "cut_bat" || GameManager.objectPlayerTwo.texture.key == "cut_herb")) {
             Slot.cookingSlotsList.getAt(slot).ingredients[Slot.cookingSlotsList.getAt(slot).numIngredients] = GameManager.objectPlayerTwo;
             this.playerTwo.haveObject = false;
             Slot.cookingSlotsList.getAt(slot).ingredients[Slot.cookingSlotsList.getAt(slot).numIngredients].setPosition(Slot.cookingSlotsList.getAt(slot).x + (20 * Slot.cookingSlotsList.getAt(slot).numIngredients), Slot.cookingSlotsList.getAt(slot).y).setScale(1);
@@ -2000,11 +2048,11 @@ class OnlineGameScene extends Phaser.Scene {
         }
     }
 
-    takePotion(Player, slot) {
+    takePotion(player, slot) {
         GameManager.scene.comandDone = false;
         Slot.cookingSlotsList.getAt(slot).numIngredients = 0;
         Slot.cookingSlotsList.getAt(slot).ready = false;
-        if (Player == 1) {
+        if (player == 1) {
             this.playerOne.haveObject = true;
             var type = Slot.cookingSlotsList.getAt(slot).ingredients[slot].texture.key;
             switch (type) {
@@ -2025,7 +2073,7 @@ class OnlineGameScene extends Phaser.Scene {
             }
             console.log("Ning: " + Slot.cookingSlotsList.getAt(slot).numIngredients + " readiu: " + Slot.cookingSlotsList.getAt(slot).ready + " cçooking: " + Slot.cookingSlotsList.getAt(slot).cooking)
         }
-        else if (Player == 2) {
+        else if (player == 2) {
             this.playerTwo.haveObject = true;
             var type = Slot.cookingSlotsList.getAt(slot).ingredients[slot].texture.key;
             switch (type) {
@@ -2048,8 +2096,8 @@ class OnlineGameScene extends Phaser.Scene {
         }
     }
 
-    leavePotion(Player) {
-        if (Player == 1) {
+    leavePotion(player) {
+        if (player == 1) {
             var i = 0;
             while (i < Slot.comandSlots.length && GameManager.scene.comandDone == false) {
                 var type = Slot.comandSlots.getAt(i).currentObject.texture.key;
@@ -2099,7 +2147,7 @@ class OnlineGameScene extends Phaser.Scene {
 
         }
 
-        if (Player == 2) {
+        if (player == 2) {
             var i = 0;
             while (i < Slot.comandSlots.length) {
                 var type = Slot.comandSlots.getAt(i).texture.key;
