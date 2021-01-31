@@ -1737,7 +1737,18 @@ class OnlineGameScene extends Phaser.Scene {
 
 
         this.updateCauldron();
-        this.updateComands();
+        if(player == 1){
+            this.drawComands(this.updateComands());
+        }else{
+            if(commandTypeOnline.type == "H"){
+                this.drawComands("H");
+            }
+            if (commandTypeOnline.type == "B"){
+                this.drawComands("B");
+            }
+        }
+       
+
 
     }
 
@@ -1770,46 +1781,37 @@ class OnlineGameScene extends Phaser.Scene {
     }
 
     updateComands() {
-
-        if (player == 1) {
+            
             var numComand = Math.random() * 10;
+
             if (numComand <= 5 && GameManager.timeLeft <= GameManager.gameTime * this.rithim) {
-                connection.send("{\"id\":3,\"group\":" + group + ",\"numPlayer\":" + player + ",\"type\":\"BP\"}");
-                    var freeSlot = this.findFreeSlot();
-                    if (freeSlot != -1) {
-                        Slot.comandSlots.getAt(freeSlot).currentObject = this.add.sprite(Slot.comandSlots.getAt(freeSlot).x, Slot.comandSlots.getAt(freeSlot).y, 'comandBat').setScale(0.65);
-                        this.rithim -= 0.2;
-                    }
-                
+                connection.send("{\"id\":3,\"group\":" + group + ",\"numPlayer\":" + player + ",\"type\":\"B\"}");
+                return "B";
             }
-            else if (numComand>5 && GameManager.timeLeft <= GameManager.gameTime * this.rithim) {
-                connection.send("{\"id\":3,\"group\":" + group + ",\"numPlayer\":" + player + ",\"type\":\"HP\"}");
-                var freeSlot = this.findFreeSlot();
-                if (freeSlot != -1) {
-                        Slot.comandSlots.getAt(freeSlot).currentObject = this.add.sprite(Slot.comandSlots.getAt(freeSlot).x, Slot.comandSlots.getAt(freeSlot).y, 'comandHerb').setScale(0.65);
-                        this.rithim -= 0.2;
-                 }
+            else if (numComand > 5 && GameManager.timeLeft <= GameManager.gameTime * this.rithim) {
+                connection.send("{\"id\":3,\"group\":" + group + ",\"numPlayer\":" + player + ",\"type\":\"H\"}");
+                return "H";               
             }else{
                 connection.send("{\"id\":3,\"group\":" + group + ",\"numPlayer\":" + player + ",\"type\":\"\"}");
-            }
-            
-        } else {
+            }    
+    }
 
-            if (GameManager.timeLeft <= GameManager.gameTime * this.rithim && commandTypeOnline.type == "BP") {
-                var freeSlot = this.findFreeSlot();
-                if (freeSlot != -1) {
-                    Slot.comandSlots.getAt(freeSlot).currentObject = this.add.sprite(Slot.comandSlots.getAt(freeSlot).x, Slot.comandSlots.getAt(freeSlot).y, 'comandBat').setScale(0.65);
-                    this.rithim -= 0.2;
-                }
-            }
+    drawComands(commandType){
 
-            if (GameManager.timeLeft <= GameManager.gameTime * this.rithim && commandTypeOnline.type == "HP") {
-                var freeSlot = this.findFreeSlot();
-                if (freeSlot != -1) {
-                    Slot.comandSlots.getAt(freeSlot).currentObject = this.add.sprite(Slot.comandSlots.getAt(freeSlot).x, Slot.comandSlots.getAt(freeSlot).y, 'comandHerb').setScale(0.65);
-                    this.rithim -= 0.2;
-                }
+        if(commandType == "B"){//BAT
+            var freeSlot = this.findFreeSlot();
+            if (freeSlot != -1) {
+                Slot.comandSlots.getAt(freeSlot).currentObject = this.add.sprite(Slot.comandSlots.getAt(freeSlot).x, Slot.comandSlots.getAt(freeSlot).y, 'comandBat').setScale(0.65);
+                this.rithim -= 0.2;
             }
+        }
+
+        if(commandType == "H"){//HERB
+            var freeSlot = this.findFreeSlot();
+                    if (freeSlot != -1) {
+                            Slot.comandSlots.getAt(freeSlot).currentObject = this.add.sprite(Slot.comandSlots.getAt(freeSlot).x, Slot.comandSlots.getAt(freeSlot).y, 'comandHerb').setScale(0.65);
+                            this.rithim -= 0.2;
+                    }
         }
     }
 
