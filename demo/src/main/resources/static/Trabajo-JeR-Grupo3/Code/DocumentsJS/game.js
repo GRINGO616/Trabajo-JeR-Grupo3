@@ -53,6 +53,7 @@ var serverFailed;
 var serverActive;
 var conexionError=false;
 var Scene;
+var partyFull;
 
 // Variables para el multijugador
 /*

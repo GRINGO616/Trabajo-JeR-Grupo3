@@ -1510,14 +1510,15 @@ class OnlineGameScene extends Phaser.Scene {
                 this.physics.add.overlap(this.playerTwo, this.cookingAreaZero[0], function () {
                     if (GameManager.scene.playerTwo.lastMov == 3) {
                         if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 2 && GameManager.scene.playerOne.haveObject) {
+                            GameManager.scene.putIngredient(2, 0);
                             if(!conexionError)
                             connection.send("{\"id\":2,\"group\":" + group + ",\"numPlayer\":" + player + ",\"action\":\"E4\"}")
-                            GameManager.scene.putIngredient(2, 0);
+                            
                         }
                         else if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerTwo.haveObject) {
+                            GameManager.scene.takePotion(2, 0);
                             if(!conexionError)
                             connection.send("{\"id\":2,\"group\":" + group + ",\"numPlayer\":" + player + ",\"action\":\"E5\"}")
-                            GameManager.scene.takePotion(2, 0);
                         }
                     }
 
@@ -1525,16 +1526,18 @@ class OnlineGameScene extends Phaser.Scene {
                 this.physics.add.overlap(this.playerTwo, this.cookingAreaZero[1], function () {
                     if (GameManager.scene.playerTwo.lastMov == 0) {
                         if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients < 2 && GameManager.scene.playerOne.haveObject) {
+                            GameManager.scene.putIngredient(2, 0);
                             if(!conexionError)
                             connection.send("{\"id\":2,\"group\":" + group + ",\"numPlayer\":" + player + ",\"action\":\"E4\"}")
-                            GameManager.scene.putIngredient(2, 0);
+                            
                             
 
                         }
                         else if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(0).numIngredients == 2 && Slot.cookingSlotsList.getAt(0).ready == true && !GameManager.scene.playerTwo.haveObject) {
+                            GameManager.scene.takePotion(2, 0);
                             if(!conexionError)
                             connection.send("{\"id\":2,\"group\":" + group + ",\"numPlayer\":" + player + ",\"action\":\"E5\"}")
-                            GameManager.scene.takePotion(2, 0);
+                            
                            
 
                         }
@@ -1547,17 +1550,18 @@ class OnlineGameScene extends Phaser.Scene {
                 this.physics.add.overlap(this.playerTwo, this.cookingAreaOne[0], function () {
                     if (GameManager.scene.playerTwo.lastMov == 1) {
                         if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 2 && GameManager.scene.playerOne.haveObject) {
-                            
+                            GameManager.scene.putIngredient(2, 1);
                             if(!conexionError)
                             connection.send("{\"id\":2,\"group\":" + group + ",\"numPlayer\":" + player + ",\"action\":\"E4\"}")
-                            GameManager.scene.putIngredient(2, 1);
+                            
                             
 
                         }
                         else if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerTwo.haveObject) {
+                            GameManager.scene.takePotion(2, 1);
                             if(!conexionError)
                             connection.send("{\"id\":2,\"group\":" + group + ",\"numPlayer\":" + player + ",\"action\":\"E5\"}")
-                            GameManager.scene.takePotion(2, 1);
+                            
                             
 
                         }
@@ -1567,16 +1571,18 @@ class OnlineGameScene extends Phaser.Scene {
                 this.physics.add.overlap(this.playerTwo, this.cookingAreaOne[1], function () {
                     if (GameManager.scene.playerTwo.lastMov == 3) {
                         if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients < 2 && GameManager.scene.playerOne.haveObject) {
+                            GameManager.scene.putIngredient(2, 1);
                             if(!conexionError)
                             connection.send("{\"id\":2,\"group\":" + group + ",\"numPlayer\":" + player + ",\"action\":\"E4\"}")
-                            GameManager.scene.putIngredient(2, 1);
+                            
                             
 
                         }
                         else if (GameManager.scene.cursorsSecondPlayer.take.isDown && Slot.cookingSlotsList.getAt(1).numIngredients == 2 && Slot.cookingSlotsList.getAt(1).ready == true && !GameManager.scene.playerTwo.haveObject) {
+                            GameManager.scene.takePotion(2, 1);
                             if(!conexionError)
                             connection.send("{\"id\":2,\"group\":" + group + ",\"numPlayer\":" + player + ",\"action\":\"E5\"}")
-                            GameManager.scene.takePotion(2, 1);
+                            
                             
 
                         }

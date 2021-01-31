@@ -89,7 +89,7 @@ public class WebSocketEchoHandler extends TextWebSocketHandler {
         int id= node.get("group").asInt();
         
         for(WebSocketSession participant : groups.get(id)) {
-			if(!participant.getId().equals(session.getId()) && participant!=null) {
+			if(participant!=null && !participant.getId().equals(session.getId()) ) {
 				participant.sendMessage(new TextMessage(node.toString()));
 			}
 		}
