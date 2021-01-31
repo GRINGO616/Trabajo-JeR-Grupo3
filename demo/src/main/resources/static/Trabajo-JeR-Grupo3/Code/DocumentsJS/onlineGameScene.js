@@ -1930,15 +1930,19 @@ class OnlineGameScene extends Phaser.Scene {
 
 
         this.updateCauldron();
+
         if(player == 1){
             this.drawComands(this.updateComands());
-        }else{
+        }
+        
+        if(player == 2){
             if(commandTypeOnline.type == "H"){
                 this.drawComands("H");
             }
             if (commandTypeOnline.type == "B"){
                 this.drawComands("B");
             }
+            this.updateComands();
         }
        
 
@@ -2480,39 +2484,45 @@ class OnlineGameScene extends Phaser.Scene {
 
         if (p == 2) {
             var i = 0;
-            while (i < Slot.comandSlots.length) {
-                var type = Slot.comandSlots.getAt(i).texture.key;
-
+            while (i < Slot.comandSlots.length && GameManager.scene.comandDone == false) {
+                var type = Slot.comandSlots.getAt(i).currentObject.texture.key;
                 if (GameManager.objectPlayerTwo.texture.key == 'herbal_potion' && type == 'comandHerb' && Slot.comandSlots.getAt(i).occupied == true) {
+
                     if (GameManager.timeLeft > (GameManager.gameTime / 2)) {
 
                         GameManager.levelCoins += 100;
                         GameManager.scene.comandDone = true;
+
                     }
                     else if (GameManager.timeLeft < (GameManager.gameTime / 2) && GameManager.timeLeft > (GameManager.gameTime / 3)) {
                         GameManager.levelCoins += 200;
                         GameManager.scene.comandDone = true;
+
                     }
                     else if (GameManager.timeLeft < (GameManager.gameTime / 3)) {
                         GameManager.levelCoins += 300;
                         GameManager.scene.comandDone = true;
+
                     }
                     Slot.comandSlots.getAt(i).currentObject.destroy();
                     Slot.comandSlots.getAt(i).occupied = false;
-
                 }
                 else if (GameManager.objectPlayerTwo.texture.key == 'bat_potion' && type == 'comandBat' && Slot.comandSlots.getAt(i).occupied == true) {
+
                     if (GameManager.timeLeft > (GameManager.gameTime / 2)) {
                         GameManager.levelCoins += 100;
                         GameManager.scene.comandDone = true;
+
                     }
                     else if (GameManager.timeLeft < (GameManager.gameTime / 2) && GameManager.timeLeft > (GameManager.gameTime / 3)) {
                         GameManager.levelCoins += 200;
                         GameManager.scene.comandDone = true;
+
                     }
                     else if (GameManager.timeLeft < (GameManager.gameTime / 3)) {
                         GameManager.levelCoins += 300;
                         GameManager.scene.comandDone = true;
+
                     }
                     Slot.comandSlots.getAt(i).currentObject.destroy();
                     Slot.comandSlots.getAt(i).occupied = false;
