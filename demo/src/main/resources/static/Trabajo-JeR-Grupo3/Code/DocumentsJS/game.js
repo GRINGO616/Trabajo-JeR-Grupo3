@@ -6,7 +6,7 @@ var config = {
     backgroundColor: 0x000000,
     pixelArt: true, //Prevent pixel art from becoming blurred when scaled.
     //antialias: true,
-    scene: [Loading, Login, Menu, Settings, Configuration, Credits, SelectionLevel, SelectionMode, PreloadLevel, OnlineGameScene,GameScene, FinishGameScene],
+    scene: [Loading, Login, Menu, Settings, Configuration, Credits, SelectionLevel, SelectionMode, PreloadLevel, OnlineGameScene, GameScene, FinishGameScene],
     physics: {
         default: 'arcade',
         arcade: {
@@ -45,7 +45,8 @@ var online;
 var group;
 var player;
 var actionOnlinePlayer = { id: 1, group: 0, player: 0, action: "" }
-var actionOnlinePlayerObjects = {id: 2, group:0, player:0, action:""}
+var actionOnlinePlayerObjects = { id: 2, group: 0, player: 0, action: "" }
+var commandTypeOnline = { id: 3, group: 0, player: 0, type: "" }
 var nameP1 = null;
 var nameP2 = null;
 var serverFailed;
@@ -92,10 +93,13 @@ connection.onmessage = function (msg) {
             actionOnlinePlayer.player = aux.player;
             break;
         case 1: //movimiento
-            actionOnlinePlayer=aux;
+            actionOnlinePlayer = aux;
             break;
         case 2:
             actionOnlinePlayerObjects = aux;
+            break;
+        case 3:
+            commandTypeOnline = aux;
             break;
     }
 }
