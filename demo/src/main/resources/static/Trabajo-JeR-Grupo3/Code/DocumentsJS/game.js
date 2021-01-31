@@ -6,7 +6,7 @@ var config = {
     backgroundColor: 0x000000,
     pixelArt: true, //Prevent pixel art from becoming blurred when scaled.
     //antialias: true,
-    scene: [Loading, Login, Menu, Settings, Configuration, Credits, SelectionLevel, SelectionMode, PreloadLevel, OnlineGameScene, GameScene, FinishGameScene],
+    scene: [Loading, Login, Menu, Settings, Configuration, Credits, SelectionLevel, SelectionMode, PreloadLevel, OnlineGameScene, ErrorScene, GameScene, FinishGameScene],
     physics: {
         default: 'arcade',
         arcade: {
@@ -51,6 +51,8 @@ var nameP1 = null;
 var nameP2 = null;
 var serverFailed;
 var serverActive;
+var conexionError=false;
+var Scene;
 
 // Variables para el multijugador
 /*
@@ -73,46 +75,7 @@ this.setJugador = function (msg) {
 };*/
 
 
-let connection = new WebSocket('ws://127.0.0.1:8080/echo');
-
-connection.onopen = function () {
-    console.log("La conexión se ha abierto con éxito");
-    //connection.send(JSON.stringify({name:"conexion establecida"}));
-}
-
-connection.onmessage = function (msg) {
-
-    //interpretar mensaje con switch
-    var aux = JSON.parse(msg.data)
-    switch (aux.id) {
-        case 0:
-            console.log("Grupo " + aux.group + " jugador " + aux.numPlayer);
-            group = aux.group;
-            player = aux.numPlayer;
-            actionOnlinePlayer.group = aux.group;
-            actionOnlinePlayer.player = aux.player;
-            break;
-        case 1: //movimiento
-            actionOnlinePlayer = aux;
-            break;
-        case 2:
-            actionOnlinePlayerObjects = aux;
-            break;
-        case 3:
-            commandTypeOnline = aux;
-            break;
-    }
-}
-
-connection.onerror = function (e) {
-    console.log("Se ha producido el error " + e);
-}
-
-connection.onclose = function () {
-    console.log("La conexión se ha cerrado con éxito");
-}
-
-
+let connection;
 
 window.onload = function () {
     var game = new Phaser.Game(config);

@@ -46,10 +46,35 @@ public class WebSocketEchoHandler extends TextWebSocketHandler {
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		System.out.println("Session closed: " + session.getId());
-		sessions.remove(session.getId());
+
+        System.out.println("Session closed: " + session.getId());
+        int i=0;
+        for (WebSocketSession[] participants : groups.values()) {
+            if (participants[1]!=null && participants[1].getId().equals(session.getId())) {
+                if (participants[0] != null) {
+                    participants[0].sendMessage(new TextMessage("{\"id\":4}"));
+                    sessions.remove(participants[1].getId());
+                    participants[1]=null;
+                } else{
+                    sessions.remove(participants[1].getId());
+                    participants[1]=null;
+                }
+                    
+            } else if (participants[0]!=null && participants[0].getId().equals(session.getId())){
+                if (participants[1] != null) {
+                    participants[1].sendMessage(new TextMessage("{\"id\":4}"));
+                    sessions.remove(participants[1].getId());
+                    participants[0]=null;
+                } else{
+                    sessions.remove(participants[0].getId());
+                    participants[0]=null;
+                }
+            }
+            i++;
+        } 
     }
     
+
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         
@@ -64,7 +89,7 @@ public class WebSocketEchoHandler extends TextWebSocketHandler {
         int id= node.get("group").asInt();
         
         for(WebSocketSession participant : groups.get(id)) {
-			if(!participant.getId().equals(session.getId())) {
+			if(!participant.getId().equals(session.getId()) && participant!=null) {
 				participant.sendMessage(new TextMessage(node.toString()));
 			}
 		}

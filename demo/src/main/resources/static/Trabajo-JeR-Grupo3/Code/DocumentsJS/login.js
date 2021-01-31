@@ -214,7 +214,7 @@ class Login extends Phaser.Scene {
                         this.scene.start("GameScene"); 
                     }
                     else{
-                        this.scene.start("OnlineGameScene"); 
+                        this.scene.start("SelectionMode"); 
                     }
                                       
                 })
@@ -247,7 +247,7 @@ class Login extends Phaser.Scene {
                         this.scene.start("GameScene"); 
                     }
                     else{
-                        this.scene.start("OnlineGameScene"); 
+                        this.scene.start("SelectionMode"); 
                     }
                 })
             }
