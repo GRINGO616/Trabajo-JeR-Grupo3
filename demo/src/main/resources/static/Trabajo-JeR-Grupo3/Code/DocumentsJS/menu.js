@@ -36,8 +36,8 @@ class Menu extends Phaser.Scene {
         }
 
         if (english === true) {
-            this.local_button = this.add.image(config.width *0.33, 1.4 * config.height / 4.25, 'arcade_button').setScale(0.3)
-            this.online_button = this.add.image(config.width*0.66, 1.4 * config.height / 4.25, 'arcade_button').setScale(0.3)
+            this.local_button = this.add.image(config.width*0.33, 1.4 * config.height / 4.25, 'local_button').setScale(1.0)
+            this.online_button = this.add.image(config.width*0.66, 1.4 * config.height / 4.25, 'online_button').setScale(1.0)
             //this.storyMode_button=this.add.image(1.9*config.width/3,1.4*config.height/4.25,'storyMode_button_english').setScale(0.3)
             this.controls_button = this.add.image(config.width / 2, 1.8 * config.height / 4, 'controls_button_english').setScale(1.05);
             this.settings_button = this.add.image(config.width / 2, 2.3 * config.height / 4, 'settings_button_english').setScale(1.05);

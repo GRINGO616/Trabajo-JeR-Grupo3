@@ -41,6 +41,7 @@ class Login extends Phaser.Scene {
         this.readyPlayerTwo = false;
 
         //Seleccion de nombre y contraseña
+        this.loginInfoText = this.add.text(config.width * 0.15, config.height * 0.03, "Escribe tu nombre y contraseña o registra uno nuevo", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10);
         this.playerOneText = this.add.text(config.width * 0.15, config.height * 0.4, "Jugador 1", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
         this.namePlayerOne = this.add.text(config.width * 0.1, config.height * 0.5, "Nombre:", { font: "28px PixelFont", fill: "#ffffff", align: "center" }).setResolution(10).setVisible(false);
         this.errorPlayerOne = this.add.text(config.width * 0.1, config.height * 0.57, "La contraseña es incorrecta", { font: "20px PixelFont", fill: "#ff0000", align: "center" }).setResolution(10).setVisible(false);
