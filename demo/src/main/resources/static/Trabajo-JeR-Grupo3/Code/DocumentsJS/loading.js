@@ -28,6 +28,8 @@ class Loading extends Phaser.Scene {
         this.load.image('logoGame', 'Assets/menuScene/logoGame.PNG');
         this.load.image('menuBackground','Assets/menuScene/menuBackground.png');
         this.load.image('arcade_button','Assets/menuScene/arcade_button.png');
+        this.load.image('local_button','Assets/menuScene/local_button.png');
+        this.load.image('online_button','Assets/menuScene/online_button.png');
         this.load.image('storyMode_button_spanish','Assets/menuScene/storyMode_button_spanish.png');
         this.load.image('settings_button_spanish','Assets/menuScene/settings_button_spanish.png');
         this.load.image('controls_button_spanish','Assets/menuScene/controls_button_spanish.png');
