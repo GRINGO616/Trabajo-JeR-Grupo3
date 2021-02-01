@@ -64,7 +64,7 @@ class Menu extends Phaser.Scene {
             this.tweens.add({
                 targets: this.local_button,
                 duration: 200,
-                scale: 0.9,
+                scale: 1.2,
             });
         })
 
@@ -93,7 +93,7 @@ class Menu extends Phaser.Scene {
             this.tweens.add({
                 targets: this.online_button,
                 duration: 200,
-                scale: 0.9,
+                scale: 1.2,
             });
         })
 
