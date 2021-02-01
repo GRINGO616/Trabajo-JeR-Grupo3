@@ -32,6 +32,8 @@ Versión 1.0: implementación local del videojuego con los dos niveles propuesto
 
 Versión 1.5: implementación con conexión y el uso de API REST para el funcionamiento de un login.
 
+Versión 1.8: implementación del modo de juego online cooperativo, uso de WebSockets para la transmisión de datos y mejoras finales.
+
 
 #PRE-REQUISITOS
 
@@ -250,6 +252,9 @@ Se trata de otra interfaz que solo se verá en el modo historia, por la misma ra
 
 La única interfaz que será exclusiva del modo arcade, ya que, para el otro modo, aunque también es determinante la puntuación, no se determina el progreso de una historia. En dicha pantalla se observará un ranking de la puntuación que hay en el nivel escogido, además de la posición que han ocupado los dos jugadores que están jugando en línea.
 
+# 4.13- Sala de espera
+Esta interfaz ha sido de las últimas en ser implementadas. Es una interfaz única del modo online y la encontraremos tras introducir nuestro nombre y contraseña en la pantalla de login. Tras eso el jugador accede a esta sala donde esperará a que otro jugador online sea conectado a su misma partida. El juego no dará comienzo hasta que ambos jugadores no estén listos, algo que pueden indicar pulsando el botón de “listo” que se encuentra debajo del personaje. Una vez se cumpla esta condición dará comienzo la partida, se mostrará la pantalla de carga y a continuación la pantalla del nivel.
+
 # DISEÑO AUDIOVISUAL
 
 Expotion es un videojuego concebido por un equipo de desarrollo que no presenta grandes aptitudes en el ámbito artístico de los videojuegos. De esta forma, una de las opciones que se barajó para el mismo era un arte simple y fácil de manejar, ya que realizar un juego en red bajo el motor de Phaser era algo nuevo para todos y la simplicidad ayuda a familiarizarse mejor con un entorno nuevo.
@@ -284,6 +289,19 @@ Con el objetivo de poder compartir información entre cliente y servidor por una
 
 Teniendo como objetivo, esquematizar un poco más todo, se concretará todo esto a través de un UML para observar las relaciones que hay entre estas clases.
 
+# WEBSOCKETS
+
+Para la adaptación de nuestro juego a multijugador online se ha utilizado una transmisión de datos entre clientes y con el servidor a través de websockets.
+Esto lo conseguimos con una nueva clase, WebSocketEchoHandler. A través de esta clase, se gestionaran todas las sesiones que se unan al servidor y el intercambio de mensajes entre ellas. Este actuará como listener de los mensajes que se envíen y de cuando se abren o cierran sesiones, actuando de manera diferente en cada situación.
+
+- afterConnectionEstablished: esta función es la encargada de registrar las nuevas sesiones que se inician vinculadas en este servidor. Almacenará la sesión en una lista de sesiones activas que se identificaran por su id y además se le vinculara a un grupo, ya que las partidas son por parejas.
+
+- afterConnectionClosed: se encarga de sacar de la lista de sesiones activa a aquella que esta desconectándose. Además, la sesión que este vinculada a esta por que pertenezcan al mismo grupo será avisada de que su compañero se ha desconectado para que se le saque de la partida.
+
+- handleTextMessage: será la función encargada de actuar como listener de los mensajes que se envían, los codificará a json y se los transmitirá a otra función (sendOtherParticipants), la cual encontramos en el mismo WebSocketEchoHandler.java, para que el mensaje sea enviado a la sesión con la que está vinculado.
+
+Teniendo como objetivo, esquematizar un poco más todo, se concretará todo esto a través de un UML para observar las relaciones que hay entre estas clases: 
+
 
 # EJECUCIÓN DE LA APLICACIÓN
 
@@ -299,6 +317,30 @@ Debido a que nos encontramos frente a un juego en red, el establecimiento de alg
 
 Un apunte que se quiere dejar claro es que el juego es tolerante a fallos, ya que, aunque surgen errores por consola con el servidor, nunca van a interrumpir la ejecución del videojuego.
 
+# MEJORAS IMPLEMENTADAS EN LA FASE 5
+
+Respecto a la fase cinco tuvimos en cuenta una lista de mejoras que fuimos acumulando a lo largo de las diferentes fases, teniendo en cuenta peticiones que nos sugerían las personas que probaban el juego o referencias que tomábamos de nuestros compañeros.
+
+Pero antes de empezar a hacer esas mejoras, hicimos cambios en el código del juego para arreglar bugs como que se podían coger ingredientes mientras se estaban cortando. Esto provocaba una desincronización ya que cuando acababa el tiempo de cortar se volvía a guardar ese objeto ahora cortado en el bolsillo pero no te dejaba dejarlo en ningún sitio ni hacer nada con él. Esto se vio solucionado poniendo una condición de que solo podías coger objetos si habías terminado de cortar.
+
+En segundo lugar se reorganizó todo el flujo de escenas para que fuese más intuitivo para el jugador, llevando al jugador al menú principal nada más empezar el juego y ya a partir de ahí dejándole total libertad de navegar por las escenas.
+
+Otro cambio que se realizo fue desarrollar nuevos botones para las nuevas interfaces o algunas ya existentes en el que los botones no dejaban claro a que escena te llevaban.
+Además se ha ajustado el tiempo de las comandas para que no saliesen tan rápido ya que podía saturar al jugador.
+
+Por último se han añadido nuevas interfaces según las necesidades del proyecto, como la sala de espera en el caso de jugar online, el login para identificar al jugador de manera única y la pantalla de error para notificar al jugador que se le va a redirigir a la pantalla de inicio.
+
+# FUTURAS MEJORAS A IMPLEMENTAR
+
+Aun habiendo hecho algunas mejoras para la fase 5, ha quedado una amplia lista de aspectos a mejorar para que el juego sea lo más cómodo e intuitivo para los usuarios.
+
+Lo primero serían mejoras de optimización que permitirían que el juego se ejecutase más fluidamente. Esto lo conseguiríamos refactorizando el código, haciendo así que no haya fragmentos del código repetidos y evitando así posibles errores en zonas puntuales y haciéndolo más entendible. Por otra parte, los niveles en vez de estar montados directamente en el código, los guardaríamos en un archivo json que sería leído al principio de la ejecución y montaría el escenario con todos los objetos de manera más óptima.
+
+A nivel de mecánicas, se querían hacer algunas implementaciones. La primera seria la incorporación de powerups que permitiesen al jugador andar más rápido, cortar más rápido o poder llevar más de un objeto en el inventario.
+
+Por otro lado queríamos poner un tiempo límite de realización de comandas, forzando así al jugador a priorizar unas con respecto a otras.
+
+Por último se querían hacer algunas mejoras a nivel visual. Por ejemplo, hacer una barra de progreso en la carga de recursos, de esta manera permitimos al usuario saber cuántos recursos lleva cargados y cuanto le queda. Además de añadir nuevos sprites de personajes y dejar que el jugador seleccione el que más le guste.
 
 # EQUIPO DE DESARROLLO
 
