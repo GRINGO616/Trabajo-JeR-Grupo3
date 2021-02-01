@@ -13,6 +13,8 @@ class ErrorScene extends Phaser.Scene{
         });
     }
     loadMenu(){
+        Scene.scene.stop("FinishGameScene");
+        Scene.scene.stop("GameScene");
         Scene.scene.stop("OnlineGameScene");
         Scene.scene.stop("SelectionMode");
         Scene.scene.start("Menu");

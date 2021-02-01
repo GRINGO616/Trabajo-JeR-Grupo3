@@ -6,7 +6,7 @@ var config = {
     backgroundColor: 0x000000,
     pixelArt: true, //Prevent pixel art from becoming blurred when scaled.
     //antialias: true,
-    scene: [Loading, Login, Menu, Settings, Configuration, Credits, SelectionLevel, SelectionMode, PreloadLevel, OnlineGameScene, ErrorScene, GameScene, FinishGameScene],
+    scene: [Loading, Login, Menu, Settings, Configuration, Credits, SelectionLevel, PreloadLevel, OnlineGameScene, ErrorScene, GameScene, FinishGameScene, SelectionMode],
     physics: {
         default: 'arcade',
         arcade: {
@@ -54,6 +54,7 @@ var serverActive;
 var conexionError=false;
 var Scene;
 var partyFull;
+var game;
 
 // Variables para el multijugador
 /*
@@ -79,6 +80,6 @@ this.setJugador = function (msg) {
 let connection;
 
 window.onload = function () {
-    var game = new Phaser.Game(config);
+    game = new Phaser.Game(config);
     window.focus();
 }

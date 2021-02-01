@@ -1445,7 +1445,7 @@ class GameScene extends Phaser.Scene {
 
 class GameManager {
     static scene;
-    static gameTime = 120;
+    static gameTime = 10;
     static timeLeft;
     static levelCoins;
     static objectPlayerOne;
